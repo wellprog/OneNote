@@ -5,4 +5,8 @@
     <RootNamespace>OneNote.SQLite</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
 </Project>
