@@ -10,6 +10,6 @@ namespace OneNote.Model
         public DateTime CreateTime { get; set; } = DateTime.Now;
         public DateTime UpdateTime { get; set; } = DateTime.Now;
         public DateTime DeleteTime { get; set; } = DateTime.Now;
-        public bool IsDeleted { get; set; } 
+        public bool IsDeleted { get; set; }
     }
 }

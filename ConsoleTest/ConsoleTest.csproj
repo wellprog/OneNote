@@ -164,6 +164,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{14ddb02b-927c-4aaa-9ed7-4f9834f2267d}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SQLite\SQLite.csproj">
       <Project>{3de66547-6b47-4e1c-b299-e1257837f635}</Project>
       <Name>SQLite</Name>
