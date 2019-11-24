@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using OneNote.Model;
+using OneNote.SQLite.Helper;
 using OneNote.SQLite.Model;
+using System.Linq;
 
 namespace OneNote.SQLite
 {
@@ -16,51 +18,17 @@ namespace OneNote.SQLite
 
         public void AddBook(Book value)
         {
-            _connection.Add(value);
-
-            HistoryRecord record = new HistoryRecord();
-            record.Autor = value.Autor;
-            record.Table = nameof(Book);
-            record.RecordID = value.ID;
-
-            _connection.Add(record);
-
-            HistoryDetail detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Name);
-            detail.NewValue = value.Name;
-            _connection.Add(detail);
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Cover);
-            detail.NewValue = value.Cover;
-            _connection.Add(detail);
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Autor);
-            detail.NewValue = value.Autor;
-            _connection.Add(detail);
-
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Description);
-            detail.NewValue = value.Description;
-            _connection.Add(detail);
-
-            _connection.SaveChanges();
+            InsertModel(value);
         }
 
-        public void AddPage(Book value)
+        public void AddPage(Page value)
         {
-            throw new NotImplementedException();
+            InsertModel(value);
         }
 
-        public void AddSection(Book value)
+        public void AddSection(Section value)
         {
-            throw new NotImplementedException();
+            InsertModel(value);
         }
 
         public HistoryModel GetBookHistory(string LastID)
@@ -95,7 +63,7 @@ namespace OneNote.SQLite
 
         public void UpdateBook(Book value)
         {
-            throw new NotImplementedException();
+            UpdateModel(value);
         }
 
         public void UpdateBookByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
@@ -103,9 +71,9 @@ namespace OneNote.SQLite
             throw new NotImplementedException();
         }
 
-        public void UpdatePage(Book value)
+        public void UpdatePage(Page value)
         {
-            throw new NotImplementedException();
+            UpdateModel(value);
         }
 
         public void UpdatePageByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
@@ -113,14 +81,45 @@ namespace OneNote.SQLite
             throw new NotImplementedException();
         }
 
-        public void UpdateSection(Book value)
+        public void UpdateSection(Section value)
         {
-            throw new NotImplementedException();
+            UpdateModel(value);
         }
 
         public void UpdateSectionByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
         {
             throw new NotImplementedException();
+        }
+
+        private void InsertHistory(HistoryModel model)
+        {
+            _connection.Add(model.Records);
+            _connection.Add(model.Details);
+
+            _connection.SaveChanges();
+        }
+
+        private void InsertModel<T>(T model) where T : Base
+        {
+            _connection.Add(model);
+            _connection.SaveChanges();
+
+            InsertHistory(History.GetHistoryFromModel(null, model, model.ID));
+        }
+
+        private void UpdateModel<T>(T model) where T : Base
+        {
+            var element = _connection.Find(model.GetType(), new object[] { model.ID });
+            if (element == null)
+            {
+                InsertModel(model);
+                return;
+            }
+
+            _connection.Entry(element).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            _connection.Update(model);
+
+            InsertHistory(History.GetHistoryFromModel(element as T, model, model.ID));
         }
     }
 }
