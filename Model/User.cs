@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OneNote.Model
 {
-    class User : Base
+    public class User : Base
     {
         public string   UserName { get; set; }
         public string   EMail { get; set; }

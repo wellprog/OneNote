@@ -4,11 +4,11 @@ using System.Text;
 
 namespace OneNote.Model
 {
-    class Book : Base
+    public class Book : Base
     {
         public string   Name { get; set; }
         public string   Cover { get; set; }
-        public int      Autor { get; set; }
+        public string   Autor { get; set; }
         public string   Description { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace OneNote.Model
 {
-    class Base
+    public class Base
     {
-        public int ID { get; set; }
+        public string ID { get; set; } = Guid.NewGuid().ToString();
         public DateTime CreateTime { get; set; } = DateTime.Now;
         public DateTime UpdateTime { get; set; } = DateTime.Now;
         public DateTime DeleteTime { get; set; } = DateTime.Now;
