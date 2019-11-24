@@ -5,8 +5,743 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Application"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="500" Width="650"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="0"
+                            CornerRadius="30,30,30,10"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MaxLines" Value="1"/>
+            <Setter Property="MaxLength" Value="40"/>
+            <Setter Property="Foreground" Value="#646464"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+    </Window.Resources>
+    
+    <Border
+        Opacity="0"
+        Background="#fff"
+        Margin="10">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="15" Opacity="0.7" Color="#555"/>
+        </Border.Effect>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Border.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                Duration="0:0:0.5"
+                                From="0"
+                                To="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Border.Triggers>
+
+        <Grid
+            Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label
+                MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+                Grid.Column="0"
+                Grid.Row="0"
+                Content="Welcome!"
+                Margin="5,0,5,5"
+                FontSize="28"
+                HorizontalAlignment="Stretch"/>
+
+            <Border
+                Grid.Column="1"
+                Grid.Row="0"
+                Background="#bbf"
+                Margin="0,5,0,5"
+                MouseLeftButtonUp="Border_MouseLeftButtonUp_1">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#bbf"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+
+            <Border
+                Grid.Column="2"
+                Grid.Row="0"
+                Margin="5"
+                Background="#fbb"
+                MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#fbb"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+
+            <Grid
+                x:Name="Container"
+                MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+                Background="Transparent"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="1"
+                Margin="10,5,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" x:Name="SignInColumn"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="0*" x:Name="SignUpColumn"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border
+                    Tag="SignIn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300">
+                    <TextBox
+                        Text="Name"
+                        Tag="Name"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignIn"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300">
+                    <TextBox
+                        Text="Password"
+                        Tag="Password"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignIn"
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Background="#dfd"
+                    Margin="0,5,0,0"
+                    MinWidth="150"
+                    MaxWidth="150">
+                    <TextBlock
+                        Text="SIGN IN"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0.25"
+                                        To="#dfd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.RowSpan="9"
+                    Grid.Column="1"
+                    Width="50"
+                    Height="50"
+                    Margin="5"
+                    VerticalAlignment="Center"
+                    Background="#ddd"
+                    CornerRadius="30,30,30,10">
+                    <Button
+                        PreviewMouseLeftButtonUp="Border_PreviewMouseLeftButtonUp"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Style="{StaticResource MyButtonStyle}"/>
+                    <Border.RenderTransform>
+                        <RotateTransform x:Name="Arrow" CenterX="25" CenterY="25" Angle="225"/>
+                    </Border.RenderTransform>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="Background.Color"
+                                            Duration="0:0:0.25"
+                                            To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="Background.Color"
+                                            Duration="0:0:0.25"
+                                            To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+<!--Second Column-->
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Name"
+                        Tag="Name"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="EMail"
+                        Tag="EMail"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Password"
+                        Tag="Password"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Phone"
+                        Tag="Phone"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Age"
+                        Tag="Age"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Avatar"
+                        Tag="Avatar"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Gender"
+                        Tag="Gender"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="7"
+                    Grid.Column="2"
+                    Margin="0,5,0,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#ddd"
+                    MinWidth="300"
+                    Opacity="0">
+                    <TextBox
+                        Text="Status"
+                        Tag="Status"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <Border
+                    Tag="SignUp"
+                    Grid.Row="9"
+                    Grid.Column="2"
+                    Background="#dfd"
+                    Margin="0,5,0,0"
+                    MinWidth="150"
+                    MaxWidth="150"
+                    Opacity="0">
+                    <TextBlock
+                        Text="SIGN UP"
+                        GotFocus="TextBlock_GotFocus"
+                        LostFocus="TextBlock_LostFocus"/>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="Background.Color"
+                                            Duration="0:0:0.25"
+                                            To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetProperty="Background.Color"
+                                            Duration="0:0:0.25"
+                                            To="#dfd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
