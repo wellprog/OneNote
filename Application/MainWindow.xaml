@@ -622,14 +622,19 @@
                     Grid.Row="6"
                     Grid.Column="2"
                     Margin="0,5,0,0"
-                    BorderThickness="2"
-                    BorderBrush="#ddd"
-                    Background="#ddd"
+                    BorderThickness="0"
+                    BorderBrush="#fff"
+                    Background="#fff"
                     MinWidth="300"
                     Opacity="0">
-                    <TextBox
-                        Text="Gender"
-                        Tag="Gender"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox FontSize="22" Grid.Column="0" IsChecked="False" Content="Male"/>
+                        <CheckBox Grid.Column="1" IsChecked="False" Content="Female"/>
+                    </Grid>
                     <Border.Triggers>
                         <EventTrigger RoutedEvent="Mouse.MouseEnter">
                             <EventTrigger.Actions>
