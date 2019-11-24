@@ -57,7 +57,7 @@ namespace Application
             glaRight.BeginTime = TimeSpan.FromMilliseconds(500);
             rotation.Duration = TimeSpan.FromMilliseconds(500);
             rotation.FillBehavior = FillBehavior.HoldEnd;
-            rotation.BeginTime = TimeSpan.FromMilliseconds(250);
+            rotation.BeginTime = TimeSpan.FromMilliseconds(500);
             appear.Duration = TimeSpan.FromMilliseconds(250);
             appear.FillBehavior = FillBehavior.HoldEnd;
             appear.BeginTime = TimeSpan.FromMilliseconds(500);
