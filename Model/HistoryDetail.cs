@@ -9,6 +9,6 @@ namespace OneNote.Model
         public string   Field { get; set; }
         public string   PrevValue { get; set; }
         public string   NewValue { get; set; }
-        public string   HistoryRecord { get; set; }
+        public string   HistoryRecord { get; set; } // ID HistoryRecord к которой относится запись
     }
 }
