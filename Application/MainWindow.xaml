@@ -237,7 +237,6 @@
 
             <Grid
                 x:Name="Container"
-                MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
                 Background="Transparent"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
@@ -644,7 +643,7 @@
                     </Border.Triggers>
                 </Border>
 
-                <Border
+                <!--<Border
                     Tag="SignUp"
                     Grid.Row="5"
                     Grid.Column="2"
@@ -683,13 +682,62 @@
                             </EventTrigger.Actions>
                         </EventTrigger>
                     </Border.Triggers>
+                </Border>-->
+
+                <Border
+                    Tag="SignUp"
+                    x:Name="IMGBorder"
+                    Grid.Row="5"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Margin="0,5,470,0"
+                    BorderThickness="2"
+                    BorderBrush="#ddd"
+                    Background="#eee"
+                    MouseLeftButtonUp="Border_MouseLeftButtonUp_2">
+                    <Rectangle
+                        RadiusX="10"
+                        RadiusY="10"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="IMGSource"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ccc"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                        Storyboard.TargetProperty="BorderBrush.Color"
+                                        Duration="0:0:0.25"
+                                        To="#ddd"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Border.Triggers>
                 </Border>
 
                 <Border
                     Tag="SignUp"
-                    Grid.Row="6"
+                    Grid.Row="5"
+                    Grid.RowSpan="2"
                     Grid.Column="2"
-                    Margin="0,5,0,0"
+                    Margin="85,5,0,0"
                     BorderThickness="0"
                     BorderBrush="#fff"
                     Background="#fff"
@@ -705,11 +753,11 @@
                             Content="Male"
                             Grid.Column="0"
                             Padding="0"
-                            Margin="100,0,0,0"
                             FontSize="24"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
                         <Rectangle
-                            MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"
+                            MouseLeftButtonUp="Rectangle_MouseLeftButtonDown"
                             VerticalAlignment="Center"
                             Grid.Column="1"
                             Stroke="#ddd"
@@ -721,7 +769,7 @@
                             Width="100"/>
                         <Rectangle
                             x:Name="Toggle"
-                            MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"
+                            MouseLeftButtonUp="Rectangle_MouseLeftButtonDown"
                             Grid.Column="1"
                             Width="24"
                             Height="24"
@@ -736,9 +784,9 @@
                             Content="Female"
                             Grid.Column="2"
                             Padding="0"
-                            Margin="0,0,100,0"
                             FontSize="24"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
 

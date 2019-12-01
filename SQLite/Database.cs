@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using OneNote.Model;
 using OneNote.SQLite.Helper;
 using OneNote.SQLite.Model;
-using System.Linq;
 
 namespace OneNote.SQLite
 {
     public class Database : IDatabase
     {
         private readonly Connection _connection;
-        public Database(Connection connection)
+        Database(Connection connection)
         {
             _connection = connection;
         }
@@ -96,11 +94,8 @@ namespace OneNote.SQLite
 
         private void InsertHistory(HistoryModel model)
         {
-            foreach (var item in model.Records)
-                _connection.Add(item);
-
-            foreach (var item in model.Details)
-                _connection.Add(item);
+            _connection.Add(model.Records);
+            _connection.Add(model.Details);
 
             _connection.SaveChanges();
         }
@@ -127,27 +122,15 @@ namespace OneNote.SQLite
 
             InsertHistory(History.GetHistoryFromModel(element as T, model, model.ID));
         }
-
-        //private (Exception ex, HistoryModel mod) Test()
-        //{
-        //    return (ex: null, mod: null);
-        //}
-
-        private HistoryModel GetHistory(string tableName, string lastID)
+        private HistoryModel GetHistory(string TableName, string LastID)
         {
             HistoryModel historyModel = new HistoryModel();
 
-            var LastRecord = _connection.HistoryRecords.Where(f => f.Table == tableName && f.ID == lastID).FirstOrDefault();
-            if (LastRecord == null)
-            {
-                return null;
-            }
-
-            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == tableName && f.CreateTime > LastRecord.CreateTime).ToArray();
+            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == TableName && f.RecordID == LastID);
             List<HistoryDetail> details = new List<HistoryDetail>();
             foreach (HistoryRecord rec in historyModel.Records)
             {
-                details.AddRange(_connection.HistoryDetails.Where(f => f.HistoryRecord == rec.ID).ToArray());
+                details.AddRange(_connection.HistoryDetails.Where(f => f.HistoryRecord == rec.ID).ToList());
             }
             historyModel.Details = details;
             return historyModel;

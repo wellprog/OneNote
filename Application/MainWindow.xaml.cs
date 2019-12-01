@@ -1,6 +1,8 @@
-﻿using OneNote.Application;
+﻿using Microsoft.Win32;
+using OneNote.Application;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,6 +147,19 @@ namespace Application
             }
             IsMale = !IsMale;
             Toggle.BeginStoryboard(sb1);
+        }
+
+        private void Border_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "JPG (*.jpg)|*.jpg|JPEG (*.jpeg)|*.jpeg|PNG (*.png)|*.png";
+            fd.FileName = "Avatar";
+            fd.Title = "Choose avatar image";
+            var result = fd.ShowDialog();
+            if (result == true)
+            {
+                IMGSource.ImageSource = new BitmapImage(new Uri(fd.FileName));
+            }
         }
     }
 }
