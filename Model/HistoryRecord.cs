@@ -6,8 +6,8 @@ namespace OneNote.Model
 {
     public class HistoryRecord : Base
     {
-        public string   Table { get; set; }
-        public string   RecordID { get; set; }
+        public string   Table { get; set; }     // Имя Таблицы
+        public string   RecordID { get; set; }  // ID изменяемого элемента 
         public string   Autor { get; set; }
     }
 }
