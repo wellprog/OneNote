@@ -17,12 +17,10 @@ using System.Windows.Shapes;
 
 namespace Application
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         bool IsLeftOpen = false;
+        bool IsMale = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -132,6 +130,21 @@ namespace Application
                 tb.Text = tb.Tag.ToString();
                 tb.Foreground = new SolidColorBrush(Color.FromRgb(100, 100, 100));
             }
+        }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Storyboard sb1 = new Storyboard();
+            if (IsMale)
+            {
+                sb1 = FindResource("ToggleAnimToFemale") as Storyboard;                
+            }
+            else if (!IsMale)
+            {
+                sb1 = FindResource("ToggleAnimToMale") as Storyboard;
+            }
+            IsMale = !IsMale;
+            Toggle.BeginStoryboard(sb1);
         }
     }
 }
