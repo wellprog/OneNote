@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OneNote.Communication.Model
 {
-    class PageModel
+    public class PageModel
     {
         public List<Page> Pages { get; set; }
         public string LastHistory { get; set; }
