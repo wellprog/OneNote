@@ -53,6 +53,74 @@
         <Style TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="10"/>
         </Style>
+
+        <Storyboard x:Key="ToggleAnimToFemale">
+            <ColorAnimation
+                Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                To="#fbb"
+                Duration="0:0:0.5"
+                FillBehavior="HoldEnd"/>
+            <DoubleAnimation
+                Storyboard.TargetProperty="Width"
+                From="24"
+                To="94"
+                Duration="0:0:0.3"
+                FillBehavior="HoldEnd"/>
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin"
+                From="0,0,70,0"
+                To="0,0,0,0"
+                Duration="0:0:0.3"
+                FillBehavior="HoldEnd"/>
+            <DoubleAnimation
+                Storyboard.TargetProperty="Width"
+                From="94"
+                To="24"
+                Duration="0:0:0.2"
+                FillBehavior="HoldEnd"
+                BeginTime="0:0:0.3"/>
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="70,0,0,0"
+                Duration="0:0:0.2"
+                FillBehavior="HoldEnd"
+                BeginTime="0:0:0.3"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ToggleAnimToMale">
+            <ColorAnimation
+                Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                To="#bbf"
+                Duration="0:0:0.5"
+                FillBehavior="HoldEnd"/>
+            <DoubleAnimation
+                Storyboard.TargetProperty="Width"
+                From="24"
+                To="94"
+                Duration="0:0:0.3"
+                FillBehavior="HoldEnd"/>
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin"
+                From="70,0,0,0"
+                To="0,0,0,0"
+                Duration="0:0:0.3"
+                FillBehavior="HoldEnd"/>
+            <DoubleAnimation
+                Storyboard.TargetProperty="Width"
+                From="94"
+                To="24"
+                Duration="0:0:0.2"
+                FillBehavior="HoldEnd"
+                BeginTime="0:0:0.3"/>
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin"
+                From="0,0,0,0"
+                To="0,0,70,0"
+                Duration="0:0:0.2"
+                FillBehavior="HoldEnd"
+                BeginTime="0:0:0.3"/>
+        </Storyboard>
     </Window.Resources>
     
     <Border
@@ -200,7 +268,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300">
                     <TextBox
                         Text="Name"
@@ -242,7 +310,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300">
                     <TextBox
                         Text="Password"
@@ -368,7 +436,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
@@ -411,7 +479,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
@@ -454,7 +522,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
@@ -497,7 +565,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
@@ -540,7 +608,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
@@ -630,37 +698,48 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox FontSize="22" Grid.Column="0" IsChecked="False" Content="Male"/>
-                        <CheckBox Grid.Column="1" IsChecked="False" Content="Female"/>
+                        <Label
+                            Content="Male"
+                            Grid.Column="0"
+                            Padding="0"
+                            Margin="100,0,0,0"
+                            FontSize="24"
+                            HorizontalAlignment="Center"/>
+                        <Rectangle
+                            MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            Stroke="#ddd"
+                            StrokeThickness="2"
+                            Fill="#eee"
+                            RadiusY="5"
+                            RadiusX="5"
+                            Height="30"
+                            Width="100"/>
+                        <Rectangle
+                            x:Name="Toggle"
+                            MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"
+                            Grid.Column="1"
+                            Width="24"
+                            Height="24"
+                            RadiusX="5"
+                            RadiusY="5"
+                            Margin="0,0,70,0">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="#bbf"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label
+                            Content="Female"
+                            Grid.Column="2"
+                            Padding="0"
+                            Margin="0,0,100,0"
+                            FontSize="24"
+                            HorizontalAlignment="Center"/>
                     </Grid>
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation
-                                        Storyboard.TargetProperty="BorderBrush.Color"
-                                        Duration="0:0:0.25"
-                                        To="#ccc"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation
-                                        Storyboard.TargetProperty="BorderBrush.Color"
-                                        Duration="0:0:0.25"
-                                        To="#ddd"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-                    </Border.Triggers>
                 </Border>
 
                 <Border
@@ -670,7 +749,7 @@
                     Margin="0,5,0,0"
                     BorderThickness="2"
                     BorderBrush="#ddd"
-                    Background="#ddd"
+                    Background="#eee"
                     MinWidth="300"
                     Opacity="0">
                     <TextBox

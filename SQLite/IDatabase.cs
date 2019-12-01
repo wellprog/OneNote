@@ -21,16 +21,16 @@ namespace OneNote.SQLite
         /// </summary>
         /// <param name="value"></param>
         void UpdateBook(Book value);
-        void UpdateSection(Book value);
-        void UpdatePage(Book value);
+        void UpdateSection(Section value);
+        void UpdatePage(Page value);
 
         /// <summary>
         /// Функции добавляют записи, а так же добавляют информацию в историю
         /// </summary>
         /// <param name="value"></param>
         void AddBook(Book value);
-        void AddSection(Book value);
-        void AddPage(Book value);
+        void AddSection(Section value);
+        void AddPage(Page value);
 
         /// <summary>
         /// Функции обновляют записи по истории

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using OneNote.Model;
+using OneNote.SQLite.Helper;
 using OneNote.SQLite.Model;
 
 namespace OneNote.SQLite
@@ -18,50 +20,28 @@ namespace OneNote.SQLite
         public void AddBook(Book value)
         {
             _connection.Add(value);
-
-            HistoryRecord record = new HistoryRecord();
-            record.Autor = value.Autor;
-            record.Table = nameof(Book);
-            record.RecordID = value.ID;
-
-            _connection.Add(record);
-
-            HistoryDetail detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Name);
-            detail.NewValue = value.Name;
-            _connection.Add(detail);
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Cover);
-            detail.NewValue = value.Cover;
-            _connection.Add(detail);
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Autor);
-            detail.NewValue = value.Autor;
-            _connection.Add(detail);
-
-
-            detail = new HistoryDetail();
-            detail.HistoryRecord = record.ID;
-            detail.Field = nameof(value.Description);
-            detail.NewValue = value.Description;
-            _connection.Add(detail);
-
+            var history = History.GetHistoryFromModel(null, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
             _connection.SaveChanges();
         }
 
-        public void AddPage(Book value)
+        public void AddPage(Page value)
         {
-            throw new NotImplementedException();
+            _connection.Add(value);
+            var history = History.GetHistoryFromModel(null, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
+            _connection.SaveChanges();
         }
 
-        public void AddSection(Book value)
+        public void AddSection(Section value)
         {
-            throw new NotImplementedException();
+            _connection.Add(value);
+            var history = History.GetHistoryFromModel(null, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
+            _connection.SaveChanges();
         }
 
         public HistoryModel GetBookHistory(string LastID)
@@ -96,7 +76,17 @@ namespace OneNote.SQLite
 
         public void UpdateBook(Book value)
         {
-            throw new NotImplementedException();
+            _connection.Add(value);
+            var item = _connection.Books.Where(f => f.ID == value.ID).FirstOrDefault();
+            if(item == null)
+            {
+                AddBook(value);
+                return;
+            }
+            var history = History.GetHistoryFromModel(item, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
+            _connection.SaveChanges();
         }
 
         public void UpdateBookByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
@@ -104,9 +94,19 @@ namespace OneNote.SQLite
             throw new NotImplementedException();
         }
 
-        public void UpdatePage(Book value)
+        public void UpdatePage(Page value)
         {
-            throw new NotImplementedException();
+            _connection.Add(value);
+            var item = _connection.Pages.Where(f => f.ID == value.ID).FirstOrDefault();
+            if (item == null)
+            {
+                AddPage(value);
+                return;
+            }
+            var history = History.GetHistoryFromModel(item, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
+            _connection.SaveChanges();
         }
 
         public void UpdatePageByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
@@ -114,9 +114,19 @@ namespace OneNote.SQLite
             throw new NotImplementedException();
         }
 
-        public void UpdateSection(Book value)
+        public void UpdateSection(Section value)
         {
-            throw new NotImplementedException();
+            _connection.Add(value);
+            var item = _connection.Sections.Where(f => f.ID == value.ID).FirstOrDefault();
+            if (item == null)
+            {
+                AddSection(value);
+                return;
+            }
+            var history = History.GetHistoryFromModel(item, value, "Autor");
+            _connection.Add(history.Details);
+            _connection.Add(history.Records);
+            _connection.SaveChanges();
         }
 
         public void UpdateSectionByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
