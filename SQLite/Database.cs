@@ -140,19 +140,21 @@ namespace OneNote.SQLite
         {
             foreach (HistoryRecord record in records)
             {
-                Type typeElement = Type.GetType(record.Table);
+                Type typeElement = Type.GetType($"OneNote.Model.{ record.Table }, Model");
 
                 var element = _connection.Find(typeElement, record.RecordID);
-                //   Book book = _connection.Books.Where(f => f.ID == record.RecordID).FirstOrDefault();
-                if (element == null) continue;
+                if (element == null)
+                {
+                    element = Activator.CreateInstance(typeElement);
+                    _connection.Add(element);
+                }
 
                 IEnumerable<HistoryDetail> _details = details.Where(f => f.HistoryRecord == record.ID);
                 foreach (HistoryDetail item in _details)
                 {
-                    PropertyInfo property = typeElement.GetType().GetProperty(item.Field);
-                    property.SetValue(null, item.NewValue);
+                    PropertyInfo property = typeElement.GetProperty(item.Field);
+                    property.SetValue(element, item.NewValue);
                 }
-                _connection.Entry(element).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
             }
             _connection.SaveChanges();
 

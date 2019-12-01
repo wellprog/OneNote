@@ -39,8 +39,9 @@ namespace ConsoleTest
 
             var arr = c.HistoryRecords.ToArray();
 
+            var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
 
-            d.GetBookHistory("0e5c2067-3a28-4b66-8c96-4d974f471b7d");
+            d.UpdateBookByHistory(history.Records, history.Details);
         }
     }
 }
