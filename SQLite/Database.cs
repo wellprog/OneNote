@@ -12,7 +12,7 @@ namespace OneNote.SQLite
     public class Database : IDatabase
     {
         private readonly Connection _connection;
-        Database(Connection connection)
+        public Database(Connection connection)
         {
             _connection = connection;
         }
@@ -95,8 +95,11 @@ namespace OneNote.SQLite
 
         private void InsertHistory(HistoryModel model)
         {
-            _connection.Add(model.Records);
-            _connection.Add(model.Details);
+            foreach (var item in model.Records)
+                _connection.Add(item);
+
+            foreach (var item in model.Details)
+                _connection.Add(item);
 
             _connection.SaveChanges();
         }
@@ -123,15 +126,27 @@ namespace OneNote.SQLite
 
             InsertHistory(History.GetHistoryFromModel(element as T, model, model.ID));
         }
-        private HistoryModel GetHistory(string TableName, string LastID)
+
+        //private (Exception ex, HistoryModel mod) Test()
+        //{
+        //    return (ex: null, mod: null);
+        //}
+
+        private HistoryModel GetHistory(string tableName, string lastID)
         {
             HistoryModel historyModel = new HistoryModel();
 
-            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == TableName && f.RecordID == LastID);
+            var LastRecord = _connection.HistoryRecords.Where(f => f.Table == tableName && f.ID == lastID).FirstOrDefault();
+            if (LastRecord == null)
+            {
+                return null;
+            }
+
+            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == tableName && f.CreateTime > LastRecord.CreateTime).ToArray();
             List<HistoryDetail> details = new List<HistoryDetail>();
             foreach (HistoryRecord rec in historyModel.Records)
             {
-                details.AddRange(_connection.HistoryDetails.Where(f => f.HistoryRecord == rec.ID).ToList());
+                details.AddRange(_connection.HistoryDetails.Where(f => f.HistoryRecord == rec.ID).ToArray());
             }
             historyModel.Details = details;
             return historyModel;

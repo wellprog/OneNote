@@ -15,8 +15,8 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             //Создание базы данных
-            //Connection c = new Connection();
-            //c.Database.EnsureCreated();
+            Connection c = new Connection();
+            c.Database.EnsureCreated();
 
             Book b = new Book();
             b.Name = "test";
@@ -31,7 +31,16 @@ namespace ConsoleTest
             b1.Description = "";
 
 
-            var d = History.GetHistoryFromModel(b1, b, "123");
+            Database d = new Database(c);
+
+            d.AddBook(b);
+            d.AddBook(b1);
+
+
+            var arr = c.HistoryRecords.ToArray();
+
+
+            d.GetBookHistory("0e5c2067-3a28-4b66-8c96-4d974f471b7d");
         }
     }
 }
