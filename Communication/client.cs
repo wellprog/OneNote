@@ -24,11 +24,118 @@ namespace OneNote.Communication
             connection = _connection;
         }
 
+        private async Task<BookModel> asyncGetBooks()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<BookModel>(getted);
+            //либо return JsonConvert.DeserializeObject<BookModel>(Token);
+        }
+        public BookModel GetBooks(string Token)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+
+            httpClient.PostAsync(new Uri(baseUrl + "/GetBooks"), content);
+
+            return asyncGetBooks().Result;
+        }
+
+        private async Task<HistoryModel> asyncGetHistory()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<HistoryModel>(getted);
+            //либо return JsonConvert.DeserializeObject<BookModel>(Token);
+        }
+        public HistoryModel GetHistory(string Token, string Table, int LastID)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("Table"), Table);
+            content.Add(new StringContent("LastID"), LastID.ToString());
+
+            httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content);
+
+            return asyncGetHistory().Result;
+        }
+
+        private async Task<PageModel> asyncGetPages()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PageModel>(getted);
+            //либо return JsonConvert.DeserializeObject<BookModel>(Token);
+        }
+        public PageModel GetPages(string Token)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+
+            httpClient.PostAsync(new Uri(baseUrl + "/GetPages"), content);
+
+            return asyncGetPages().Result;
+        }
+
+        private async Task<SectionModel> asyncGetSections()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<SectionModel>(getted);
+            //либо return JsonConvert.DeserializeObject<BookModel>(Token);
+        }
+        public SectionModel GetSections(string Token)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+
+            httpClient.PostAsync(new Uri(baseUrl + "/GetSections"), content);
+
+            return asyncGetSections().Result;
+        }
+        
+        private async Task<User> asyncGetUserDetails()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<User>(getted);
+            //либо return JsonConvert.DeserializeObject<BookModel>(Token);
+        }
+        public User GetUserDetails(string Token)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+
+            httpClient.PostAsync(new Uri(baseUrl + "/GetUserDetails"), content);
+
+            return asyncGetUserDetails().Result;
+        }
+
+        /*private async Task<string> asyncAuthorize(string login, string password)
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            return JsonConvert.DeserializeObject<string>(login);
+        }
+         private async Task<string> asyncAuthorize()
+         {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<string>(getted);
+         }*/
         public string Authorize(string login, string password)
         {
-            foreach(User i in connection.Users)
+            /*
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("login"), login);
+            content.Add(new StringContent("password"), password);
+
+            httpClient.PostAsync(new Uri(baseUrl + "/Authorize"), content);
+
+            return asyncAuthorize().Result;
+            */
+            foreach (User i in connection.Users)
             {
-                if(i.UserName == login && i.Password == password)
+                if (i.UserName == login && i.Password == password)
                 {
                     return JsonConvert.SerializeObject(i);
                 }
@@ -37,80 +144,21 @@ namespace OneNote.Communication
             return null;
         }
 
-        private async Task<BookModel> asyncGetBooks(string Token)
+        /*private async Task<string> asyncRegister()
         {
             HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
-            return JsonConvert.DeserializeObject<BookModel>(Token);
-        }
-        public BookModel GetBooks(string Token)
-        {
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("someone"), "token");
-
-            httpClient.PostAsync(new Uri(baseUrl + "/GetBooks"), content);
-
-            return asyncGetBooks(Token).Result;
-        }
-
-        private async Task<HistoryModel> asyncGetHistory(string Token)
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
-            return JsonConvert.DeserializeObject<HistoryModel>(Token);
-        }
-        public HistoryModel GetHistory(string Token, string Table, int LastID)
-        {
-            MultipartContent content = new MultipartContent();
-            content.Add();
-            httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content);
-
-            return asyncGetHistory(Token).Result;
-        }
-
-        private async Task<PageModel> asyncGetPages(string Token)
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
-            return JsonConvert.DeserializeObject<PageModel>(Token);
-        }
-        public PageModel GetPages(string Token)
-        {
-            MultipartContent content = new MultipartContent();
-            content.Add();
-            httpClient.PostAsync(new Uri(baseUrl + "/GetPages"), content);
-
-            return asyncGetPages(Token).Result;
-        }
-
-        private async Task<SectionModel> asyncGetSelections(string Token)
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
-            return JsonConvert.DeserializeObject<SectionModel>(Token);
-        }
-        public SectionModel GetSections(string Token)
-        {
-            MultipartContent content = new MultipartContent();
-            content.Add();
-            httpClient.PostAsync(new Uri(baseUrl + "/GetSections"), content);
-
-            return asyncGetSelections(Token).Result;
-        }
-
-        private async Task<User> asyncGetUserDetails(string Token)
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
-            return JsonConvert.DeserializeObject<User>(Token);
-        }
-        public User GetUserDetails(string Token)
-        {
-            MultipartContent content = new MultipartContent();
-            content.Add();
-            httpClient.PostAsync(new Uri(baseUrl + "/GetUserDetails"), content);
-
-            return asyncGetUserDetails(Token).Result;
-        }
-
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<string>(getted);
+        }*/
         public string Register(User user)
         {
-            foreach(User i in connection.Users)
+            /*MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("user"), JsonConvert.SerializeObject(user));
+            httpClient.PostAsync(new Uri(baseUrl + "/Register"), content);
+
+            return asyncRegister().Result;*/
+
+            foreach (User i in connection.Users)
             {
                 if(i.UserName == user.UserName)
                 {
@@ -123,9 +171,20 @@ namespace OneNote.Communication
             return JsonConvert.SerializeObject(user);
         }
 
+        private async Task<string> asyncGetSettedHistoryID()
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
+            string getted = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<string>(getted);
+        }
         public string SetHistory(string Token, HistoryModel history)
         {
-            //connection.HistoryDetails.Add(history.Details);
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
+            httpClient.PostAsync(new Uri(baseUrl + "/SetHistory"), content);
+
+            return asyncGetSettedHistoryID().Result;
         }
     }
 }
