@@ -11,7 +11,7 @@ namespace OneNote.SQLite
     public class Database : IDatabase
     {
         private readonly Connection _connection;
-        Database(Connection connection)
+        public Database(Connection connection)
         {
             _connection = connection;
         }

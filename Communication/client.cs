@@ -23,7 +23,7 @@ namespace OneNote.Communication
             httpClient = new HttpClient();
             connection = _connection;
         }
-
+        
         private async Task<BookModel> asyncGetBooks()
         {
             HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
@@ -120,7 +120,8 @@ namespace OneNote.Communication
          {
             HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
             string getted = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<string>(getted);
+            return getted;
+            //return JsonConvert.DeserializeObject<string>(getted);
          }*/
         public string Authorize(string login, string password)
         {
@@ -148,7 +149,8 @@ namespace OneNote.Communication
         {
             HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
             string getted = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<string>(getted);
+            return getted;
+            //return JsonConvert.DeserializeObject<string>(getted);
         }*/
         public string Register(User user)
         {
@@ -175,7 +177,8 @@ namespace OneNote.Communication
         {
             HttpResponseMessage response = await httpClient.GetAsync(baseUrl);
             string getted = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<string>(getted);
+            return getted;
+            //return JsonConvert.DeserializeObject<string>(getted);
         }
         public string SetHistory(string Token, HistoryModel history)
         {
