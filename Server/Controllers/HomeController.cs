@@ -34,11 +34,14 @@ namespace Server.Controllers
 
         public ActionResult Authorize(string login, string password)
         {
-            //var user = _con.Users.Where(f => f.UserName == login && f.Password == password).FirstOrDefault();
             var user = _db.GetUserByLoginPassword(login, password);
             if (user == null) return Json("No such user!");
             string token = login + _salt + password;
-            _tokenStorage.Tokens.Add(token, user);
+            if (!_tokenStorage.Tokens.ContainsKey(token))
+            {
+                _tokenStorage.Tokens.Add(token, user);
+            }
+
             return Json(token);
         }
 
