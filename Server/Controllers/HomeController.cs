@@ -44,14 +44,14 @@ namespace Server.Controllers
 
         public ActionResult Register([FromForm]User user)
         {
-            if (IsUserExists(user.UserName)) return Json("User with same name already exitsts!");
+            if (_db.IsUserExists(user.UserName)) return Json("User with same name already exitsts!");
             _db.AddUser(user);
             string token = user.UserName + _salt + user.Password;
             _tokenStorage.Tokens.Add(token, user);
             return Json(token);
         }
 
-        public ActionResult GetUserDetails(string token)
+        public ActionResult/*User*/ GetUserDetails(string token)
         {
             if (_tokenStorage.Tokens.ContainsKey(token))
             {
@@ -112,9 +112,22 @@ namespace Server.Controllers
             }
         }
 
-        public ActionResult/*string*/ SetHistory(String token, HistoryModel history)
+        public ActionResult/*string*/ SetBookHistory(String token, HistoryModel history)
         {
-            return Json(_db.UpdateBookByHistory(history.Records, history.Details));
+            _db.UpdateBookByHistory(history.Records, history.Details);
+            return Json(_db.GetLastBookHistory());
+        }
+
+        public ActionResult/*string*/ SetSectionHistory(String token, HistoryModel history)
+        {
+            _db.UpdateSectionByHistory(history.Records, history.Details);
+            return Json(_db.GetLastSectionHistory());
+        }
+
+        public ActionResult/*string*/ SetPageHistory(String token, HistoryModel history)
+        {
+            _db.UpdatePageByHistory(history.Records, history.Details);
+            return Json(_db.GetLastPageHistory());
         }
 
         private IEnumerable<Book> GetBooks(User user)
