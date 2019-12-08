@@ -57,8 +57,10 @@ namespace OneNote.SQLite
         /// </summary>
         /// <returns></returns>
         User GetUserByLoginPassword(string login, string password);
+        bool IsUserExists(string login);
         bool AddUser(User user);
         bool DeleteUser(User user);
         bool UpdateUser(User user);
+
     }
 }

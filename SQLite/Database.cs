@@ -159,5 +159,63 @@ namespace OneNote.SQLite
             _connection.SaveChanges();
 
         }
+
+        public User GetUserByLoginPassword(string login, string password)
+        {
+            User currentUser = _connection.Users.Where(f => f.UserName == login && f.Password == password).FirstOrDefault();
+            if (currentUser == null)
+                return null;
+
+            return currentUser;
+        }
+
+        public bool AddUser(User user)
+        {
+            User currentUser = _connection.Users.Where(f => f.UserName == user.UserName).FirstOrDefault();
+            if (currentUser != null)
+                return false;
+            _connection.Add(user);
+            _connection.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteUser(User user)
+        {
+
+            User currentUser = _connection.Users.Where(f => f.UserName == user.UserName).FirstOrDefault();
+            if (currentUser == null)
+                return false;
+            currentUser.IsDeleted = true;
+            _connection.SaveChanges();
+            return true;
+        }
+
+        public bool UpdateUser(User user)
+        {
+            User currentUser = _connection.Users.Where(f => f.UserName == user.UserName).FirstOrDefault();
+            if (currentUser == null)
+                return false;
+
+            PropertyInfo[] propertys = currentUser.GetType().GetProperties();
+
+            if (!Validate.ValidateModel(user)) return false;
+            foreach(PropertyInfo prop in propertys)
+            {
+                if (prop.Name.ToLower() == "id")
+                    continue;
+                prop.SetValue(currentUser, prop.GetValue(user));
+            }
+
+            _connection.SaveChanges();
+            return true;
+        }
+
+        public bool IsUserExists(string login)
+        {
+            User currentUser = _connection.Users.Where(f => f.UserName == login).FirstOrDefault();
+            if (currentUser == null)
+                return false;
+            return true;
+        }
     }
     }
