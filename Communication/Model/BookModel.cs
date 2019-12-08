@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OneNote.Communication.Model
 {
-    class BookModel
+    public class BookModel
     {
         public List<Book> Books { get; set; }
         public string LastHistory { get; set; }
