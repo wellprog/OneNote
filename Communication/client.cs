@@ -15,13 +15,11 @@ namespace OneNote.Communication
     {
         Uri baseUrl;
         HttpClient httpClient;
-        private readonly Connection connection;
 
-        Client(string uri, Connection _connection)
+        Client(string uri)
         {
             baseUrl = new Uri(uri);
             httpClient = new HttpClient();
-            connection = _connection;
         }
         
         private async Task<GettedType> asyncGet<GettedType>()
