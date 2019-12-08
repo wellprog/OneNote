@@ -7,8 +7,7 @@ namespace OneNote.Communication.Model
 {
     public class HistoryModel
     {
-        List<HistoryRecord> Records { get; set; }
-        List<HistoryDetail> Details { get; set; }
-        public string LastHistory { get; set; }
+        public List<HistoryRecord> Records { get; set; }
+        public List<HistoryDetail> Details { get; set; }
     }
 }

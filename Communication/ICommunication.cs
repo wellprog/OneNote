@@ -59,6 +59,8 @@ namespace OneNote.Communication
         /// <param name="Token">Токен пользователя</param>
         /// <param name="history">История</param>
         /// <returns>ID истории</returns>
-        string SetHistory(String token, HistoryModel history);
+        string SetBookHistory(String token, HistoryModel history);
+        string SetSectionHistory(String token, HistoryModel history);
+        string SetPageHistory(String token, HistoryModel history);
     }
 }

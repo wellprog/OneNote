@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OneNote.SQLite
 {
-    interface IDatabase
+    public interface IDatabase
     {
         /// <summary>
         /// Функции просто возвращают значения
@@ -41,7 +41,6 @@ namespace OneNote.SQLite
         void UpdateBookByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
         void UpdateSectionByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
         void UpdatePageByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
-
         /// <summary>
         /// Функции просто возвращают записи по последниму ID
         /// </summary>
@@ -51,6 +50,9 @@ namespace OneNote.SQLite
         HistoryModel GetSectionHistory(string LastID);
         HistoryModel GetPageHistory(string LastID);
 
+        string GetLastBookHistory();
+        string GetLastSectionHistory();
+        string GetLastPageHistory();
 
         /// <summary>
         /// Работа с пользователями
