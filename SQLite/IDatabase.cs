@@ -50,5 +50,15 @@ namespace OneNote.SQLite
         HistoryModel GetBookHistory(string LastID);
         HistoryModel GetSectionHistory(string LastID);
         HistoryModel GetPageHistory(string LastID);
+
+
+        /// <summary>
+        /// Работа с пользователями
+        /// </summary>
+        /// <returns></returns>
+        User GetUserByLoginPassword(string login, string password);
+        bool AddUser(User user);
+        bool DeleteUser(User user);
+        bool UpdateUser(User user);
     }
 }
