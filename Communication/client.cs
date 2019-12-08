@@ -85,7 +85,6 @@ namespace OneNote.Communication
         
         public string Authorize(string login, string password)
         {
-            /*
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("login"), login);
             content.Add(new StringContent("password"), password);
@@ -93,37 +92,15 @@ namespace OneNote.Communication
             httpClient.PostAsync(new Uri(baseUrl + "/Authorize"), content);
             
             return asyncGet<string>().Result;
-            */
-            foreach (User i in connection.Users)
-            {
-                if (i.UserName == login && i.Password == password)
-                {
-                    return JsonConvert.SerializeObject(i);
-                }
-            }
-
-            return null;
         }
         
         public string Register(User user)
         {
-            /*MultipartFormDataContent content = new MultipartFormDataContent();
+            MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("user"), JsonConvert.SerializeObject(user));
             httpClient.PostAsync(new Uri(baseUrl + "/Register"), content);
             
-            return asyncGet<User>().Result;*/
-
-            foreach (User i in connection.Users)
-            {
-                if(i.UserName == user.UserName)
-                {
-                    return null;
-                }
-            }
-
-            connection.Users.Add(user);
-            connection.SaveChanges();
-            return JsonConvert.SerializeObject(user);
+            return asyncGet<string>().Result;
         }
         
         public string SetHistory(string Token, HistoryModel history)
