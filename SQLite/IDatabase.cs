@@ -42,6 +42,8 @@ namespace OneNote.SQLite
         void UpdateSectionByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
         void UpdatePageByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
 
+        void UpdateByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
+
         /// <summary>
         /// Функции просто возвращают записи по последниму ID
         /// </summary>
