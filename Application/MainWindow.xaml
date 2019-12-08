@@ -346,6 +346,16 @@
 
                 <Border
                     Tag="SignIn"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Margin="10"
+                    Grid.RowSpan="7">
+                    <!--<MediaElement
+                        x:Name="MediaSource"/>-->
+                 </Border>
+                    
+                <Border
+                    Tag="SignIn"
                     Grid.Row="9"
                     Grid.Column="0"
                     Background="#dfd"
@@ -525,8 +535,10 @@
                     MinWidth="300"
                     Opacity="0">
                     <TextBox
+                        SelectionChanged="TextBox_SelectionChanged"
                         Text="Password"
                         Tag="Password"
+                        KeyUp="TextBox_KeyUp"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
                     <Border.Triggers>

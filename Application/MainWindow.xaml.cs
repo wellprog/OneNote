@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,9 +24,12 @@ namespace Application
     {
         bool IsLeftOpen = false;
         bool IsMale = true;
+        string Password = string.Empty;
+        bool IsEntering = false;
         public MainWindow()
         {
             InitializeComponent();
+            //MediaSource.Source = new Uri(System.IO.Path.GetFullPath("Resources/giphy.gif"));
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -117,10 +121,11 @@ namespace Application
         private void TextBlock_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = sender as TextBox;
-            if(tb.Text == tb.Tag.ToString())
+            if (tb.Text == tb.Tag.ToString())
             {
                 tb.Text = "";
-                tb.Foreground = new SolidColorBrush(Color.FromRgb(0,0,0));
+                Password = "";
+                tb.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             }
         }
 
@@ -139,7 +144,7 @@ namespace Application
             Storyboard sb1 = new Storyboard();
             if (IsMale)
             {
-                sb1 = FindResource("ToggleAnimToFemale") as Storyboard;                
+                sb1 = FindResource("ToggleAnimToFemale") as Storyboard;
             }
             else if (!IsMale)
             {
@@ -160,6 +165,53 @@ namespace Application
             {
                 IMGSource.ImageSource = new BitmapImage(new Uri(fd.FileName));
             }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl
+            //    || e.Key == Key.LeftAlt || e.Key == Key.RightAlt) return;
+
+            if (IsEntering == false)
+            {
+                IsEntering = true;
+                TextBox tb = (TextBox)sender;
+                tb.SelectionLength = 0;
+                int tmppos = tb.CaretIndex;
+                if (tmppos > Password.Length + 1) tmppos = Password.Length + 1;
+
+                if (e.Key == Key.Back || e.Key == Key.Delete && Password.Length > 0)
+                {
+                    Password = Password.Remove(tmppos, 1);
+                    tb.Text = Regex.Replace(Password, @"[0-9,a-z,A-Z]{1}", "⬤");
+                    tb.SelectionStart = tmppos;
+                }
+
+                else if ((int)e.Key >= 34 && (int)e.Key <= 69)
+                {
+                    if (e.Key == Key.RightShift || e.Key == Key.LeftShift
+                        || System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock))
+                    {
+                        Password = Password.Insert(tmppos - 1, new KeyConverter().ConvertToString(e.Key));
+                    }
+                    else
+                    {
+                        Password = Password.Insert(tmppos - 1, new KeyConverter().ConvertToString(e.Key).ToLower());
+                    }
+
+                    tb.Text = Regex.Replace(Password, @"[0-9,a-z,A-Z]{1}", "⬤");
+                    tb.SelectionStart = tb.Text.Length;
+                }
+            }
+
+            IsEntering = false;
+        }
+
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            TextBox tb = (TextBox)sender;
+            tb.SelectionLength = 0;
         }
     }
 }
