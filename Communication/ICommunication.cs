@@ -6,6 +6,13 @@ using System.Text;
 
 namespace OneNote.Communication
 {
+
+    /// <summary>
+    /// 1 - Конструктор принимает базовый URL
+    /// 2 - Для отправки запроса используется POST базовый URL + название функции
+    /// 3 - Все параметры отправляются POST www-form-url-encoded или multipart-form-data
+    /// 4 - Переменные при отправке имеют название переменных из параметров функций
+    /// </summary>
     interface ICommunication
     {
         /// <summary>
@@ -27,16 +34,16 @@ namespace OneNote.Communication
         /// </summary>
         /// <param name="Token"></param>
         /// <returns></returns>
-        User GetUserDetails(string Token);
+        User GetUserDetails(string token);
 
         /// <summary>
         /// Получение всех секций
         /// </summary>
         /// <param name="Token">Токен пользователя</param>
         /// <returns>Модель секций</returns>
-        SectionModel GetSections(string Token);
-        BookModel GetBooks(string Token);
-        PageModel GetPages(string Token);
+        SectionModel GetSections(string token);
+        BookModel GetBooks(string token);
+        PageModel GetPages(string token);
         
         /// <summary>
         /// Получение истории изменений по таблице и последней версии
@@ -45,13 +52,13 @@ namespace OneNote.Communication
         /// <param name="Table">Наименование таблицы</param>
         /// <param name="LastID">Последний ID истории</param>
         /// <returns>Массив истории</returns>
-        HistoryModel GetHistory(string Token, string Table, int LastID);
+        HistoryModel GetHistory(string token, string table, int lastID);
         /// <summary>
         /// Отправка истории
         /// </summary>
         /// <param name="Token">Токен пользователя</param>
         /// <param name="history">История</param>
         /// <returns>ID истории</returns>
-        string SetHistory(String Token, HistoryModel history);
+        string SetHistory(String token, HistoryModel history);
     }
 }

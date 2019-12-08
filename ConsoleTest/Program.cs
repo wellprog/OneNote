@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OneNote.Model;
 using OneNote.SQLite;
 using OneNote.SQLite.Helper;
+
+
+using System.Net.Http;
 
 namespace ConsoleTest
 {
@@ -42,6 +46,13 @@ namespace ConsoleTest
             var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
 
             d.UpdateBookByHistory(history.Records, history.Details);
+
+
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("123"), "token");
+
+            HttpClient client = new HttpClient();
+            client.PostAsync("http://test.ru/GetBooks", content);
         }
     }
 }
