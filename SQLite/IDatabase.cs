@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OneNote.SQLite
 {
-    interface IDatabase
+    public interface IDatabase
     {
         /// <summary>
         /// Функции просто возвращают значения
