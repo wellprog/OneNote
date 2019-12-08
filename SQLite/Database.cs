@@ -157,7 +157,6 @@ namespace OneNote.SQLite
                 }
             }
             _connection.SaveChanges();
-
         }
     }
     }

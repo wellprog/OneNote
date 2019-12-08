@@ -51,6 +51,9 @@ namespace OneNote.SQLite
         HistoryModel GetSectionHistory(string LastID);
         HistoryModel GetPageHistory(string LastID);
 
+        string GetLastBookHistory();
+        string GetLastSectionHistory();
+        string GetLastPageHistory();
 
         /// <summary>
         /// Работа с пользователями
