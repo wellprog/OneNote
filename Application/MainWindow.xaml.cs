@@ -209,9 +209,9 @@ namespace Application
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
-            TextBox tb = (TextBox)sender;
-            tb.SelectionLength = 0;
+            //e.Handled = true;
+            //TextBox tb = (TextBox)sender;
+            //tb.SelectionLength = 0;
         }
     }
 }

@@ -43,7 +43,22 @@ namespace OneNote.Communication
             throw new NotImplementedException();
         }
 
+        public string SetBookHistory(string token, HistoryModel history)
+        {
+            throw new NotImplementedException();
+        }
+
         public string SetHistory(string token, HistoryModel history)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SetPageHistory(string token, HistoryModel history)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SetSectionHistory(string token, HistoryModel history)
         {
             throw new NotImplementedException();
         }
