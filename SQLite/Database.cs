@@ -216,5 +216,20 @@ namespace OneNote.SQLite
                 return false;
             return true;
         }
+
+        public string GetLastBookHistory()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetLastSectionHistory()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetLastPageHistory()
+        {
+            throw new NotImplementedException();
+        }
     }
     }

@@ -17,6 +17,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OneNote.Communication;
+using OneNote.Model;
+using Newtonsoft.Json;
 
 namespace Application
 {
@@ -26,10 +29,13 @@ namespace Application
         bool IsMale = true;
         string Password = string.Empty;
         bool IsEntering = false;
+        Client client;
+
         public MainWindow()
         {
             InitializeComponent();
-            //MediaSource.Source = new Uri(System.IO.Path.GetFullPath("Resources/giphy.gif"));
+            //client = new Client("BaseURL"); //Здесь вылетит, потому что URL неизвестен
+            ////MediaSource.Source = new Uri(System.IO.Path.GetFullPath("Resources/giphy.gif")); //??
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -154,6 +160,7 @@ namespace Application
             Toggle.BeginStoryboard(sb1);
         }
 
+        string fileName; //?
         private void Border_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
@@ -163,6 +170,7 @@ namespace Application
             var result = fd.ShowDialog();
             if (result == true)
             {
+                fileName = fd.FileName; //??
                 IMGSource.ImageSource = new BitmapImage(new Uri(fd.FileName));
             }
         }
@@ -209,9 +217,59 @@ namespace Application
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
-            TextBox tb = (TextBox)sender;
-            tb.SelectionLength = 0;
+            //e.Handled = true;
+            //TextBox tb = (TextBox)sender;
+            //tb.SelectionLength = 0;
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Window1 mww = new Window1(new User());
+            mww.Show();
+            Close();
+            //test
+
+            if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
+                return;
+            string token = client.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
+            if(token != null)
+            {
+                //Авторизовались и всё хорошо
+                Window1 mw = new Window1(JsonConvert.DeserializeObject<User>(token));
+                mw.Show();
+                Close();
+            }
+            else
+            {
+                //Не авторизовались. Выводим ошибку.
+            }
+        }
+
+        private void SignupTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            User registerProfile = new User();
+            registerProfile.UserName = regNameTextBox.Text;
+            registerProfile.EMail = regEMailTextBox.Text;
+            registerProfile.Password = Password;
+            registerProfile.Phone = regPhoneTextBox.Text;
+            try { registerProfile.Age = System.Convert.ToInt32(regAgeTextBox.Text); }
+            catch (FormatException) { //Если мы сюда попали, значит пользователь вместо возраста ввел что-то нечисленное и его нужно оповестить
+            }
+            registerProfile.Avatar = fileName; //???
+            registerProfile.Gender = IsMale;
+            registerProfile.Status = regStatusTextBox.Text;
+            
+            if(client.Register(registerProfile) != null)
+            {
+                //Сказать пользователю, что он зарегестрирован и войти в программу
+                Window1 mw = new Window1(registerProfile);
+                mw.Show();
+                Close();
+            }
+            else
+            {
+                //Вывести ошибку
+            }
         }
     }
 }
