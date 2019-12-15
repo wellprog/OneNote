@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OneNote.Communication.Model;
 using OneNote.Model;
 using OneNote.Server;
+using OneNote.Server.Model;
 using OneNote.SQLite;
 
 namespace Server.Controllers
@@ -35,14 +36,15 @@ namespace Server.Controllers
         public ActionResult Authorize(string login, string password)
         {
             var user = _db.GetUserByLoginPassword(login, password);
-            if (user == null) return Json("No such user!");
+            if (user == null)
+                return Json(new ResponceModel { ErrorID = 1, ErrorDescription = "No such user!", Data = null});
             string token = login + _salt + password;
             if (!_tokenStorage.Tokens.ContainsKey(token))
             {
                 _tokenStorage.Tokens.Add(token, user);
             }
 
-            return Json(token);
+            return Json(new ResponceModel { ErrorID = 0, ErrorDescription = "", Data = token });
         }
 
         public ActionResult Register([FromForm]User user)

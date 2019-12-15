@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using OneNote.Communication.Model;
+using Newtonsoft.Json;
 using OneNote.Model;
+using OneNote.Communication.Model;
+using OneNote.Communication.Model.ResponseModel;
 
 namespace OneNote.Communication
 {
-    class Communication : ICommunication
+    public class Communication : ICommunication
     {
+        private Client _client;
+
+        public Communication(Client client)
+        {
+            _client = client;
+        }
+
         /// <summary>
         /// Проверить логин пароль (на непустые)
         /// сделать запрос
@@ -18,7 +27,28 @@ namespace OneNote.Communication
         /// <returns></returns>
         public string Authorize(string login, string password)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrWhiteSpace(login) && String.IsNullOrWhiteSpace(password))
+            {
+                return "Please fill both fields!";
+            }
+
+            var response = _client.Authorize(login, password);
+            var responseToken = JsonConvert.DeserializeObject<ResponseToken>(response);
+            if (responseToken.ErrorID != 0)
+                return responseToken.ErrorDescription;
+
+            var books = _client.GetLocalBooks(responseToken.AutorID) as Book[];
+            if (books.Length == 0)
+            {
+                foreach (var book in books)
+                {
+
+                }
+            }
+            
+            _client.AddBook()
+            _client.Token = responseToken.Token;
+            return responseToken.Token;
         }
 
         /// <summary>
