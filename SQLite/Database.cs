@@ -218,17 +218,17 @@ namespace OneNote.SQLite
 
         public string GetLastBookHistory()
         {
-            return _connection.Books.OrderBy(f => f.CreateTime).Last().ToString();
+            return _connection.Books.OrderBy(f => f.CreateTime)?.Last().ID;
         }
 
         public string GetLastSectionHistory()
         {
-            return _connection.Sections.OrderBy(f => f.CreateTime).Last().ToString();
+            return _connection.Sections.OrderBy(f => f.CreateTime)?.Last().ID;
         }
 
         public string GetLastPageHistory()
         {
-            return _connection.Pages.OrderBy(f => f.CreateTime).Last().ToString();
+            return _connection.Pages.OrderBy(f => f.CreateTime)?.Last().ID;
         }
     }
     }
