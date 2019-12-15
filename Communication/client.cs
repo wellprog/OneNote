@@ -27,10 +27,10 @@ namespace OneNote.Communication
             httpClient = new HttpClient();
         }
         
-        public BookModel GetBooks(string Token)
+        public BookModel GetBooks(string token)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("token"), token);
             
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetBooks"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -38,12 +38,12 @@ namespace OneNote.Communication
             return JsonConvert.DeserializeObject<BookModel>(returnedDataString);
         }
         
-        public HistoryModel GetHistory(string Token, string Table, int LastID)
+        public HistoryModel GetHistory(string token, string table, int lastID)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
-            content.Add(new StringContent("Table"), Table);
-            content.Add(new StringContent("LastID"), LastID.ToString());
+            content.Add(new StringContent("token"), token);
+            content.Add(new StringContent("table"), table);
+            content.Add(new StringContent("lastID"), lastID.ToString());
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -51,10 +51,10 @@ namespace OneNote.Communication
             return JsonConvert.DeserializeObject<HistoryModel>(returnedDataString);
         }
         
-        public PageModel GetPages(string Token)
+        public PageModel GetPages(string token)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("token"), token);
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetPages"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -62,10 +62,10 @@ namespace OneNote.Communication
             return JsonConvert.DeserializeObject<PageModel>(returnedDataString);
         }
         
-        public SectionModel GetSections(string Token)
+        public SectionModel GetSections(string token)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("token"), token);
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetSections"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -73,10 +73,10 @@ namespace OneNote.Communication
             return JsonConvert.DeserializeObject<SectionModel>(returnedDataString);
         }
         
-        public User GetUserDetails(string Token)
+        public User GetUserDetails(string token)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("token"), token);
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetUserDetails"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -107,13 +107,49 @@ namespace OneNote.Communication
             return returnedDataString;
         }
         
-        public string SetHistory(string Token, HistoryModel history)
+        public string SetHistory(string token, HistoryModel history)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("Token"), Token);
+            content.Add(new StringContent("token"), token);
             content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetHistory"), content).Result;
+            string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
+
+            return returnedDataString;
+        }
+
+        public string SetBookHistory(string token, HistoryModel history)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("token"), token);
+            content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
+
+            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetBookHistory"), content).Result;
+            string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
+
+            return returnedDataString;
+        }
+
+        public string SetSectionHistory(string token, HistoryModel history)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("token"), token);
+            content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
+
+            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetSectionHistory"), content).Result;
+            string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
+
+            return returnedDataString;
+        }
+
+        public string SetPageHistory(string token, HistoryModel history)
+        {
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("token"), token);
+            content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
+
+            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetPageHistory"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
