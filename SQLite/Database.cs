@@ -192,12 +192,11 @@ namespace OneNote.SQLite
         public bool UpdateUser(User user)
         {
             User currentUser = _connection.Users.Where(f => f.UserName == user.UserName).FirstOrDefault();
-            if (currentUser == null)
-                return false;
-
+            if (currentUser == null)           return false;
+            if (!Validate.ValidateModel(user)) return false;
             PropertyInfo[] propertys = currentUser.GetType().GetProperties();
 
-            if (!Validate.ValidateModel(user)) return false;
+           
             foreach(PropertyInfo prop in propertys)
             {
                 if (prop.Name.ToLower() == "id")
@@ -215,6 +214,21 @@ namespace OneNote.SQLite
             if (currentUser == null)
                 return false;
             return true;
+        }
+
+        public string GetLastBookHistory()
+        {
+            return _connection.Books.OrderBy(f => f.CreateTime).Last().ToString();
+        }
+
+        public string GetLastSectionHistory()
+        {
+            return _connection.Sections.OrderBy(f => f.CreateTime).Last().ToString();
+        }
+
+        public string GetLastPageHistory()
+        {
+            return _connection.Pages.OrderBy(f => f.CreateTime).Last().ToString();
         }
     }
     }
