@@ -94,8 +94,8 @@ namespace OneNote.SQLite
 
         private void InsertHistory(HistoryModel model)
         {
-            _connection.Add(model.Records);
-            _connection.Add(model.Details);
+            _connection.AddRange(model.Records);
+            _connection.AddRange(model.Details);
 
             _connection.SaveChanges();
         }
@@ -138,18 +138,21 @@ namespace OneNote.SQLite
 
         private void UpdateValueByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
         {
+
+
             foreach (HistoryRecord record in records)
             {
                 Type typeElement = Type.GetType($"OneNote.Model.{ record.Table }, Model");
 
-                var element = _connection.Find(typeElement, record.RecordID);
+                Base element = (Base)_connection.Find(typeElement, record.RecordID);
                 if (element == null)
                 {
-                    element = Activator.CreateInstance(typeElement);
+                    element = (Base)Activator.CreateInstance(typeElement);
+                    element.ID = record.RecordID;
                     _connection.Add(element);
                 }
 
-                IEnumerable<HistoryDetail> _details = details.Where(f => f.HistoryRecord == record.ID);
+                IEnumerable<HistoryDetail> _details = _connection.HistoryDetails.Where(f => f.HistoryRecord == record.ID);
                 foreach (HistoryDetail item in _details)
                 {
                     PropertyInfo property = typeElement.GetProperty(item.Field);
@@ -211,9 +214,6 @@ namespace OneNote.SQLite
         public bool IsUserExists(string login)
         {
             User currentUser = _connection.Users.Where(f => f.UserName == login).FirstOrDefault();
-            //if (currentUser == null)
-            //    return false;
-            //return true;
             return currentUser == null ? false : true;
         }
 

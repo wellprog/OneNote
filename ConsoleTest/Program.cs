@@ -16,43 +16,55 @@ namespace ConsoleTest
 {
     class Program
     {
+        public void Test()
+        {
+
+
+
+
+        }
+
         static void Main(string[] args)
         {
             //Создание базы данных
             Connection c = new Connection();
             c.Database.EnsureCreated();
 
-            Book b = new Book();
-            b.Name = "test";
-            b.Cover = "test";
-            b.Autor = "Aleksandr aka (MadeInMama)";
-            b.Description = "Test";
+            //Book b = new Book();
+            //b.Name = "test";
+            //b.Cover = "test";
+            //b.Autor = "Aleksandr aka (MadeInMama)";
+            //b.Description = "Test";
 
-            Book b1 = new Book();
-            b1.Name = "test";
-            b1.Cover = "test";
-            b1.Autor = "Aleksandr aka (MadeInMama)";
-            b1.Description = "";
+            //Book b1 = new Book();
+            //b1.Name = "test";
+            //b1.Cover = "test";
+            //b1.Autor = "Aleksandr aka (MadeInMama)";
+            //b1.Description = "";
 
 
             Database d = new Database(c);
 
-            d.AddBook(b);
-            d.AddBook(b1);
+            //d.AddBook(b);
+            //d.AddBook(b1);
 
 
-            var arr = c.HistoryRecords.ToArray();
+            //   var arr = c.HistoryRecords.ToArray();
 
-            var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
+            List<Book> book  = d.GetBooks("Aleksandr aka (MadeInMama)").ToList();
+
+            var history = d.GetBookHistory("7e9205cd-ed8a-46c7-b9e4-f2a3e9d8f661");
 
             d.UpdateBookByHistory(history.Records, history.Details);
 
 
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("123"), "token");
+            var value =  d.GetLastBookHistory();
 
-            HttpClient client = new HttpClient();
-            client.PostAsync("http://test.ru/GetBooks", content);
+            //MultipartFormDataContent content = new MultipartFormDataContent();
+            //content.Add(new StringContent("123"), "token");
+
+            //HttpClient client = new HttpClient();
+            //client.PostAsync("http://test.ru/GetBooks", content);
         }
     }
 }
