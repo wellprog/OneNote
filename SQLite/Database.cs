@@ -211,24 +211,25 @@ namespace OneNote.SQLite
         public bool IsUserExists(string login)
         {
             User currentUser = _connection.Users.Where(f => f.UserName == login).FirstOrDefault();
-            if (currentUser == null)
-                return false;
-            return true;
+            //if (currentUser == null)
+            //    return false;
+            //return true;
+            return currentUser == null ? false : true;
         }
 
         public string GetLastBookHistory()
         {
-            return _connection.Books.OrderBy(f => f.CreateTime)?.Last().ID;
+            return _connection.HistoryRecords.Where(f => f.Table == "Book").OrderBy(f => f.CreateTime).Last()?.ID;
         }
 
         public string GetLastSectionHistory()
         {
-            return _connection.Sections.OrderBy(f => f.CreateTime)?.Last().ID;
+            return _connection.HistoryRecords.Where(f => f.Table == "Section").OrderBy(f => f.CreateTime).Last()?.ID;
         }
 
         public string GetLastPageHistory()
         {
-            return _connection.Pages.OrderBy(f => f.CreateTime)?.Last().ID;
+            return _connection.HistoryRecords.Where(f => f.Table == "Page").OrderBy(f => f.CreateTime).Last()?.ID;
         }
     }
     }
