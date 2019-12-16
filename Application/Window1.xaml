@@ -61,6 +61,11 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="#646464"/>
         </Style>
+
+        <Style TargetType="{x:Type Rectangle}">
+            <Setter Property="RadiusX" Value="10"></Setter>
+            <Setter Property="RadiusY" Value="10"></Setter>
+        </Style>
     </Window.Resources>
     <Border
         Opacity="0"
@@ -86,18 +91,11 @@
         </Border.Triggers>
         <Grid
             Background="Transparent">
+            <!--Этот label симулирует передвижение окна по экрану-->
             <Label
                 Margin="5,0,5,5"
-                Content="WellNote 0.1v"/>
-            <Label
-                MouseLeftButtonDown="Label_MouseLeftButtonDown"
-                Grid.Column="0"
-                Grid.Row="0"
-                Content=""
-                Margin="5,0,5,5"
-                FontSize="28"
-                HorizontalAlignment="Stretch"/>
-            <!--Извиняюсь за это, у меня не было времени-->
+                Content="WellNote 0.1v"
+                MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
             <ListBox
                 x:Name="fListBox"
                 HorizontalAlignment="Left"
