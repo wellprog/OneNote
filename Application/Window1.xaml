@@ -39,12 +39,15 @@
             <Setter Property="Padding" Value="5,0,5,0"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="MaxLines" Value="1"/>
-            <Setter Property="MaxLength" Value="40"/>
+            <Setter Property="AcceptsReturn" Value="true"/>
             <Setter Property="Foreground" Value="#646464"/>
+
+            <Setter Property="MaxLength" Value="500"/>
+            <Setter Property="MaxLines" Value="10"/>
+            <Setter Property="MinLines" Value="1"/>
         </Style>
 
-        <Style TargetType="{x:Type TextBlock}">
+        <Style TargetType="{x:Type TextBlock} ">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -88,12 +91,15 @@
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
+            
+            
         </Border.Triggers>
         <Grid
             Background="Transparent">
             <!--Этот label симулирует передвижение окна по экрану-->
             <Label
                 Margin="5,0,5,5"
+                FontSize="26"
                 Content="WellNote 0.1v"
                 MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
             <ListBox
@@ -134,12 +140,13 @@
                 TextWrapping="Wrap"
                 Text="TextBox"
                 VerticalAlignment="Top"
-                Width="400"/>
+                Width="400"
+                TextChanged="FTextBox_TextChanged"/>
             <Rectangle
                 x:Name="closeButtonRectangle"
                 Margin="725,7,10,375"
                 Fill="#fbb"
-                MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                MouseLeftButtonUp="closeButtonRectangle_MouseLeftButtonUp"/>
             <Rectangle
                 x:Name="minimizeButtonRectangle"
                 Margin="670,7,65,375"
