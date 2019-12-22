@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OneNote.Communication;
+using OneNote.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,11 @@ namespace Application
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        public App()
+        {
+            var loader = ClassLoader.Instance;
+
+            loader.Register<ICommunication>(new LocalCommunication());
+        }
     }
 }

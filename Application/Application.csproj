@@ -117,6 +117,10 @@
       <Project>{b7575604-1ca9-47fa-84c8-9e8d2136d5a6}</Project>
       <Name>Communication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{7916d0d0-4eeb-43e9-a4a4-0cb218957ea1}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{14DDB02B-927C-4AAA-9ED7-4F9834F2267D}</Project>
       <Name>Model</Name>
