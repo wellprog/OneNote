@@ -62,12 +62,16 @@ namespace ConsoleTest
             //d.AddBook(b1);
 
 
-            //var arr = c.HistoryRecords.ToArray();
+            //   var arr = c.HistoryRecords.ToArray();
 
-            //var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
+            List<Book> book  = d.GetBooks("Aleksandr aka (MadeInMama)").ToList();
+
+            var history = d.GetBookHistory("7e9205cd-ed8a-46c7-b9e4-f2a3e9d8f661");
 
             //d.UpdateBookByHistory(history.Records, history.Details);
 
+
+            var value =  d.GetLastBookHistory();
 
             //MultipartFormDataContent content = new MultipartFormDataContent();
             //content.Add(new StringContent("123"), "token");
