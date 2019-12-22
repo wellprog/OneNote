@@ -60,7 +60,7 @@ namespace OneNote.Application
             this.DragMove();
         }
 
-        private void Rectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void closeButtonRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
@@ -68,6 +68,21 @@ namespace OneNote.Application
         private void MinimizeButtonRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void FTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //if Enter in start of TextBox || if Enter pressed twice
+            if((fTextBox.SelectionStart == 2 && fTextBox.Text[1] == '\n') || (fTextBox.SelectionStart >= 2 && fTextBox.Text[fTextBox.SelectionStart - 1] == '\n' && fTextBox.Text[fTextBox.SelectionStart - 3] == '\n'))
+            {
+                int tempSaveSelection = fTextBox.SelectionStart; //Save selection position (Selection removed after textBox = *string* fix)
+
+                string leftSide = fTextBox.Text.Substring(0, fTextBox.SelectionStart - 2);
+                string rightSide = fTextBox.Text.Substring(fTextBox.SelectionStart, fTextBox.Text.Length - fTextBox.SelectionStart);
+                fTextBox.Text = leftSide + rightSide;
+
+                fTextBox.Select(tempSaveSelection - 2, 0); //Set selection position (Selection removed after textBox = *string* fix)
+            }
         }
     }
 }
