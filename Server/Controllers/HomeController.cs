@@ -19,6 +19,8 @@ namespace Server.Controllers
 
         public HomeController(TokenStorage tokenStorage)
         {
+            Dictionary<string, string> test;
+
             _tokenStorage = tokenStorage;
             Connection c = new Connection();
             if (c.Database.EnsureCreated())

@@ -11,48 +11,69 @@ using OneNote.SQLite.Helper;
 
 
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ConsoleTest
 {
     class Program
     {
+
+        public void Test ()
+        {
+            
+        }
+
+
         static void Main(string[] args)
         {
-            //Создание базы данных
-            Connection c = new Connection();
-            c.Database.EnsureCreated();
-
-            Book b = new Book();
-            b.Name = "test";
-            b.Cover = "test";
-            b.Autor = "Aleksandr aka (MadeInMama)";
-            b.Description = "Test";
-
-            Book b1 = new Book();
-            b1.Name = "test";
-            b1.Cover = "test";
-            b1.Autor = "Aleksandr aka (MadeInMama)";
-            b1.Description = "";
 
 
-            Database d = new Database(c);
+            List<string> ff = new List<string>();
 
-            d.AddBook(b);
-            d.AddBook(b1);
+            for (int i = 0; i < 100; i++)
+            {
+
+            }
+
+            Enumerable.Range(0, 100000)
+                .AsParallel()
+                .ForAll(f => Console.WriteLine(f));
+
+            ////Создание базы данных
+            //Connection c = new Connection();
+            //c.Database.EnsureCreated();
+
+            //Book b = new Book();
+            //b.Name = "test";
+            //b.Cover = "test";
+            //b.Autor = "Aleksandr aka (MadeInMama)";
+            //b.Description = "Test";
+
+            //Book b1 = new Book();
+            //b1.Name = "test";
+            //b1.Cover = "test";
+            //b1.Autor = "Aleksandr aka (MadeInMama)";
+            //b1.Description = "";
 
 
-            var arr = c.HistoryRecords.ToArray();
+            //Database d = new Database(c);
 
-            var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
+            //d.AddBook(b);
+            //d.AddBook(b1);
 
-            d.UpdateBookByHistory(history.Records, history.Details);
+
+            //var arr = c.HistoryRecords.ToArray();
+
+            //var history = d.GetBookHistory("3cd02520-d7aa-484b-8691-5bccdbca512a");
+
+            //d.UpdateBookByHistory(history.Records, history.Details);
 
 
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("123"), "token");
+            //MultipartFormDataContent content = new MultipartFormDataContent();
+            //content.Add(new StringContent("123"), "token");
 
-            HttpClient client = new HttpClient();
-            client.PostAsync("http://test.ru/GetBooks", content);
+            //HttpClient client = new HttpClient();
+            //client.PostAsync("http://test.ru/GetBooks", content);
         }
     }
 }
