@@ -122,7 +122,7 @@ namespace OneNote.SQLite
 
             InsertHistory(History.GetHistoryFromModel(element as T, model, model.ID));
         }
-        private HistoryModel GetHistory(string TableName, string LastID)
+        public HistoryModel GetHistory(string TableName, string LastID)
         {
             HistoryModel historyModel = new HistoryModel();
 
