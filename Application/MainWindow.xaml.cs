@@ -32,15 +32,14 @@ namespace Application
         string Password = string.Empty;
         bool IsEntering = false;
 
-        ICommunication _communication;
-        IEnviroment _enviroment;
+        ICommunication _communication; //Client
+        IEnviroment _enviroment; //User
 
         public MainWindow()
         {
             InitializeComponent();
             //client = new Client("BaseURL"); //Здесь вылетит, потому что URL неизвестен
             ////MediaSource.Source = new Uri(System.IO.Path.GetFullPath("Resources/giphy.gif")); //??
-            ///
 
             _communication = ClassLoader.Instance.GetElement<ICommunication>();
             _enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
@@ -232,38 +231,38 @@ namespace Application
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO 
-            //ClassLoader.Instance.GetElement<ICommunication>().Authorize()
-
-            Window1 mww = new Window1(new User());
-            mww.Show();
+            /* Тестовый просмотр основого окна
+            Window1 MainWindow = new Window1(new User());
+            MainWindow.Show();
             Close();
             return;
-            //test
-         
+            */ //TODO
+
             if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
                 return;
-            string token = _communication.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
-            if(token != null)
+            string unconfirmedToken = _communication.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
+            if (unconfirmedToken != null)
             {
                 //Авторизовались и всё хорошо
-                Window1 mw = new Window1(JsonConvert.DeserializeObject<User>(token));
-                mw.Show();
+                _enviroment.UserToken = unconfirmedToken;
+                _enviroment.CurrentUser = _communication.GetUserDetails(unconfirmedToken);
+
+                Window1 MainWindow = new Window1();
+                MainWindow.Show();
                 Close();
             }
             else
             {
+                //TODO
                 //Не авторизовались. Выводим ошибку.
             }
         }
 
         private void SignupTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //_enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
-            //TODO 
-            //ClassLoader.Instance.GetElement<ICommunication>().Register()
-
-            return; //Доработать эту зону без готового клиента пока невозможно (+Нужна система frontend оповещений)
+            //return; //Доработать эту зону без готового клиента пока невозможно (+Нужна система frontend оповещений)
             User registerProfile = new User();
             registerProfile.UserName = regNameTextBox.Text;
             registerProfile.EMail = regEMailTextBox.Text;
@@ -275,16 +274,20 @@ namespace Application
             registerProfile.Avatar = fileName; //???
             registerProfile.Gender = IsMale;
             registerProfile.Status = regStatusTextBox.Text;
-            
-            if(_communication.Register(registerProfile) != null)
+
+            string unconfirmedToken = _communication.Register(registerProfile);
+            if (unconfirmedToken != null)
             {
                 //Сказать пользователю, что он зарегестрирован и войти в программу
-                Window1 mw = new Window1(registerProfile);
-                mw.Show();
+                _enviroment.UserToken = unconfirmedToken;
+                _enviroment.CurrentUser = registerProfile;
+                Window1 MainWindow = new Window1();
+                MainWindow.Show();
                 Close();
             }
             else
             {
+                //TODO
                 //Вывести ошибку
             }
         }
