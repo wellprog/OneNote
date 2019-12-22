@@ -20,6 +20,8 @@ using System.Windows.Shapes;
 using OneNote.Communication;
 using OneNote.Model;
 using Newtonsoft.Json;
+using OneNote.Helpers;
+using OneNote.Application.Helpers;
 
 namespace Application
 {
@@ -29,13 +31,19 @@ namespace Application
         bool IsMale = true;
         string Password = string.Empty;
         bool IsEntering = false;
-        Client client;
+
+        ICommunication _communication;
+        IEnviroment _enviroment;
 
         public MainWindow()
         {
             InitializeComponent();
             //client = new Client("BaseURL"); //Здесь вылетит, потому что URL неизвестен
             ////MediaSource.Source = new Uri(System.IO.Path.GetFullPath("Resources/giphy.gif")); //??
+            ///
+
+            _communication = ClassLoader.Instance.GetElement<ICommunication>();
+            _enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -224,15 +232,18 @@ namespace Application
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //TODO 
+            //ClassLoader.Instance.GetElement<ICommunication>().Authorize()
+
             Window1 mww = new Window1(new User());
             mww.Show();
             Close();
             return;
             //test
-
+         
             if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
                 return;
-            string token = client.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
+            string token = _communication.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
             if(token != null)
             {
                 //Авторизовались и всё хорошо
@@ -248,6 +259,10 @@ namespace Application
 
         private void SignupTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            //TODO 
+            //ClassLoader.Instance.GetElement<ICommunication>().Register()
+
             return; //Доработать эту зону без готового клиента пока невозможно (+Нужна система frontend оповещений)
             User registerProfile = new User();
             registerProfile.UserName = regNameTextBox.Text;
@@ -261,7 +276,7 @@ namespace Application
             registerProfile.Gender = IsMale;
             registerProfile.Status = regStatusTextBox.Text;
             
-            if(client.Register(registerProfile) != null)
+            if(_communication.Register(registerProfile) != null)
             {
                 //Сказать пользователю, что он зарегестрирован и войти в программу
                 Window1 mw = new Window1(registerProfile);

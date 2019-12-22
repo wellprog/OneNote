@@ -1,4 +1,5 @@
-﻿using OneNote.Communication;
+﻿using OneNote.Application.Helpers;
+using OneNote.Communication;
 using OneNote.Helpers;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Application
             var loader = ClassLoader.Instance;
 
             loader.Register<ICommunication>(new LocalCommunication());
+            loader.Register<IEnviroment>(new Enviroment());
         }
     }
 }
