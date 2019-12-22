@@ -47,7 +47,7 @@
             <Setter Property="MinLines" Value="1"/>
         </Style>
 
-        <Style TargetType="{x:Type TextBlock} ">
+        <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
