@@ -227,6 +227,7 @@ namespace Application
             Window1 mww = new Window1(new User());
             mww.Show();
             Close();
+            return;
             //test
 
             if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
@@ -247,6 +248,7 @@ namespace Application
 
         private void SignupTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            return; //Доработать эту зону без готового клиента пока невозможно (+Нужна система frontend оповещений)
             User registerProfile = new User();
             registerProfile.UserName = regNameTextBox.Text;
             registerProfile.EMail = regEMailTextBox.Text;
