@@ -13,7 +13,7 @@ namespace OneNote.Communication
     /// 3 - Все параметры отправляются POST www-form-url-encoded или multipart-form-data
     /// 4 - Переменные при отправке имеют название переменных из параметров функций
     /// </summary>
-    interface ICommunication
+    public interface ICommunication
     {
         /// <summary>
         /// Авторизация пользователя
