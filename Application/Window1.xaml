@@ -5,10 +5,147 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OneNote.Application"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="57,77,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="353"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="57,123,0,0" VerticalAlignment="Top" Width="382" Height="43"/>
+        Title="App" Height="450" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="0"
+                            CornerRadius="30,30,30,10"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    </Grid>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MaxLines" Value="1"/>
+            <Setter Property="MaxLength" Value="40"/>
+            <Setter Property="Foreground" Value="#646464"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#646464"/>
+        </Style>
+
+        <Style TargetType="{x:Type Rectangle}">
+            <Setter Property="RadiusX" Value="10"></Setter>
+            <Setter Property="RadiusY" Value="10"></Setter>
+        </Style>
+    </Window.Resources>
+    <Border
+        Opacity="0"
+        Background="#fff"
+        Margin="10">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="15" Opacity="0.7" Color="#555"/>
+        </Border.Effect>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Border.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                Duration="0:0:0.5"
+                                From="0"
+                                To="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Border.Triggers>
+        <Grid
+            Background="Transparent">
+            <!--Этот label симулирует передвижение окна по экрану-->
+            <Label
+                Margin="5,0,5,5"
+                Content="WellNote 0.1v"
+                MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+            <ListBox
+                x:Name="fListBox"
+                HorizontalAlignment="Left"
+                Height="322"
+                Margin="14,63,0,0"
+                VerticalAlignment="Top"
+                Width="165"/>
+            <ListBox
+                x:Name="sListBox"
+                HorizontalAlignment="Left"
+                Height="322"
+                Margin="185,63,0,0"
+                VerticalAlignment="Top"
+                Width="165"/>
+            <Button
+                x:Name="fButton"
+                Content="Add"
+                HorizontalAlignment="Left"
+                Margin="55,400,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Background="#dfd"/>
+            <Button
+                x:Name="sButton"
+                Content="Add"
+                HorizontalAlignment="Left"
+                Margin="230,400,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Background="#dfd"/>
+            <TextBox
+                x:Name="fTextBox"
+                HorizontalAlignment="Left"
+                Height="347"
+                Margin="365,63,0,0"
+                TextWrapping="Wrap"
+                Text="TextBox"
+                VerticalAlignment="Top"
+                Width="400"/>
+            <Rectangle
+                x:Name="closeButtonRectangle"
+                Margin="725,7,10,375"
+                Fill="#fbb"
+                MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+            <Rectangle
+                x:Name="minimizeButtonRectangle"
+                Margin="670,7,65,375"
+                Fill="#bbf"
+                MouseLeftButtonUp="MinimizeButtonRectangle_MouseLeftButtonUp"/>
+
+        </Grid>
+    </Border>
 </Window>

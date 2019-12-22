@@ -270,6 +270,7 @@
                     Background="#eee"
                     MinWidth="300">
                     <TextBox
+                        x:Name="autLoginTextBox"
                         Text="Name"
                         Tag="Name"
                         GotFocus="TextBlock_GotFocus"
@@ -312,6 +313,7 @@
                     Background="#eee"
                     MinWidth="300">
                     <TextBox
+                        x:Name="autPasswordTextBox"
                         Text="Password"
                         Tag="Password"
                         GotFocus="TextBlock_GotFocus"
@@ -361,7 +363,8 @@
                     Background="#dfd"
                     Margin="0,5,0,0"
                     MinWidth="150"
-                    MaxWidth="150">
+                    MaxWidth="150"
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown">
                     <TextBlock
                         Text="SIGN IN"/>
                     <Border.Triggers>
@@ -450,6 +453,7 @@
                     Opacity="0">
                     <TextBox
                         Text="Name"
+                        x:Name="regNameTextBox"
                         Tag="Name"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
@@ -493,6 +497,7 @@
                     Opacity="0">
                     <TextBox
                         Text="EMail"
+                        x:Name="regEMailTextBox"
                         Tag="EMail"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
@@ -537,6 +542,7 @@
                     <TextBox
                         SelectionChanged="TextBox_SelectionChanged"
                         Text="Password"
+                        x:Name="regPasswordTextBox"
                         Tag="Password"
                         KeyUp="TextBox_KeyUp"
                         GotFocus="TextBlock_GotFocus"
@@ -581,6 +587,7 @@
                     Opacity="0">
                     <TextBox
                         Text="Phone"
+                        x:Name="regPhoneTextBox"
                         Tag="Phone"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
@@ -624,6 +631,7 @@
                     Opacity="0">
                     <TextBox
                         Text="Age"
+                        x:Name="regAgeTextBox"
                         Tag="Age"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
@@ -814,6 +822,7 @@
                     Opacity="0">
                     <TextBox
                         Text="Status"
+                        x:Name="regStatusTextBox"
                         Tag="Status"
                         GotFocus="TextBlock_GotFocus"
                         LostFocus="TextBlock_LostFocus"/>
@@ -855,9 +864,11 @@
                     MaxWidth="150"
                     Opacity="0">
                     <TextBlock
+                        x:Name="regSignUpTextBlock"
                         Text="SIGN UP"
                         GotFocus="TextBlock_GotFocus"
-                        LostFocus="TextBlock_LostFocus"/>
+                        LostFocus="TextBlock_LostFocus"
+                        MouseLeftButtonDown="SignupTextBlock_MouseLeftButtonDown"/>
                     <Border.Triggers>
                         <EventTrigger RoutedEvent="Mouse.MouseEnter">
                             <EventTrigger.Actions>
