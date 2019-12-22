@@ -232,19 +232,5 @@ namespace OneNote.SQLite
             return _connection.HistoryRecords.Where(f => f.Table == "Page").OrderBy(f => f.CreateTime).Last()?.ID;
         }
 
-        public string GetLastBookHistory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetLastSectionHistory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetLastPageHistory()
-        {
-            throw new NotImplementedException();
-        }
     }
-    }
+}

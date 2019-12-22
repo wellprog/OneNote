@@ -28,56 +28,56 @@ namespace ConsoleTest
         {
 
 
-            List<string> ff = new List<string>();
+            //List<string> ff = new List<string>();
 
-            for (int i = 0; i < 100; i++)
-            {
+            //for (int i = 0; i < 100; i++)
+            //{
 
-            }
+            //}
 
-            Enumerable.Range(0, 100000)
-                .AsParallel()
-                .ForAll(f => Console.WriteLine(f));
+            //Enumerable.Range(0, 100000)
+            //    .AsParallel()
+            //    .ForAll(f => Console.WriteLine(f));
 
-            ////Создание базы данных
-            //Connection c = new Connection();
-            //c.Database.EnsureCreated();
+            //////Создание базы данных
+            ////Connection c = new Connection();
+            ////c.Database.EnsureCreated();
 
-            //Book b = new Book();
-            //b.Name = "test";
-            //b.Cover = "test";
-            //b.Autor = "Aleksandr aka (MadeInMama)";
-            //b.Description = "Test";
+            ////Book b = new Book();
+            ////b.Name = "test";
+            ////b.Cover = "test";
+            ////b.Autor = "Aleksandr aka (MadeInMama)";
+            ////b.Description = "Test";
 
-            //Book b1 = new Book();
-            //b1.Name = "test";
-            //b1.Cover = "test";
-            //b1.Autor = "Aleksandr aka (MadeInMama)";
-            //b1.Description = "";
-
-
-            //Database d = new Database(c);
-
-            //d.AddBook(b);
-            //d.AddBook(b1);
+            ////Book b1 = new Book();
+            ////b1.Name = "test";
+            ////b1.Cover = "test";
+            ////b1.Autor = "Aleksandr aka (MadeInMama)";
+            ////b1.Description = "";
 
 
-            //   var arr = c.HistoryRecords.ToArray();
+            ////Database d = new Database(c);
 
-            List<Book> book  = d.GetBooks("Aleksandr aka (MadeInMama)").ToList();
-
-            var history = d.GetBookHistory("7e9205cd-ed8a-46c7-b9e4-f2a3e9d8f661");
-
-            //d.UpdateBookByHistory(history.Records, history.Details);
+            ////d.AddBook(b);
+            ////d.AddBook(b1);
 
 
-            var value =  d.GetLastBookHistory();
+            ////   var arr = c.HistoryRecords.ToArray();
 
-            //MultipartFormDataContent content = new MultipartFormDataContent();
-            //content.Add(new StringContent("123"), "token");
+            //List<Book> book  = d.GetBooks("Aleksandr aka (MadeInMama)").ToList();
 
-            //HttpClient client = new HttpClient();
-            //client.PostAsync("http://test.ru/GetBooks", content);
+            //var history = d.GetBookHistory("7e9205cd-ed8a-46c7-b9e4-f2a3e9d8f661");
+
+            ////d.UpdateBookByHistory(history.Records, history.Details);
+
+
+            //var value =  d.GetLastBookHistory();
+
+            ////MultipartFormDataContent content = new MultipartFormDataContent();
+            ////content.Add(new StringContent("123"), "token");
+
+            ////HttpClient client = new HttpClient();
+            ////client.PostAsync("http://test.ru/GetBooks", content);
         }
     }
 }
