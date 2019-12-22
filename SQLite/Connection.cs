@@ -15,9 +15,16 @@ namespace OneNote.SQLite
         public DbSet<HistoryRecord> HistoryRecords { get; set; }
         public DbSet<HistoryDetail> HistoryDetails { get; set; }
 
+        private string _dbName = "";
+
+        public Connection(string dbName = "mydb.db")
+        {
+            _dbName = dbName;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=mydb.db");
+            optionsBuilder.UseSqlite($"Data Source={_dbName}");
         }
     }
 }
