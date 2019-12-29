@@ -17,6 +17,7 @@ namespace OneNote.Communication
         HttpClient httpClient;
         private IDatabase _db;
         private Connection _con;
+        private string LastId { get; set; }  //указатель на последнюю запись скачанную с удаленного репо
 
         public string Token { get; set; }
 
@@ -197,6 +198,11 @@ namespace OneNote.Communication
         public IEnumerable<Page> GetLocalPages(string section)
         {
             return _db.GetPages(section);
+        }
+        
+        public HistoryModel GetLocalBookHystory()
+        {
+            _db.GetBookHistory();
         }
     }
 }

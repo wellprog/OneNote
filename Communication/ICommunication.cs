@@ -22,6 +22,7 @@ namespace OneNote.Communication
         /// <param name="password"></param>
         /// <returns>Если все ок, то возвращается токен авторизации, если нет то NULL</returns>
         string Authorize(string login, string password);
+
         /// <summary>
         /// Регистрация пользователя
         /// </summary>
@@ -53,6 +54,7 @@ namespace OneNote.Communication
         /// <param name="LastID">Последний ID истории</param>
         /// <returns>Массив истории</returns>
         HistoryModel GetHistory(string token, string table, int lastID);
+
         /// <summary>
         /// Отправка истории
         /// </summary>

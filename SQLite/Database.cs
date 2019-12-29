@@ -122,11 +122,12 @@ namespace OneNote.SQLite
 
             InsertHistory(History.GetHistoryFromModel(element as T, model, model.ID));
         }
+
         private HistoryModel GetHistory(string TableName, string LastID)
         {
             HistoryModel historyModel = new HistoryModel();
 
-            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == TableName && f.RecordID == LastID);
+            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == TableName && f.RecordID == LastID);  //переделать CreateDate > CreateDate(f.RecordID == LastID)
             List<HistoryDetail> details = new List<HistoryDetail>();
             foreach (HistoryRecord rec in historyModel.Records)
             {

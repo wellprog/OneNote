@@ -33,21 +33,26 @@ namespace OneNote.Communication
             }
 
             var response = _client.Authorize(login, password);
-            var responseToken = JsonConvert.DeserializeObject<ResponseToken>(response);
+            ResponseToken responseToken = JsonConvert.DeserializeObject<ResponseToken>(response);
             if (responseToken.ErrorID != 0)
                 return responseToken.ErrorDescription;
 
-            var books = _client.GetLocalBooks(responseToken.AutorID) as Book[];
-            if (books.Length == 0)
-            {
-                foreach (var book in books)
-                {
+            //этио должно быть в синхронизации
+            //var books = _client.GetLocalBooks(responseToken.AutorID) as Book[];
+            //if (books.Length == 0)
+            //{
+            //    foreach (var book in books)
+            //    {
+                    
+            //    }
+            //}
 
-                }
-            }
-            
-            _client.AddBook()
             _client.Token = responseToken.Token;
+            //BookModel bookModel = _client.GetBooks(_client.Token);
+            
+            //записать сначала локальные на сервер, потом с сервера вытащить всё(в том числе только что записанные локальные)
+            //отправляем HistoryModel.
+            _client.
             return responseToken.Token;
         }
 
