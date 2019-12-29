@@ -231,12 +231,12 @@ namespace Application
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            /* Тестовый просмотр основого окна
-            Window1 MainWindow = new Window1(new User());
+            // Тестовый просмотр основого окна
+            Window1 MainWindow = new Window1();
             MainWindow.Show();
             Close();
             return;
-            */ //TODO
+            //TODO
 
             if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
                 return;
@@ -247,9 +247,9 @@ namespace Application
                 _enviroment.UserToken = unconfirmedToken;
                 _enviroment.CurrentUser = _communication.GetUserDetails(unconfirmedToken);
 
-                Window1 MainWindow = new Window1();
+                /*Window1 MainWindow = new Window1();
                 MainWindow.Show();
-                Close();
+                Close();*/
             }
             else
             {
