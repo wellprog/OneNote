@@ -29,7 +29,7 @@
                         BorderThickness="1"
                         BorderBrush="Black"
                         Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding Username}" />
+                    <TextBox TextAlignment="Center" Text="{Binding UserName}" />
                 </Border>
             </StackPanel>
             <StackPanel

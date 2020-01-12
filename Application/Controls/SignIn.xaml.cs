@@ -28,6 +28,9 @@ namespace OneNote.Application.Controls
         private void SignInButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //При нажатии на кнопку авторизации
+            //Заглушка для открытия основного окна
+            GeneralWindow nextWindow = new GeneralWindow();
+            nextWindow.Show();
         }
     }
 }
