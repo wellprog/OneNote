@@ -219,32 +219,25 @@ namespace OneNote.SQLite
 
         public string GetLastBookHistory()
         {
-            return _connection.HistoryRecords.Where(f => f.Table == "Book").OrderBy(f => f.CreateTime).Last()?.ID;
+            var History = _connection.HistoryRecords.Where(f => f.Table == "Book").ToList();
+            if (History.Count == 0) return null;
+            return History.OrderBy(f => f.CreateTime).Last().ID;
         }
 
         public string GetLastSectionHistory()
         {
-            return _connection.HistoryRecords.Where(f => f.Table == "Section").OrderBy(f => f.CreateTime).Last()?.ID;
+            var History = _connection.HistoryRecords.Where(f => f.Table == "Section").ToList();
+            if (History.Count == 0)   return null; 
+            return History.OrderBy(f => f.CreateTime).Last().ID;
         }
 
         public string GetLastPageHistory()
         {
-            return _connection.HistoryRecords.Where(f => f.Table == "Page").OrderBy(f => f.CreateTime).Last()?.ID;
+            var History = _connection.HistoryRecords.Where(f => f.Table == "Page").ToList();
+            if (History.Count == 0) return null;
+            return History.OrderBy(f => f.CreateTime).Last().ID;
         }
 
-        public string GetLastBookHistory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetLastSectionHistory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetLastPageHistory()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
     }

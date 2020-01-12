@@ -67,8 +67,10 @@ namespace Server.Controllers
 
         public ActionResult/*BookModel*/ GetBooks(string token)
         {
-            User user = GetUserByToken(token);
             if (token == null) return Json("No token");
+            User user = GetUserByToken(token);
+                if (user == null) return Json("User not found!");
+            
             var books = GetBooks(user);
             var lastHistory = _db.GetLastBookHistory();
             BookModel result = new BookModel { Books = books.ToList(), LastHistory = lastHistory };
@@ -77,8 +79,10 @@ namespace Server.Controllers
 
         public ActionResult/*SectionModel*/ GetSections(string token)
         {
-            User user = GetUserByToken(token);
             if (token == null) return Json("No token");
+            User user = GetUserByToken(token);
+                 if (user == null) return Json("User not found!");
+
             var books = GetBooks(user);
             var sections = GetSections(books);
             var lastHistory = _db.GetLastSectionHistory();
@@ -88,8 +92,9 @@ namespace Server.Controllers
 
         public ActionResult/*PageModel*/ GetPages(string token)
         {
-            User user = GetUserByToken(token);
             if (token == null) return Json("No token");
+            User user = GetUserByToken(token);
+            if (user == null) return Json("User not found!");
 
             var books = GetBooks(user);
             var sections = GetSections(books);
@@ -101,8 +106,9 @@ namespace Server.Controllers
 
         public ActionResult/*HistoryModel*/ GetHistory(string token, string table, int lastID)
         {
-            User user = GetUserByToken(token);
             if (token == null) return Json("No token");
+            User user = GetUserByToken(token);
+            if (user == null) return Json("User not found!");
             switch (table)
             {
                 case "Books":
@@ -136,6 +142,7 @@ namespace Server.Controllers
 
         private IEnumerable<Book> GetBooks(User user)
         {
+            if (user == null) return null;
             return _db.GetBooks(user.ID);
         }
 
