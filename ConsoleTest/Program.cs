@@ -43,7 +43,7 @@ namespace ConsoleTest
             //b1.Description = "";
 
 
-            Database d = new Database(c);
+            Database d = new Database(c, true);
 
             //d.AddBook(b);
             //d.AddBook(b1);

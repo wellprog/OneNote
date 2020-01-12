@@ -25,7 +25,7 @@ namespace Server.Controllers
             if (c.Database.EnsureCreated())
             {
                 _con = c;
-                _db = new Database(c);
+                _db = new Database(c, false);
             }
             else
             {

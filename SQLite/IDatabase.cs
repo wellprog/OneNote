@@ -65,5 +65,6 @@ namespace OneNote.SQLite
         bool DeleteUser(User user);
         bool UpdateUser(User user);
 
+        string GetLastID(string tableName);
     }
 }

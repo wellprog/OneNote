@@ -49,10 +49,11 @@ namespace OneNote.Communication
 
             _client.Token = responseToken.Token;
             //BookModel bookModel = _client.GetBooks(_client.Token);
-            
+
             //записать сначала локальные на сервер, потом с сервера вытащить всё(в том числе только что записанные локальные)
             //отправляем HistoryModel.
-            _client.
+            var lastID = _client.GetLastId("Books");
+            _client.GetLocalBookHystory(lastID);
             return responseToken.Token;
         }
 

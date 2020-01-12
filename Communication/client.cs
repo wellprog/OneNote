@@ -34,7 +34,7 @@ namespace OneNote.Communication
             if (c.Database.EnsureCreated())
             {
                 _con = c;
-                _db = new Database(c);
+                _db = new Database(c, true);
             }
             else
             {
@@ -200,9 +200,14 @@ namespace OneNote.Communication
             return _db.GetPages(section);
         }
         
-        public HistoryModel GetLocalBookHystory()
+        public SQLite.Model.HistoryModel GetLocalBookHystory(string LastID)
         {
-            _db.GetBookHistory();
+            return _db.GetBookHistory(LastID);
+        }
+
+        public string GetLastId(string tableName)
+        {
+            return _db.GetLastID(tableName);
         }
     }
 }
