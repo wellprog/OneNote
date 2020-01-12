@@ -23,7 +23,9 @@
 
 
     <Border CornerRadius="20" Background="White" Padding="10"
-            MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+        MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+        BorderThickness="1"
+        BorderBrush="Black">
         <!-- Начало страницы Свитчер -->
         <Canvas x:Name="WindowCanvas">
             

@@ -46,6 +46,7 @@
                 Background="Aqua"
                 Width="250"
                 PreviewMouseLeftButtonDown="SignInButton_PreviewMouseLeftButtonDown">
+                <!--PreviewMouseLeftButtonDown="{Binding SignIn}">-->
                 <Label
                     Content="Sign In"
                     HorizontalAlignment="Center">

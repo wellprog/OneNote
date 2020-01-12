@@ -11,65 +11,17 @@
         ResizeMode="NoResize"
         Background="Transparent"
         WindowStartupLocation="CenterScreen">
+
+
     <Window.Resources>
-        <Style x:Key="MyButtonStyle" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" 
-                            BorderThickness="0"
-                            CornerRadius="30,30,30,10"
-                            Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="5,0,5,0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="AcceptsReturn" Value="true"/>
-            <Setter Property="Foreground" Value="#646464"/>
-
-            <Setter Property="MaxLength" Value="500"/>
-            <Setter Property="MaxLines" Value="10"/>
-            <Setter Property="MinLines" Value="1"/>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-        <Style TargetType="{x:Type Border}">
-            <Setter Property="CornerRadius" Value="10"/>
-        </Style>
-
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="5,0,5,0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="#646464"/>
-        </Style>
-
-        <Style TargetType="{x:Type Rectangle}">
-            <Setter Property="RadiusX" Value="10"></Setter>
-            <Setter Property="RadiusY" Value="10"></Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <ResourceDictionary Source="Resources/RoundedToggle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
+
     <Border
         Opacity="0"
         Background="#fff"

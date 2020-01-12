@@ -21,13 +21,14 @@ namespace OneNote.Application
     /// </summary>
     public partial class LoginPage : Window
     {
-        SignInViewModel SModel = new SignInViewModel();
+        SignInViewModel SignInModel = new SignInViewModel();
+        SignUpViewModel SignUpModel = new SignUpViewModel();
 
         public LoginPage()
         {
             InitializeComponent();
 
-            DataContext = new List<object>() { SModel };
+            DataContext = new List<object>() { SignInModel, SignUpModel };
         }
 
         bool IsLeftOpen = false;
