@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="OneNote.Application.Controls.SignUp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OneNote.Application.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" HorizontalAlignment="Center">
+            <Label Content="We will be glad to see you in WellNote"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <Label Content="Username"  Width="250"/>
+                <Border
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding Username}" />
+                </Border>
+            </StackPanel>
+            <StackPanel
+                    Margin="75,0,0,0">
+                <Label Content="Status"  Width="250"/>
+                <Border
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding Status}" />
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <Label Content="EMail"  Width="250"/>
+                <Border
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding EMail}" />
+                </Border>
+            </StackPanel>
+            <StackPanel
+                Margin="75,0,0,0">
+                <Label Content="Password"  Width="250"/>
+                <Border
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding Password}" />
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <Label Content="Phone"  Width="250"/>
+                <Border
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding Phone}" />
+                </Border>
+            </StackPanel>
+            <StackPanel
+                Margin="75,0,0,0">
+                <Label Content="Age"  Width="250"/>
+                <Border
+                        BorderThickness="1"
+                        BorderBrush="Black"
+                        Width="250">
+                    <TextBox TextAlignment="Center" Text="{Binding Age}" />
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <Label Content="Avatar"  Width="250"/>
+                <Border HorizontalAlignment="Left"
+                    BorderThickness="2"
+                    BorderBrush="Black"
+                    Height="35"
+                    Width="35">
+                    <Rectangle
+                        Height="35"
+                        Width="35"
+                        HorizontalAlignment="Left"
+                        PreviewMouseLeftButtonDown="ChooseAvatar_PreviewMouseLeftButtonDown">
+                        <Rectangle.Fill>
+                            <ImageBrush x:Name="IMGSource"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
+            </StackPanel>
+            <StackPanel
+                Margin="75,0,0,0">
+                <Label Content="Gender"  Width="250"/>
+                <CheckBox/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" VerticalAlignment="Center" Margin="0,20,0,0">
+            <Border
+                Background="Aqua"
+                Width="250"
+                PreviewMouseLeftButtonDown="SignUpButton_PreviewMouseLeftButtonDown">
+                <Label
+                    Content="Sign Up"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                </Label>
+            </Border>
+        </StackPanel>
+
+        <!--UserName, EMail, Password, Phone, Age, Avatar, Gender, Status -->
+    </Grid>
+</UserControl>

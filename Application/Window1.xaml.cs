@@ -1,3 +1,6 @@
+using OneNote.Application.Helpers;
+using OneNote.Communication;
+using OneNote.Helpers;
 using OneNote.Model;
 using System;
 using System.Collections.Generic;
@@ -20,7 +23,9 @@ namespace OneNote.Application
     /// </summary>
     public partial class Window1 : Window
     {
-        User thisUser;
+        ICommunication _communication; //Client
+        IEnviroment _enviroment; //User
+        //TODO
 
         private void fillElementsTrash()
         {
@@ -47,10 +52,12 @@ namespace OneNote.Application
             fTextBox.Text = "Я знаю, это лучший фронтенд (Почти все скопипастчено у Александра)";
         }
 
-        public Window1(User _thisUser)
+        public Window1()
         {
-            thisUser = _thisUser;
             InitializeComponent();
+
+            _communication = ClassLoader.Instance.GetElement<ICommunication>();
+            _enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
             fillElementsTrash();
         }
