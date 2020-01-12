@@ -10,6 +10,7 @@ using OneNote.SQLite;
 
 namespace Server.Controllers
 {
+    [Route("[Controller]/[Action]")]
     public class HomeController : Controller
     {
         private IDatabase _db;
@@ -19,22 +20,20 @@ namespace Server.Controllers
 
         public HomeController(TokenStorage tokenStorage)
         {
-            Dictionary<string, string> test;
-
             _tokenStorage = tokenStorage;
             Connection c = new Connection();
-            if (c.Database.EnsureCreated())
-            {
+            //if (c.Database.EnsureCreated())
+            //{
                 _con = c;
                 _db = new Database(c);
-            }
-            else
-            {
-                throw new Exception("A white little polar animal has come!");
-            }
+            //}
+            //else
+            //{
+            //    throw new Exception("A white little polar animal has come!");
+            //}
         }
 
-        public ActionResult Authorize(string login, string password)
+        public ActionResult Authorize([FromForm]string login, [FromForm]string password)
         {
             var user = _db.GetUserByLoginPassword(login, password);
             if (user == null) return Json("No such user!");
