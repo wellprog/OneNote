@@ -14,29 +14,46 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,50,0,0">
-            <Label Content="login"  Width="250"/>
+            <Label
+                Content="login"
+                Width="250"/>
             <Border
                 BorderThickness="1"
                 BorderBrush="Black"
                 Width="250">
-                <TextBox TextAlignment="Center" Text="{Binding Login}" />
+                <TextBox
+                    TextAlignment="Center"
+                    Text="{Binding Login}" />
             </Border>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="0,20,0,0">
-            <Label Content="password"  Width="250"/>
+            <Label
+                Content="password" 
+                Width="250"/>
             <Border
                 BorderThickness="1"
                 BorderBrush="Black"
                 Width="250">
-                <TextBox TextAlignment="Center" Text="{Binding Password}" />
+                <TextBox
+                    TextAlignment="Center"
+                    Text="{Binding Password}" />
             </Border>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Margin="0,20,0,0">
-            <Button Content="SignIn"
+            <Border
+                Background="Aqua"
+                Width="250"
+                PreviewMouseLeftButtonDown="SignInButton_PreviewMouseLeftButtonDown">
+                <Label
+                    Content="Sign In"
+                    HorizontalAlignment="Center">
+                </Label>
+            </Border>
+            <!--<Button Content="SignIn"
                     Width="250"
-                    Command="{Binding SignIn}"/>
+                    Command="{Binding SignIn}"/>-->
         </StackPanel>
 
     </Grid>

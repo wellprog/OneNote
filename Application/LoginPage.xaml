@@ -21,8 +21,9 @@
     </Window.Resources>
 
 
-    
-    <Border CornerRadius="20" Background="White" Padding="10">
+
+    <Border CornerRadius="20" Background="White" Padding="10"
+            MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
         <!-- Начало страницы Свитчер -->
         <Canvas x:Name="WindowCanvas">
             
@@ -43,6 +44,10 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
+                <Label
+                    Content="WellNote 0.1"
+                    FontSize="20"/>
+
                 <!-- Первый контент -->
                 <StackPanel Grid.Column="0">
                     <controls:SignIn DataContext="{Binding [0]}" />
@@ -59,13 +64,25 @@
                     </Button>
                 </StackPanel>
                 <!-- Второй контент -->
-                <StackPanel Grid.Column="2" Background="Yellow"></StackPanel>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <controls:SignUp DataContext="{Binding [1]}" />
+                </StackPanel>
             </Grid>
 
             <StackPanel Canvas.Right="0"
-                        Canvas.Top="0">
-                <Button Content="Close" />
-                <Button Content="Minimize" />
+                        Canvas.Top="0"
+                        Orientation="Horizontal">
+                <Rectangle
+                    Width="35" Height="35"
+                    PreviewMouseLeftButtonDown="Minimize_PreviewMouseLeftButtonDown"
+                    Fill="Aqua">
+                </Rectangle>
+                <Rectangle
+                    Margin="5,0,0,0"
+                    Width="35" Height="35"
+                    PreviewMouseLeftButtonDown="Exit_PreviewMouseLeftButtonDown"
+                    Fill="Red">
+                </Rectangle>
             </StackPanel>
         </Canvas>
     </Border>

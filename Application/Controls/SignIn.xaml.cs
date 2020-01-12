@@ -24,5 +24,10 @@ namespace OneNote.Application.Controls
         {
             InitializeComponent();
         }
+
+        private void SignInButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //При нажатии на кнопку авторизации
+        }
     }
 }

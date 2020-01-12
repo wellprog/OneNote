@@ -34,6 +34,8 @@
         <Setter Property="Foreground" Value="#646464"/>
     </Style>
 
+    <!-- <SolidColorBrush x:Name="DynamicBrush" x:Key="DynamicBrushKey" Color="Aqua"/> -->
+
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -44,5 +46,9 @@
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
 
+    <Style TargetType="{x:Type Rectangle}">
+        <Setter Property="RadiusX" Value="9"/>
+        <Setter Property="RadiusY" Value="9"/>
+    </Style>
 
 </ResourceDictionary>
