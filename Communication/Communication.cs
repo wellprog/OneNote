@@ -37,15 +37,6 @@ namespace OneNote.Communication
             if (responseToken.ErrorID != 0)
                 return responseToken.ErrorDescription;
 
-            //этио должно быть в синхронизации
-            //var books = _client.GetLocalBooks(responseToken.AutorID) as Book[];
-            //if (books.Length == 0)
-            //{
-            //    foreach (var book in books)
-            //    {
-                    
-            //    }
-            //}
 
             _client.Token = responseToken.Token;
             //BookModel bookModel = _client.GetBooks(_client.Token);
