@@ -25,12 +25,14 @@ namespace OneNote.Application.Controls
             InitializeComponent();
         }
 
-        private void SignInButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void ShowError()
         {
-            //При нажатии на кнопку авторизации
-            //Заглушка для открытия основного окна
-            GeneralWindow nextWindow = new GeneralWindow();
-            nextWindow.Show();
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(LoginTB.Text) || String.IsNullOrWhiteSpace(PasswordTB.Text)) ShowError();
         }
     }
 }

@@ -15,8 +15,8 @@ namespace OneNote.Application.ViewModel
 
         public SignInViewModel()
         {
-            Login = "Enter Login";
-            Password = "Enter Password";
+            Login = "";
+            Password = "";
             SignIn = new RoutedCommand();
         }
     }

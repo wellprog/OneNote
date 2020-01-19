@@ -24,16 +24,6 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="Padding" Value="5,0,5,0"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="MaxLines" Value="1"/>
-        <Setter Property="MaxLength" Value="40"/>
-        <Setter Property="Foreground" Value="#646464"/>
-    </Style>
-
     <!-- <SolidColorBrush x:Name="DynamicBrush" x:Key="DynamicBrushKey" Color="Aqua"/> -->
 
     <Style TargetType="{x:Type TextBlock}">
