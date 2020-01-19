@@ -1,5 +1,6 @@
 ﻿using OneNote.Communication.Model;
 using OneNote.Model;
+using OneNote.SQLite.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

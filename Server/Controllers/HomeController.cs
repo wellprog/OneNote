@@ -8,6 +8,8 @@ using OneNote.Model;
 using OneNote.Server;
 using OneNote.Server.Model;
 using OneNote.SQLite;
+using OneNote.SQLite.Model;
+
 
 namespace Server.Controllers
 {

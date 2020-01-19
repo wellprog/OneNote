@@ -4,17 +4,21 @@ using System.Text;
 using Newtonsoft.Json;
 using OneNote.Model;
 using OneNote.Communication.Model;
+using OneNote.Communication.Helpers;
 using OneNote.Communication.Model.ResponseModel;
+using OneNote.SQLite.Model;
 
 namespace OneNote.Communication
 {
     public class Communication : ICommunication
     {
         private Client _client;
+        private Enviroment _env;
 
-        public Communication(Client client)
+        public Communication(Client client, Enviroment env)
         {
             _client = client;
+            _env = env;
         }
 
         /// <summary>
@@ -43,8 +47,11 @@ namespace OneNote.Communication
 
             //записать сначала локальные на сервер, потом с сервера вытащить всё(в том числе только что записанные локальные)
             //отправляем HistoryModel.
-            var lastID = _client.GetLastId("Books");
-            _client.GetLocalBookHystory(lastID);
+            //var lastID = _client.GetLastId("Books");
+            var lastID = _env.LastRecordId;
+            var localHistoryModel = _client.GetLocalBookHystory(lastID);
+
+
             return responseToken.Token;
         }
 

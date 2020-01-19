@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using OneNote.Communication.Model;
 using OneNote.Model;
 using OneNote.SQLite;
+using OneNote.SQLite.Model;
 
 namespace OneNote.Communication
 {

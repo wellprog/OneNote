@@ -136,8 +136,6 @@
     <Compile Include="GeneralWindow.xaml.cs">
       <DependentUpon>GeneralWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Enviroment.cs" />
-    <Compile Include="Helpers\IEnviroment.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

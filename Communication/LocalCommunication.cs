@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OneNote.Communication.Model;
 using OneNote.Model;
+using OneNote.SQLite.Model;
 using System.Linq;
 
 namespace OneNote.Communication

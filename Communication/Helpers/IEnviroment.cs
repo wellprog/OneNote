@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneNote.Application.Helpers
+namespace OneNote.Communication.Helpers
 {
-    interface IEnviroment
+    public interface IEnviroment
     {
         string UserToken { get; set; }
         User   CurrentUser { get; set; }
+        string LastRecordId { get; set; }
     }
 }
