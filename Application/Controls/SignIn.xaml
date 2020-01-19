@@ -9,11 +9,27 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="150" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="140" />
         </Grid.RowDefinitions>
 
+        <Border
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Height="50"
+            Width="250"
+            Background="Red"
+            Margin="0,0,0,0"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Opacity="0">
+            <Label
+                Content="ERROR"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+        </Border>
+        
         <StackPanel
             Grid.Row="0"
             VerticalAlignment="Center"

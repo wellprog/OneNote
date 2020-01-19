@@ -27,11 +27,11 @@ namespace OneNote.Application.Controls
         {
             InitializeComponent();
 
-            textBrush = LoginTextBox.Foreground;
-            LoginTextBox.Foreground = helpBrush;
-            PasswordTextBox.Foreground = helpBrush;
-            LoginTextBox.Text = "Enter your Login";
-            PasswordTextBox.Text ="Enter yout Password";
+            //textBrush = LoginTextBox.Foreground;
+            //LoginTextBox.Foreground = helpBrush;
+            //PasswordTextBox.Foreground = helpBrush;
+            //LoginTextBox.Text = "Enter your Login";
+            //PasswordTextBox.Text ="Enter yout Password";
         }
 
         void ShowError()
@@ -41,7 +41,11 @@ namespace OneNote.Application.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(LoginTB.Text) || String.IsNullOrWhiteSpace(PasswordTB.Text)) ShowError();
+            if (String.IsNullOrWhiteSpace(LoginTB.Text) || String.IsNullOrWhiteSpace(PasswordTB.Text))
+            {
+                ShowError();
+                return;
+            }
         }
     }
 }
