@@ -1,0 +1,63 @@
+﻿<Window x:Class="OneNote.Application.MessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OneNote.Application"
+        mc:Ignorable="d"
+        Title="AddBox" Height="360" Width="530"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <ResourceDictionary Source="Resources/RoundedToggle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border CornerRadius="20" Background="White" Padding="10"
+        MouseLeftButtonDown="App_MouseLeftButtonDown"
+        BorderThickness="1"
+        BorderBrush="Black">
+
+        <Grid>
+            <Label
+                Content="WellNote 0.1"
+                FontSize="20"
+                Margin="0,-15,0,0"/>
+
+            <TextBox
+                x:Name="mainTextBox"
+                HorizontalAlignment="Center"
+                Height="240"
+                IsReadOnly="True"
+                TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Margin="10,45,0,0"/>
+
+            <Border
+                HorizontalAlignment="Center"
+                Background="Aqua"
+                PreviewMouseLeftButtonDown="Ok_PreviewMouseLeftButtonDown" Margin="150,300,150,10" Width="175">
+                <Label Content="Ok" HorizontalAlignment="Center"/>
+            </Border>
+
+            <StackPanel
+                Orientation="Horizontal" Margin="430,0,0,290">
+                <Rectangle
+                    Width="35" Height="35"
+                    PreviewMouseLeftButtonDown="Minimize_PreviewMouseLeftButtonDown"
+                    Fill="Aqua">
+                </Rectangle>
+                <Rectangle
+                    Margin="5,0,0,0"
+                    Width="35" Height="35"
+                    PreviewMouseLeftButtonDown="Exit_PreviewMouseLeftButtonDown"
+                    Fill="Red">
+                </Rectangle>
+            </StackPanel>
+        </Grid>
+
+    </Border>
+</Window>
