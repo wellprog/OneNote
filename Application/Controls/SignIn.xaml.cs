@@ -35,6 +35,8 @@ namespace OneNote.Application.Controls
             MessageBoxExample.Show();
             DialogWindow dialogWindowExample = new DialogWindow();
             dialogWindowExample.Show();
+            AddBox addBoxExample = new AddBox();
+            addBoxExample.Show();
         }
     }
 }
