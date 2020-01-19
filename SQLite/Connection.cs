@@ -14,6 +14,7 @@ namespace OneNote.SQLite
         public DbSet<User> Users { get; set; }
         public DbSet<HistoryRecord> HistoryRecords { get; set; }
         public DbSet<HistoryDetail> HistoryDetails { get; set; }
+        public DbSet<HistoryPointer> HistoryPointers { get; set; }
 
         private string _dbName = "";
 
