@@ -21,7 +21,7 @@ using OneNote.Communication;
 using OneNote.Model;
 using Newtonsoft.Json;
 using OneNote.Helpers;
-using OneNote.Application.Helpers;
+using OneNote.Communication.Helpers;
 
 namespace Application
 {

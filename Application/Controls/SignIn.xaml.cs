@@ -20,9 +20,18 @@ namespace OneNote.Application.Controls
     /// </summary>
     public partial class SignIn : UserControl
     {
+        Brush textBrush;
+        SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
+
         public SignIn()
         {
             InitializeComponent();
+
+            textBrush = LoginTextBox.Foreground;
+            LoginTextBox.Foreground = helpBrush;
+            PasswordTextBox.Foreground = helpBrush;
+            LoginTextBox.Text = "Enter your Login";
+            PasswordTextBox.Text ="Enter yout Password";
         }
 
         void ShowError()

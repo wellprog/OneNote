@@ -1,5 +1,5 @@
-using OneNote.Application.Helpers;
 using OneNote.Communication;
+using OneNote.Communication.Helpers;
 using OneNote.Helpers;
 using OneNote.Model;
 using System;

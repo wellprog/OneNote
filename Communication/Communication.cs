@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using OneNote.Communication.Model;
+using Newtonsoft.Json;
 using OneNote.Model;
+using OneNote.Communication.Model;
+using OneNote.Communication.Helpers;
+using OneNote.Communication.Model.ResponseModel;
+using OneNote.SQLite.Model;
 
 namespace OneNote.Communication
 {
-    class Communication : ICommunication
+    public class Communication : ICommunication
     {
+        private Client _client;
+        private Enviroment _env;
+
+        public Communication(Client client, Enviroment env)
+        {
+            _client = client;
+            _env = env;
+        }
+
         /// <summary>
         /// Проверить логин пароль (на непустые)
         /// сделать запрос
@@ -18,7 +31,28 @@ namespace OneNote.Communication
         /// <returns></returns>
         public string Authorize(string login, string password)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrWhiteSpace(login) && String.IsNullOrWhiteSpace(password))
+            {
+                return "Please fill both fields!";
+            }
+
+            var response = _client.Authorize(login, password);
+            ResponseToken responseToken = JsonConvert.DeserializeObject<ResponseToken>(response);
+            if (responseToken.ErrorID != 0)
+                return responseToken.ErrorDescription;
+
+
+            _client.Token = responseToken.Token;
+            //BookModel bookModel = _client.GetBooks(_client.Token);
+
+            //записать сначала локальные на сервер, потом с сервера вытащить всё(в том числе только что записанные локальные)
+            //отправляем HistoryModel.
+            //var lastID = _client.GetLastId("Books");
+            var lastID = _env.LastRecordId;
+            var localHistoryModel = _client.GetLocalBookHystory(lastID);
+
+
+            return responseToken.Token;
         }
 
         /// <summary>

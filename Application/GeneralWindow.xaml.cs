@@ -1,6 +1,6 @@
-﻿using OneNote.Application.Helpers;
-using OneNote.Application.ViewModel;
+﻿using OneNote.Application.ViewModel;
 using OneNote.Communication;
+using OneNote.Communication.Helpers;
 using OneNote.Helpers;
 using System;
 using System.Collections.Generic;
@@ -56,12 +56,14 @@ namespace OneNote.Application
 
         private void RightAdd_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            //MessageBox rightBoxAdd = new MessageBox();
+            //rightBoxAdd.Show();
         }
 
         private void LeftAdd_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            //MessageBox leftBoxAdd = new MessageBox();
+            //leftBoxAdd.Show();
         }
     }
 }

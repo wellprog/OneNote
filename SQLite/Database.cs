@@ -96,6 +96,25 @@ namespace OneNote.SQLite
         {
             _connection.AddRange(model.Records);
             _connection.AddRange(model.Details);
+            var max = model.Records.Max(f => f.CreateTime);
+            var newRecordID = model.Records.Single().RecordID;
+            var tableName = model.Records.First().Table;
+            var pointer = _connection.HistoryPointers
+                .Where(f => f.TableName == tableName)
+                .FirstOrDefault();
+
+            if (pointer == null)
+            {
+                pointer = new HistoryPointer() {
+                    TableName = tableName,
+                    RecordId = newRecordID
+                };
+                _connection.HistoryPointers.Add(pointer);
+            }
+            else
+            {
+                pointer.RecordId = newRecordID;
+            }
 
             _connection.SaveChanges();
         }
@@ -125,21 +144,23 @@ namespace OneNote.SQLite
         public HistoryModel GetHistory(string TableName, string LastID)
         {
             HistoryModel historyModel = new HistoryModel();
-
-            historyModel.Records = _connection.HistoryRecords.Where(f => f.Table == TableName && f.RecordID == LastID);
-            List<HistoryDetail> details = new List<HistoryDetail>();
+            var targetCreateTime = _connection.HistoryRecords
+                .Where(f => f.Table == TableName && f.RecordID == LastID).Select(f => f.CreateTime)
+                .FirstOrDefault();
+            historyModel.Records = _connection.HistoryRecords
+                .Where(f => f.Table == TableName && f.CreateTime > targetCreateTime);
+            List <HistoryDetail> details = new List<HistoryDetail>();
             foreach (HistoryRecord rec in historyModel.Records)
             {
                 details.AddRange(_connection.HistoryDetails.Where(f => f.HistoryRecord == rec.ID).ToList());
             }
+
             historyModel.Details = details;
             return historyModel;
         }
 
         private void UpdateValueByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details)
         {
-
-
             foreach (HistoryRecord record in records)
             {
                 Type typeElement = Type.GetType($"OneNote.Model.{ record.Table }, Model");
@@ -219,25 +240,34 @@ namespace OneNote.SQLite
 
         public string GetLastBookHistory()
         {
-            var History = _connection.HistoryRecords.Where(f => f.Table == "Book").ToList();
-            if (History.Count == 0) return null;
-            return History.OrderBy(f => f.CreateTime).Last().ID;
+            return GetLastHistory("Book");
         }
 
         public string GetLastSectionHistory()
         {
-            var History = _connection.HistoryRecords.Where(f => f.Table == "Section").ToList();
-            if (History.Count == 0)   return null; 
-            return History.OrderBy(f => f.CreateTime).Last().ID;
+            return GetLastHistory("Section");
         }
 
         public string GetLastPageHistory()
         {
-            var History = _connection.HistoryRecords.Where(f => f.Table == "Page").ToList();
+            return GetLastHistory("Page");
+        }
+
+        public string GetLastHistory(string tableName)
+        {
+            var History = _connection.HistoryRecords.Where(f => f.Table == tableName).ToList();
             if (History.Count == 0) return null;
             return History.OrderBy(f => f.CreateTime).Last().ID;
         }
 
-       
+        public string GetLastID(string tableName)
+        {
+            var result = _connection.HistoryPointers
+                .Where(f => f.TableName == tableName && f.IsClient)
+                .SingleOrDefault();
+
+            if (result == null) throw new ArgumentException("Wrong table name!");
+            return result.RecordId;
+        }
     }
-    }
+}
