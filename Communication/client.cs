@@ -34,7 +34,7 @@ namespace OneNote.Communication
             if (c.Database.EnsureCreated())
             {
                 _con = c;
-                _db = new Database(c, true);
+                _db = new Database(c);
             }
             else
             {

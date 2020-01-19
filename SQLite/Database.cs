@@ -11,11 +11,9 @@ namespace OneNote.SQLite
     public class Database : IDatabase
     {
         private readonly Connection _connection;
-        private readonly bool _isClientDb;
-        public Database(Connection connection, bool isClientDb)
+        public Database(Connection connection)
         {
             _connection = connection;
-            _isClientDb = isClientDb;
         }
 
         public void AddBook(Book value)
@@ -102,14 +100,13 @@ namespace OneNote.SQLite
             var newRecordID = model.Records.Single().RecordID;
             var tableName = model.Records.First().Table;
             var pointer = _connection.HistoryPointers
-                .Where(f => f.TableName == tableName && f.IsClient == this._isClientDb)
+                .Where(f => f.TableName == tableName)
                 .FirstOrDefault();
 
             if (pointer == null)
             {
                 pointer = new HistoryPointer() {
                     TableName = tableName,
-                    IsClient = this._isClientDb,
                     RecordId = newRecordID
                 };
                 _connection.HistoryPointers.Add(pointer);
@@ -265,7 +262,7 @@ namespace OneNote.SQLite
         public string GetLastID(string tableName)
         {
             var result = _connection.HistoryPointers
-                .Where(f => f.TableName == tableName && f.IsClient == this._isClientDb)
+                .Where(f => f.TableName == tableName && f.IsClient)
                 .SingleOrDefault();
 
             if (result == null) throw new ArgumentException("Wrong table name!");
