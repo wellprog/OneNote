@@ -47,6 +47,8 @@
                 MaxWidth="230"
                 FontSize="16"
                 BorderThickness="0"
+                GotFocus="LoginTB_GotFocus"
+                LostFocus="LoginTB_LostFocus"
                 Background="Transparent">
                 <TextBox.Triggers>
                     <EventTrigger RoutedEvent="FocusManager.GotFocus">
@@ -125,6 +127,8 @@
                 MaxWidth="230"
                 FontSize="16"
                 BorderThickness="0"
+                GotFocus="PasswordTB_GotFocus"
+                LostFocus="PasswordTB_LostFocus"
                 Background="Transparent">
                 <TextBox.Triggers>
                     <EventTrigger RoutedEvent="FocusManager.GotFocus">

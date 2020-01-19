@@ -34,6 +34,9 @@ namespace OneNote.Application
         {
             InitializeComponent();
 
+            SignInModel.Login = "Enter your Login";
+            SignInModel.Password = "Enter your Password";
+
             communicator = ClassLoader.Instance.GetElement<ICommunication>();
             enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 

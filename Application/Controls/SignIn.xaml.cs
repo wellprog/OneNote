@@ -27,14 +27,14 @@ namespace OneNote.Application.Controls
         {
             InitializeComponent();
 
-            //textBrush = LoginTextBox.Foreground;
-            //LoginTextBox.Foreground = helpBrush;
-            //PasswordTextBox.Foreground = helpBrush;
-            //LoginTextBox.Text = "Enter your Login";
-            //PasswordTextBox.Text ="Enter yout Password";
+            textBrush = LoginTB.Foreground;
+            LoginTB.Foreground = helpBrush;
+            PasswordTB.Foreground = helpBrush;
+            LoginTB.Text = "Enter your Login";
+            PasswordTB.Text = "Enter yout Password";
         }
 
-        void ShowError()
+        private void ShowError()
         {
             
         }
@@ -45,6 +45,42 @@ namespace OneNote.Application.Controls
             {
                 ShowError();
                 return;
+            }
+        }
+
+        private void LoginTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(LoginTB.Foreground == helpBrush)
+            {
+                LoginTB.Foreground = textBrush;
+                LoginTB.Text = "";
+            }
+        }
+
+        private void LoginTB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (LoginTB.Text == "")
+            {
+                LoginTB.Foreground = helpBrush;
+                LoginTB.Text = "Enter your Login";
+            }
+        }
+
+        private void PasswordTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTB.Foreground == helpBrush)
+            {
+                PasswordTB.Foreground = textBrush;
+                PasswordTB.Text = "";
+            }
+        }
+
+        private void PasswordTB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTB.Text == "")
+            {
+                PasswordTB.Foreground = helpBrush;
+                PasswordTB.Text = "Enter your Password";
             }
         }
     }
