@@ -8,6 +8,6 @@ namespace OneNote.Model
     {
         public string   Table { get; set; }     // Имя Таблицы
         public string   RecordID { get; set; }  // ID изменяемого элемента 
-        public string   Autor { get; set; }
+        public string   Autor { get; set; }     // ID автора
     }
 }

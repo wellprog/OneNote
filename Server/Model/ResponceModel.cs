@@ -9,6 +9,7 @@ namespace OneNote.Server.Model
     {
         public int    ErrorID { get; set; }
         public string ErrorDescription { get; set; }
+        public string AutorID { get; set; }
         public object Data { get; set; }
     }
 }

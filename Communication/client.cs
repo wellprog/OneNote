@@ -15,16 +15,31 @@ namespace OneNote.Communication
     {
         Uri baseUrl;
         HttpClient httpClient;
+        private IDatabase _db;
+        private Connection _con;
+        private string LastId { get; set; }  //указатель на последнюю запись скачанную с удаленного репо
 
-        public Client(string uri)
+        public string Token { get; set; }
+
+        public Client(string uri) : this(new Uri(uri))
         {
-            baseUrl = new Uri(uri);
-            httpClient = new HttpClient();
         }
+
         public Client(Uri uri)
         {
             baseUrl = uri;
             httpClient = new HttpClient();
+
+            Connection c = new Connection();
+            if (c.Database.EnsureCreated())
+            {
+                _con = c;
+                _db = new Database(c);
+            }
+            else
+            {
+                throw new Exception("A white little polar animal has come!");
+            }
         }
         
         public BookModel GetBooks(string token)
@@ -153,6 +168,46 @@ namespace OneNote.Communication
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
+        }
+
+        public void AddLocalBook(Book value)
+        {
+            _db.AddBook(value);
+        }
+
+        public void AddLocalSection(Section value)
+        {
+            _db.AddSection(value);
+        }
+
+        public void AddLocalPage(Page value)
+        {
+            _db.AddPage(value);
+        }
+
+        public IEnumerable<Book> GetLocalBooks(string autorID)
+        {
+            return _db.GetBooks(autorID);
+        }
+
+        public IEnumerable<Section> GetLocalSections(string book)
+        {
+            return _db.GetSections(book);
+        }
+
+        public IEnumerable<Page> GetLocalPages(string section)
+        {
+            return _db.GetPages(section);
+        }
+        
+        public SQLite.Model.HistoryModel GetLocalBookHystory(string LastID)
+        {
+            return _db.GetBookHistory(LastID);
+        }
+
+        public string GetLastId(string tableName)
+        {
+            return _db.GetLastID(tableName);
         }
     }
 }

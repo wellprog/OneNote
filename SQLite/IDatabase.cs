@@ -41,6 +41,7 @@ namespace OneNote.SQLite
         void UpdateBookByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
         void UpdateSectionByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
         void UpdatePageByHistory(IEnumerable<HistoryRecord> records, IEnumerable<HistoryDetail> details);
+
         /// <summary>
         /// Функции просто возвращают записи по последниму ID
         /// </summary>
@@ -64,5 +65,6 @@ namespace OneNote.SQLite
         bool DeleteUser(User user);
         bool UpdateUser(User user);
 
+        string GetLastID(string tableName);
     }
 }

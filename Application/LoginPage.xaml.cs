@@ -1,4 +1,7 @@
-﻿using OneNote.Application.ViewModel;
+﻿using OneNote.Application.Helpers;
+using OneNote.Application.ViewModel;
+using OneNote.Communication;
+using OneNote.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +27,15 @@ namespace OneNote.Application
         SignInViewModel SignInModel = new SignInViewModel();
         SignUpViewModel SignUpModel = new SignUpViewModel();
 
+        ICommunication communicator;
+        IEnviroment enviroment;
+
         public LoginPage()
         {
             InitializeComponent();
+
+            communicator = ClassLoader.Instance.GetElement<ICommunication>();
+            enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
             DataContext = new List<object>() { SignInModel, SignUpModel };
         }

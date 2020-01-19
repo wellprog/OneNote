@@ -31,6 +31,10 @@ namespace OneNote.Application.Controls
             //Заглушка для открытия основного окна
             GeneralWindow nextWindow = new GeneralWindow();
             nextWindow.Show();
+            MessageBox MessageBoxExample = new MessageBox("Этот текст передан из кода окна-родителя");
+            MessageBoxExample.Show();
+            DialogWindow dialogWindowExample = new DialogWindow();
+            dialogWindowExample.Show();
         }
     }
 }
