@@ -56,12 +56,14 @@ namespace OneNote.Application
 
         private void RightAdd_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            //MessageBox rightBoxAdd = new MessageBox();
+            //rightBoxAdd.Show();
         }
 
         private void LeftAdd_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            //MessageBox leftBoxAdd = new MessageBox();
+            //leftBoxAdd.Show();
         }
     }
 }

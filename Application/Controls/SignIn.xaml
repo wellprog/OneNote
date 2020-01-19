@@ -22,8 +22,11 @@
                 BorderBrush="Black"
                 Width="250">
                 <TextBox
+                    x:Name="LoginTextBox"
                     TextAlignment="Center"
-                    Text="{Binding Login}" />
+                    Text="{Binding Login}"
+                    GotFocus="LoginTextBox_GotFocus"
+                    LostFocus="LoginTextBox_LostFocus"/>
             </Border>
         </StackPanel>
 
@@ -36,8 +39,11 @@
                 BorderBrush="Black"
                 Width="250">
                 <TextBox
+                    x:Name="PasswordTextBox"
                     TextAlignment="Center"
-                    Text="{Binding Password}" />
+                    Text="{Binding Password}"
+                    GotFocus="PasswordTextBox_GotFocus"
+                    LostFocus="PasswordTextBox_LostFocus"/>
             </Border>
         </StackPanel>
 
