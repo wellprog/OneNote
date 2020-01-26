@@ -19,6 +19,14 @@ namespace OneNote.Application.ViewModel
         public GeneralWindowViewModel()
         {
             Content = "Here will be content";
+
+            CommandBinding binding = new CommandBinding(leftAdd);
+            binding.Executed += Binding_Executed;
+        }
+
+        private void Binding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

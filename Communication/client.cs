@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using OneNote.Communication.Model;
 using OneNote.Model;
 using OneNote.SQLite;
+using OneNote.SQLite.Model;
 
 namespace OneNote.Communication
 {
@@ -56,12 +57,12 @@ namespace OneNote.Communication
             return JsonConvert.DeserializeObject<BookModel>(returnedDataString);
         }
         
-        public HistoryModel GetHistory(string token, string table, int lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("table"), table);
-            content.Add(new StringContent("lastID"), lastID.ToString());
+            content.Add(new StringContent("lastID"), lastID);
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;

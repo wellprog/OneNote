@@ -14,6 +14,7 @@ namespace OneNote.SQLite
         public Database(Connection connection)
         {
             _connection = connection;
+            _connection.Database.EnsureCreated();
         }
 
         public void AddBook(Book value)

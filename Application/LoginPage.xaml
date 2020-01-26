@@ -10,7 +10,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
-
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -52,7 +52,7 @@
 
                 <!-- Первый контент -->
                 <StackPanel Grid.Column="0">
-                    <controls:SignIn DataContext="{Binding [0]}" />
+                    <controls:SignIn DataContext="{Binding SignInModel}" />
                 </StackPanel>
                 <!-- Кнопка -->
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -67,7 +67,7 @@
                 </StackPanel>
                 <!-- Второй контент -->
                 <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                    <controls:SignUp DataContext="{Binding [1]}" />
+                    <controls:SignUp DataContext="{Binding SignUpModel}" />
                 </StackPanel>
             </Grid>
 

@@ -20,21 +20,68 @@ namespace OneNote.Application.Controls
     /// </summary>
     public partial class SignIn : UserControl
     {
+        Brush textBrush;
+        SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
+
         public SignIn()
         {
             InitializeComponent();
+
+            textBrush = LoginTB.Foreground;
+            LoginTB.Foreground = helpBrush;
+            PasswordTB.Foreground = helpBrush;
+            LoginTB.Text = "Enter your Login";
+            PasswordTB.Text = "Enter yout Password";
         }
 
-        private void SignInButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ShowError()
         {
-            //При нажатии на кнопку авторизации
-            //Заглушка для открытия основного окна
-            GeneralWindow nextWindow = new GeneralWindow();
-            nextWindow.Show();
-            MessageBox MessageBoxExample = new MessageBox("Этот текст передан из кода окна-родителя");
-            MessageBoxExample.Show();
-            DialogWindow dialogWindowExample = new DialogWindow();
-            dialogWindowExample.Show();
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(LoginTB.Text) || String.IsNullOrWhiteSpace(PasswordTB.Text))
+            {
+                ShowError();
+                return;
+            }
+        }
+
+        private void LoginTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(LoginTB.Foreground == helpBrush)
+            {
+                LoginTB.Foreground = textBrush;
+                LoginTB.Text = "";
+            }
+        }
+
+        private void LoginTB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (LoginTB.Text == "")
+            {
+                LoginTB.Foreground = helpBrush;
+                LoginTB.Text = "Enter your Login";
+            }
+        }
+
+        private void PasswordTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTB.Foreground == helpBrush)
+            {
+                PasswordTB.Foreground = textBrush;
+                PasswordTB.Text = "";
+            }
+        }
+
+        private void PasswordTB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTB.Text == "")
+            {
+                PasswordTB.Foreground = helpBrush;
+                PasswordTB.Text = "Enter your Password";
+            }
         }
     }
 }

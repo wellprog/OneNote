@@ -1,6 +1,6 @@
-﻿using OneNote.Application.Helpers;
-using OneNote.Application.ViewModel;
+﻿using OneNote.Application.ViewModel;
 using OneNote.Communication;
+using OneNote.Communication.Helpers;
 using OneNote.Helpers;
 using System;
 using System.Collections.Generic;
@@ -24,8 +24,7 @@ namespace OneNote.Application
     /// </summary>
     public partial class LoginPage : Window
     {
-        SignInViewModel SignInModel = new SignInViewModel();
-        SignUpViewModel SignUpModel = new SignUpViewModel();
+        LoginPageModel loginPageModel = new LoginPageModel();
 
         ICommunication communicator;
         IEnviroment enviroment;
@@ -37,7 +36,7 @@ namespace OneNote.Application
             communicator = ClassLoader.Instance.GetElement<ICommunication>();
             enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
-            DataContext = new List<object>() { SignInModel, SignUpModel };
+            DataContext = loginPageModel;
         }
 
         bool IsLeftOpen = false;

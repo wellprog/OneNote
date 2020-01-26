@@ -2,10 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:OneNote.Application.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -25,66 +26,180 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Username"  Width="250"/>
-                <Border
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding UserName}" />
-                </Border>
+                <!--<TextBox x:Name="UsernameTB" Template="{StaticResource SignTBExample}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="UsernameTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                     Margin="75,0,0,0">
                 <Label Content="Status"  Width="250"/>
-                <Border
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding Status}" />
-                </Border>
+                <!--<TextBox x:Name="StatusTB" Template="{StaticResource SignTBExample}" Text="{Binding Status}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="StatusTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="EMail"  Width="250"/>
-                <Border
+                <!--<TextBox x:Name="EMailTB" Template="{StaticResource SignTBExample}" Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="EMailTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
                     BorderThickness="1"
-                    BorderBrush="Black"
-                    Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding EMail}" />
-                </Border>
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                 Margin="75,0,0,0">
                 <Label Content="Password"  Width="250"/>
-                <Border
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding Password}" />
-                </Border>
+                <!--<TextBox x:Name="PasswordTB" Template="{StaticResource SignTBExample}" Text="{Binding Password}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="PasswordTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Phone"  Width="250"/>
-                <Border
+                <!--<TextBox x:Name="PhoneTB" Template="{StaticResource SignTBExample}" Text="{Binding Phone}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="PhoneTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
                     BorderThickness="1"
-                    BorderBrush="Black"
-                    Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding Phone}" />
-                </Border>
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                 Margin="75,0,0,0">
                 <Label Content="Age"  Width="250"/>
-                <Border
-                        BorderThickness="1"
-                        BorderBrush="Black"
-                        Width="250">
-                    <TextBox TextAlignment="Center" Text="{Binding Age}" />
-                </Border>
+                <!--<TextBox x:Name="AgeTB" Template="{StaticResource SignTBExample}" Text="{Binding Age}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="AgeTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
@@ -92,7 +207,7 @@
             <StackPanel>
                 <Label Content="Avatar"  Width="250"/>
                 <Border HorizontalAlignment="Left"
-                    BorderThickness="2"
+                    BorderThickness="1"
                     BorderBrush="Black"
                     Height="35"
                     Width="35">
@@ -115,16 +230,123 @@
         </StackPanel>
 
         <StackPanel Grid.Row="6" VerticalAlignment="Center" Margin="0,20,0,0">
-            <Border
-                Background="Aqua"
-                Width="250"
-                PreviewMouseLeftButtonDown="SignUpButton_PreviewMouseLeftButtonDown">
-                <Label
-                    Content="Sign Up"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                </Label>
-            </Border>
+            <Button
+            Grid.Row="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontSize="20"
+            Height="40"
+            Width="110"
+            Content="Sign Up">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                        </Trigger>
+                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.5"
+                                                        To="Transparent"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.5,0.5"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.55,1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                    <Border
+                                    Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"
+                                    Background="#fff"
+                                    CornerRadius="10"
+                                    BorderThickness="2"
+                                    Padding="5,0,5,0"
+                                    Cursor="Hand"
+                                    x:Name="Temp">
+                                        <Label
+                                        Content="{TemplateBinding Content}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#ebebeb"/>
+                                        </Border.Effect>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.55,1">
+                                                <GradientStop Color="Transparent" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="0.5"/>
+                                                <GradientStop Color="#e66f6f" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
         <!--UserName, EMail, Password, Phone, Age, Avatar, Gender, Status -->

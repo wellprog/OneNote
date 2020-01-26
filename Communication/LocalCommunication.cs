@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OneNote.Communication.Model;
 using OneNote.Model;
+using OneNote.SQLite.Model;
 using System.Linq;
 
 namespace OneNote.Communication
@@ -41,11 +42,11 @@ namespace OneNote.Communication
             };
         }
 
-        public HistoryModel GetHistory(string token, string table, int lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID)
         {
             if (!CheckAccess(token)) return null;
 
-            var data = testDB.GetHistory(table, lastID.ToString());
+            var data = testDB.GetHistory(table, lastID);
             return new HistoryModel()
             {
                 Records = data.Records.ToList(),
