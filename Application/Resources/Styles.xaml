@@ -2,6 +2,32 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OneNote.Application.Resources">
 
+    <ControlTemplate TargetType="TextBox" x:Key="SignTBExample">
+        <StackPanel Orientation="Vertical">
+            <TextBox
+                    x:Name="LoginTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Background="Transparent">
+            </TextBox>
+            <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                </Border.Effect>
+            </Border>
+        </StackPanel>
+    </ControlTemplate>
+
     <Style x:Key="MyButtonStyle" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Margin" Value="5"/>
@@ -19,6 +45,113 @@
                             <Setter TargetName="border" Property="BorderBrush" Value="Black" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.5"
+                                                        To="Transparent"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.5,0.5"/>
+                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.55,1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    <Border
+                                    Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"
+                                    Background="#fff"
+                                    CornerRadius="10"
+                                    BorderThickness="2"
+                                    Padding="5,0,5,0"
+                                    Cursor="Hand"
+                                    x:Name="Temp">
+                        <Label
+                                        Content="{TemplateBinding Content}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#ebebeb"/>
+                        </Border.Effect>
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.55,1">
+                                <GradientStop Color="Transparent" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="0.5"/>
+                                <GradientStop Color="#e66f6f" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

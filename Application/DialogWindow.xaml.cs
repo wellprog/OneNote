@@ -40,8 +40,10 @@ namespace OneNote.Application
 
         private void Yes_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //todo delete
             DialogWindow next = new DialogWindow(MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1) + ", что вы уверены?");
             next.Show();
+
             this.Close();
         }
 
