@@ -35,7 +35,7 @@
                 Height="240"
                 GotFocus="MainTextBox_GotFocus"
                 LostFocus="MainTextBox_LostFocus"
-                TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Margin="10,45,0,0"/>
+                TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500" Margin="10,45,0,0"/>
 
             <Border
                 HorizontalAlignment="Center"
