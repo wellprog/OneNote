@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -20,6 +21,8 @@ namespace OneNote.Communication
         private string LastId { get; set; }  //указатель на последнюю запись скачанную с удаленного репо
 
         public string Token { get; set; }
+        private string _salt = "somesalt";
+        private TokenStorage _tokenStorage;
 
         public Client(string uri) : this(new Uri(uri))
         {
@@ -31,14 +34,14 @@ namespace OneNote.Communication
             httpClient = new HttpClient();
 
             Connection c = new Connection();
-            if (c.Database.EnsureCreated())
+           // if (c.Database.EnsureCreated())
             {
                 _con = c;
                 _db = new Database(c);
             }
-            else
+          //  else
             {
-                throw new Exception("A white little polar animal has come!");
+              //  throw new Exception("A white little polar animal has come!");
             }
         }
         
@@ -102,8 +105,8 @@ namespace OneNote.Communication
         public string Authorize(string login, string password)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("login"), login);
-            content.Add(new StringContent("password"), password);
+            content.Add(new StringContent(login), "login");
+            content.Add(new StringContent(password), "password");
 
             HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/Authorize"), content).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
@@ -113,13 +116,30 @@ namespace OneNote.Communication
         
         public string Register(User user)
         {
-            MultipartFormDataContent content = new MultipartFormDataContent();
-            content.Add(new StringContent("user"), JsonConvert.SerializeObject(user));
-
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/Register"), content).Result;
+            //MultipartFormDataContent content = new MultipartFormDataContent();
+           
+            //var json = JsonConvert.SerializeObject(user);
+            
+            //content.Add(new StringContent(json),
+            //    "user");
+            var encData = new Dictionary<string, string>();
+            PropertyInfo[] pInfo = typeof(User).GetProperties();
+            foreach(PropertyInfo item in pInfo)
+            {
+                encData.Add(item.Name, item.GetValue(user).ToString());
+            }
+            var formContent = new FormUrlEncodedContent(encData);
+            var uri = new Uri(baseUrl + "/Register");
+            HttpResponseMessage returnedData = httpClient.PostAsync(uri, formContent).Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
+
+            //if (_db.IsUserExists(user.UserName)) return null;
+            //_db.AddUser(user);
+            //string token = user.UserName + _salt + user.Password;
+            //_tokenStorage.Tokens.Add(token, user);
+            //return token;
         }
         
         public string SetHistory(string token, HistoryModel history)
