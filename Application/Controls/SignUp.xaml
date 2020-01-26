@@ -9,29 +9,7 @@
 
     <UserControl.Resources>
         <ControlTemplate TargetType="TextBox" x:Key="SignTBExample">
-            <StackPanel Orientation="Vertical">
-                <TextBox
-                    x:Name="LoginTB"
-                    TextAlignment="Center"
-                    Foreground="Black"
-                    Margin="0,10,0,0"
-                    MaxWidth="230"
-                    FontSize="16"
-                    BorderThickness="0"
-                    Background="Transparent">
-                </TextBox>
-                <Border
-                    x:Name="LIB"
-                    BorderThickness="1"
-                    BorderBrush="#ddd"
-                    CornerRadius="0"
-                    Margin="0,1,0,0"
-                    Width="230">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
-                    </Border.Effect>
-                </Border>
-            </StackPanel>
+            
         </ControlTemplate>
     </UserControl.Resources>
 
@@ -54,36 +32,180 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Username"  Width="250"/>
-                <TextBox x:Name="UsernameTB" Template="{StaticResource SignTBExample}"/>
+                <!--<TextBox x:Name="UsernameTB" Template="{StaticResource SignTBExample}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="UsernameTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                     Margin="75,0,0,0">
                 <Label Content="Status"  Width="250"/>
-                <TextBox x:Name="StatusTB" Template="{StaticResource SignTBExample}" Text="{Binding Status}"/>
+                <!--<TextBox x:Name="StatusTB" Template="{StaticResource SignTBExample}" Text="{Binding Status}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="StatusTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="EMail"  Width="250"/>
-                <TextBox x:Name="EMailTB" Template="{StaticResource SignTBExample}" Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
+                <!--<TextBox x:Name="EMailTB" Template="{StaticResource SignTBExample}" Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="EMailTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                 Margin="75,0,0,0">
                 <Label Content="Password"  Width="250"/>
-                <TextBox x:Name="PasswordTB" Template="{StaticResource SignTBExample}" Text="{Binding Password}"/>
+                <!--<TextBox x:Name="PasswordTB" Template="{StaticResource SignTBExample}" Text="{Binding Password}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="PasswordTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="Phone"  Width="250"/>
-                <TextBox x:Name="PhoneTB" Template="{StaticResource SignTBExample}" Text="{Binding Phone}"/>
+                <!--<TextBox x:Name="PhoneTB" Template="{StaticResource SignTBExample}" Text="{Binding Phone}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="PhoneTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
             <StackPanel
                 Margin="75,0,0,0">
                 <Label Content="Age"  Width="250"/>
-                <TextBox x:Name="AgeTB" Template="{StaticResource SignTBExample}" Text="{Binding Age}"/>
+                <!--<TextBox x:Name="AgeTB" Template="{StaticResource SignTBExample}" Text="{Binding Age}"/>-->
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                    x:Name="AgeTB"
+                    TextAlignment="Center"
+                    Foreground="Black"
+                    Margin="0,10,0,0"
+                    MaxWidth="230"
+                    FontSize="16"
+                    BorderThickness="0"
+                    Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Background="Transparent">
+                    </TextBox>
+                    <Border
+                    x:Name="LIB"
+                    BorderThickness="1"
+                    BorderBrush="#ddd"
+                    CornerRadius="0"
+                    Margin="0,1,0,0"
+                    Width="230">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
+                        </Border.Effect>
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
