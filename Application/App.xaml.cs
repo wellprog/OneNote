@@ -1,13 +1,7 @@
-﻿using OneNote.Communication;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using OneNote.Communication;
 using OneNote.Communication.Helpers;
 using OneNote.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Application
 {
@@ -22,6 +16,7 @@ namespace Application
 
             loader.Register<ICommunication>(new LocalCommunication());
             loader.Register<IEnviroment>(new Enviroment());
+            loader.Register<OneNote.SQLite.IDatabase>(new OneNote.SQLite.Database(new OneNote.SQLite.Connection()));
         }
     }
 }

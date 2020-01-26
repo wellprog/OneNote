@@ -75,7 +75,7 @@ namespace OneNote.Communication
         /// <param name="table"></param>
         /// <param name="lastID"></param>
         /// <returns></returns>
-        public HistoryModel GetHistory(string token, string table, int lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID)
         {
             throw new NotImplementedException();
         }

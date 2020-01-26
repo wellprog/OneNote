@@ -200,6 +200,7 @@
     <Compile Include="MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\SyncService.cs" />
     <Compile Include="ViewModel\ClickCommand.cs" />
     <Compile Include="ViewModel\GeneralWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginPageModel.cs" />
@@ -310,6 +311,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{14DDB02B-927C-4AAA-9ED7-4F9834F2267D}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLite\SQLite.csproj">
+      <Project>{3de66547-6b47-4e1c-b299-e1257837f635}</Project>
+      <Name>SQLite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

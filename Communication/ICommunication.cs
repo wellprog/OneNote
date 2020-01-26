@@ -54,7 +54,7 @@ namespace OneNote.Communication
         /// <param name="Table">Наименование таблицы</param>
         /// <param name="LastID">Последний ID истории</param>
         /// <returns>Массив истории</returns>
-        HistoryModel GetHistory(string token, string table, int lastID);
+        HistoryModel GetHistory(string token, string table, string lastID);
 
         /// <summary>
         /// Отправка истории
