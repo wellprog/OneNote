@@ -66,7 +66,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Content="EMail"  Width="250"/>
-                <TextBox x:Name="EMailTB" Template="{StaticResource SignTBExample}" Text="{Binding EMail}"/>
+                <TextBox x:Name="EMailTB" Template="{StaticResource SignTBExample}" Text="{Binding EMail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
             </StackPanel>
             <StackPanel
                 Margin="75,0,0,0">
