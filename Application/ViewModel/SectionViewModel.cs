@@ -45,9 +45,11 @@ namespace OneNote.Application.ViewModel
             currentUser = _communication.GetUserDetails(token);
         }
 
-        public IEnumerable<Section> FormBook(string book)
+        public void FormBook(string book)
         {
-           return _client.GetLocalSections(book);
+            Sections.Clear();
+            Sections.AddRange(_client.GetLocalSections(book));
+            
         }
 
     }
