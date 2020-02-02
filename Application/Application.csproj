@@ -205,6 +205,7 @@
     <Compile Include="ViewModel\ClickCommand.cs" />
     <Compile Include="ViewModel\GeneralWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginPageModel.cs" />
+    <Compile Include="ViewModel\SectionViewModel.cs" />
     <Compile Include="ViewModel\SignInViewModel.cs" />
     <Compile Include="ViewModel\SignUpViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
