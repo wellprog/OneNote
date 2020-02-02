@@ -13,12 +13,12 @@ namespace OneNote.Communication.Helpers
         public User CurrentUser { get; set; }
         public string LastRecordId { get; set; }
 
-        string RemoteBookCursor { get; set; }
-        string RemotePageCursor { get; set; }
-        string RemoteSectionCursor { get; set; }
+        public string RemoteBookCursor { get; set; }
+        public string RemotePageCursor { get; set; }
+        public string RemoteSectionCursor { get; set; }
 
-        string LocalBookCursor { get; set; }
-        string LocalPageCursor { get; set; }
-        string LocalSectionCursor { get; set; }
+        public string LocalBookCursor { get; set; }
+        public string LocalPageCursor { get; set; }
+        public string LocalSectionCursor { get; set; }
     }
 }

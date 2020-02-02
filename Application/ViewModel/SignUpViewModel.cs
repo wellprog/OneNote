@@ -183,7 +183,7 @@ namespace OneNote.Application.ViewModel
                 !string.IsNullOrWhiteSpace(Password) &&
                 !string.IsNullOrWhiteSpace(Phone) &&
                 !string.IsNullOrWhiteSpace(Age) &&
-                !string.IsNullOrWhiteSpace(Avatar) &&
+                //!string.IsNullOrWhiteSpace(Avatar) &&
                 !string.IsNullOrWhiteSpace(Status)
             )
                 SignUp.SetCanExecuted(true);

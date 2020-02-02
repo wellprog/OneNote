@@ -36,7 +36,7 @@
                     MaxWidth="230"
                     FontSize="16"
                     BorderThickness="0"
-                    Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                     Background="Transparent">
                     </TextBox>
                     <Border
@@ -237,6 +237,7 @@
             FontSize="20"
             Height="40"
             Width="110"
+            Command="{Binding SignUp}"
             Content="Sign Up">
                 <Button.Style>
                     <Style TargetType="Button">
