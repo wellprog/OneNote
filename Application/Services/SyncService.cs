@@ -17,6 +17,9 @@ namespace OneNote.Application.Services
         private IEnviroment _enviroment;
         private IDatabase _database;
 
+        private Thread _syncThread;
+        private bool _isStopRequested = false;
+
         public SyncService ()
         {
             _communication = ClassLoader.Instance.GetElement<ICommunication>();
@@ -24,22 +27,35 @@ namespace OneNote.Application.Services
             _database = ClassLoader.Instance.GetElement<IDatabase>();
         }
 
-        public void Start() {
-            Thread th = new Thread(threadStart);
-            th.Start();
-        }
-        public void Stop() {
-            //TODO stop timer
-        }
-
-
-        void threadStart()
+        public void Start()
         {
+            _syncThread = new Thread(ThreadStart);
+            _syncThread.Start();
+        }
+
+        public void Stop()
+        {
+            _isStopRequested = true;
+        }
+
+
+        void ThreadStart()
+        {
+            SynkThreadStop();
             SyncBooks();
             SyncSections();
             SyncPages();
+            SynkThreadStop();
 
             Thread.Sleep(60000);
+        }
+
+        void SynkThreadStop()
+        {
+            if (_isStopRequested)
+            {
+                _syncThread.Abort();
+            }
         }
 
         private void SyncBooks()
