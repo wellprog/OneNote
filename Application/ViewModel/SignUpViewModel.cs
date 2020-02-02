@@ -158,14 +158,14 @@ namespace OneNote.Application.ViewModel
 
             if (string.IsNullOrWhiteSpace(token))
             {
-                new MessageBox("Упс введенные данные не верны").Show();
+                new MessageBox(5, "Введенные данные не верны").Show();
                 return;
             }
 
             var currentUser = _communication.GetUserDetails(token);
             if (currentUser == null)
             {
-                new MessageBox("Упс не получилось получить текущего пользователя").Show();
+                new MessageBox(5, "Не получилось получить текущего пользователя").Show();
                 return;
             }
 

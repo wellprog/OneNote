@@ -23,19 +23,27 @@
         BorderThickness="1"
         BorderBrush="Black">
 
-        <Grid>
+        <Grid x:Name="GridMain">
             <Label
                 Content="WellNote 0.1"
                 FontSize="20"
                 Margin="0,-15,0,0"/>
-
-            <TextBox
-                x:Name="mainTextBox"
-                BorderThickness="0"
-                HorizontalAlignment="Center"
-                Height="240"
-                IsReadOnly="True"
-                TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500" Margin="10,45,0,0"/>
+            <StackPanel Orientation="Vertical" Margin="20,50,20,40">
+                <TextBox
+                    x:Name="oopsTextBox"
+                    BorderThickness="0"
+                    HorizontalAlignment="Center"
+                    IsReadOnly="True"
+                    FontSize="30"
+                    TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500"/>
+                <TextBox
+                    x:Name="mainTextBox" Margin="20,50,20,40"
+                    BorderThickness="0"
+                    HorizontalAlignment="Center"
+                    IsReadOnly="True"
+                    FontSize="20"
+                    TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500"/>
+            </StackPanel>
 
             <Button
                 x:Name="YesButton"

@@ -57,14 +57,14 @@ namespace OneNote.Application.ViewModel
             string token = _communication.Authorize(Login, Password);
             if (string.IsNullOrWhiteSpace(token))
             {
-                new MessageBox("Упс Логин или пароль не верен").Show();
+                new MessageBox(5, "Логин или пароль не верен").Show();
                 return;
             }
 
             var currentUser = _communication.GetUserDetails(token);
             if (currentUser == null)
             {
-                new MessageBox("Упс не получилось получить текущего пользователя").Show();
+                new MessageBox(5, "Не получилось получить текущего пользователя").Show();
                 return;
             }
 
