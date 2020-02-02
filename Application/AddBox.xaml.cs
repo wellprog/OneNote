@@ -19,18 +19,22 @@ namespace OneNote.Application
     /// </summary>
     public partial class AddBox : Window
     {
+        //Для подсказок
         Brush textBrush;
         SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
+        string helpText = "(Type someone here)";
 
         public AddBox()
         {
             InitializeComponent();
 
+            //Тоже для подсказок
             textBrush = mainTextBox.Foreground;
-            mainTextBox.Text = "(Type someone here)";
+            mainTextBox.Text = helpText;
             mainTextBox.Foreground = helpBrush;
         }
 
+        //Реализация подсказок
         private void MainTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if(mainTextBox.Foreground == helpBrush)
@@ -44,22 +48,28 @@ namespace OneNote.Application
         {
             if(mainTextBox.Text == "")
             {
-                mainTextBox.Text = "(Type someone here)";
+                mainTextBox.Text = helpText;
                 mainTextBox.Foreground = helpBrush;
             }
         }
 
-        private void Add_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
-        private void textBox1_Enter(object sender, EventArgs e)//происходит когда элемент стает активным
+        private void textBox1_Enter(object sender, EventArgs e)
         {
             mainTextBox.Text = null;
             mainTextBox.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
         }
 
+        //При нажатии AddButton
+        private void Add_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(mainTextBox.Text))
+                return;
+            //Что-то происходит (TODO)
+            this.Close();
+        }
+
+
+        //Закрытие, открытие, перенос окна
         private void App_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();

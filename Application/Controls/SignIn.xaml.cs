@@ -32,6 +32,13 @@ namespace OneNote.Application.Controls
             PasswordTB.Foreground = helpBrush;
             LoginTB.Text = "Enter your Login";
             PasswordTB.Text = "Enter yout Password";
+
+            /*
+            //Open all windows to Debug
+            (new GeneralWindow()).Show();
+            (new AddBox()).Show();
+            (new MessageBox()).Show();
+            (new DialogWindow()).Show();*/
         }
 
         private void ShowError()

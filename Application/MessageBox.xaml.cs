@@ -30,6 +30,13 @@ namespace OneNote.Application
             mainTextBox.Text = message;
         }
 
+        //При нажатии OK
+        private void Ok_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        //Закрытие, открытие, перенос окна
         private void App_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -41,11 +48,6 @@ namespace OneNote.Application
         }
 
         private void Exit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Ok_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
