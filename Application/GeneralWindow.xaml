@@ -38,7 +38,14 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Width="200" Height="345"
-                        ItemTemplate="{Binding leftListBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
+                        ItemsSource="{Binding BooksPanel.Books}"
+                        >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <Button Margin="0,5,0,0"
                         x:Name="AddBookButton"
                         VerticalAlignment="Center"
@@ -46,7 +53,7 @@
                         FontSize="15"
                         Height="30"
                         Width="75"
-                        Command="{Binding bookAdd}"
+                        Command="{Binding BooksPanel.AddCommand}"
                         Content="Add">
                         <Button.Style>
                             <Style TargetType="Button">

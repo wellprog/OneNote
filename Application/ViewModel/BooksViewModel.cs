@@ -2,6 +2,7 @@
 using OneNote.Communication.Helpers;
 using OneNote.Helpers;
 using OneNote.Model;
+using OneNote.SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,11 +31,12 @@ namespace OneNote.Application.ViewModel
             }
         }
 
+
         public ClickCommand AddCommand { get; }
 
         private ICommunication _communication;
         private IEnviroment _enviroment;
-        private Client _client;
+        private IDatabase _database;
 
         private string token = "";
         private User currentUser;
@@ -43,27 +45,32 @@ namespace OneNote.Application.ViewModel
         public BooksViewModel()
         {
             AddCommand = new ClickCommand(OnAddCommand);
+            AddCommand.SetCanExecuted(true);
+
             _communication = ClassLoader.Instance.GetElement<ICommunication>();
             _enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
-            _client = ClassLoader.Instance.GetElement<Client>();
+            _database = ClassLoader.Instance.GetElement<IDatabase>();
 
             token = _enviroment.UserToken;
             currentUser = _communication.GetUserDetails(token);
 
-            Books.AddRange(_client.GetLocalBooks(currentUser.ID));
+            Books.AddRange(_database.GetBooks(currentUser.ID));
         }
 
         protected void OnAddCommand(object param)
         {
+
+            AddBox box = new AddBox();
+            box.ShowDialog();
            
-            if(param is String)
-            {
-                Book book =_client.GetLocalBooks(currentUser.ID).Where(f => f.Name == param.ToString()).FirstOrDefault();
-                if (book == null)
-                {
-                    _client.AddLocalBook(new Book() { Name = param.ToString(), Autor = currentUser.ID });
-                }
-            }
+            //if(param is String)
+            //{
+            //    Book book = _database.GetBooks(currentUser.ID).Where(f => f.Name == param.ToString()).FirstOrDefault();
+            //    if (book == null)
+            //    {
+            //        _database.AddBook(new Book() { Name = param.ToString(), Autor = currentUser.ID });
+            //    }
+            //}
 
         }
 

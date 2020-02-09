@@ -29,7 +29,7 @@ namespace OneNote.Application
         {
             InitializeComponent();
 
-            DataContext = new List<GeneralWindowViewModel>() { GeneralWindowModel };
+            DataContext = GeneralWindowModel;
         }
 
         private void App_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
