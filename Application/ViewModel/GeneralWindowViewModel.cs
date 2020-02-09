@@ -13,6 +13,19 @@ namespace OneNote.Application.ViewModel
 {
     public class GeneralWindowViewModel
     {
-        public BooksViewModel BooksPanel { get; set; } = new BooksViewModel();
+        public BooksViewModel BooksPanel { get; }
+        public SectionViewModel SectionsPanel { get; }
+        public PagesViewModel PagesPanel { get; }
+
+        public GeneralWindowViewModel()
+        {
+            BooksPanel = new BooksViewModel();
+
+            SectionsPanel = new SectionViewModel();
+            BooksPanel.OnBookSelected += SectionsPanel.FromBook;
+
+            PagesPanel = new PagesViewModel();
+            SectionsPanel.OnSectionSelected += PagesPanel.FromSection;
+        }
     }
 }

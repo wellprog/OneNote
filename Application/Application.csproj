@@ -201,10 +201,12 @@
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\SyncService.cs" />
+    <Compile Include="ViewModel\AddBoxViewModel.cs" />
     <Compile Include="ViewModel\BooksViewModel.cs" />
     <Compile Include="ViewModel\ClickCommand.cs" />
     <Compile Include="ViewModel\GeneralWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginPageModel.cs" />
+    <Compile Include="ViewModel\PagesViewModel.cs" />
     <Compile Include="ViewModel\SectionViewModel.cs" />
     <Compile Include="ViewModel\SignInViewModel.cs" />
     <Compile Include="ViewModel\SignUpViewModel.cs" />

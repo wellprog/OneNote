@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OneNote.Application.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,14 @@ namespace OneNote.Application
         SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
         string helpText = "(Type someone here)";
 
+        AddBoxViewModel Model = new AddBoxViewModel();
+
+        public string GetResult => Model.Text;
+
         public AddBox()
         {
             InitializeComponent();
+            DataContext = Model;
 
             //Тоже для подсказок
             textBrush = mainTextBox.Foreground;

@@ -33,6 +33,7 @@
                 x:Name="mainTextBox"
                 HorizontalAlignment="Center"
                 Height="240"
+                Text="{Binding Text}"
                 GotFocus="MainTextBox_GotFocus"
                 LostFocus="MainTextBox_LostFocus"
                 BorderThickness="0"

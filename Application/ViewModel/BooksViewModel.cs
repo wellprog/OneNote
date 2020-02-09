@@ -5,6 +5,7 @@ using OneNote.Model;
 using OneNote.SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,12 @@ namespace OneNote.Application.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public delegate void BookSelected(string bookId);
+        public event BookSelected OnBookSelected;
 
-        private List<Book> _books = new List<Book>();
-        public List<Book> Books
+
+        private ObservableCollection<Book> _books = new ObservableCollection<Book>();
+        public ObservableCollection<Book> Books
         {
             get
             {
@@ -28,6 +32,25 @@ namespace OneNote.Application.ViewModel
             {
                 _books = value;
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Books)));
+            }
+        }
+
+        private int _bookIndex = -1;
+        public int BookIndex
+        {
+            get
+            {
+                return _bookIndex;
+            }
+            set
+            {
+                _bookIndex = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(BookIndex)));
+                if (_bookIndex != -1 && Books.Count > _bookIndex)
+                {
+                    OnBookSelected?.Invoke(Books[_bookIndex].ID);
+                }
+                
             }
         }
 
@@ -54,7 +77,7 @@ namespace OneNote.Application.ViewModel
             token = _enviroment.UserToken;
             currentUser = _communication.GetUserDetails(token);
 
-            Books.AddRange(_database.GetBooks(currentUser.ID));
+            _database.GetBooks(currentUser.ID).ToList().ForEach(f => Books.Add(f));
         }
 
         protected void OnAddCommand(object param)
@@ -62,16 +85,19 @@ namespace OneNote.Application.ViewModel
 
             AddBox box = new AddBox();
             box.ShowDialog();
-           
-            //if(param is String)
-            //{
-            //    Book book = _database.GetBooks(currentUser.ID).Where(f => f.Name == param.ToString()).FirstOrDefault();
-            //    if (book == null)
-            //    {
-            //        _database.AddBook(new Book() { Name = param.ToString(), Autor = currentUser.ID });
-            //    }
-            //}
 
+            string result = box.GetResult;
+
+            if(!string.IsNullOrWhiteSpace(result))
+            {
+                Book book = _database.GetBooks(currentUser.ID).Where(f => f.Name == result).FirstOrDefault();
+                if (book == null)
+                {
+                    _database.AddBook(new Book() { Name = result, Autor = currentUser.ID });
+                    Books.Add(book);
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Books)));
+                }
+            }
         }
 
         //TODO
