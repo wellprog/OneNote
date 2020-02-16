@@ -1,0 +1,30 @@
+POST http://localhost:58591/Home/Authorize
+Content-Type: application/x-www-form-urlencoded
+
+login=Vlad&password=2020
+
+
+###########
+POST http://localhost:58591/Home/Register
+Content-Type: application/x-www-form-urlencoded
+
+UserName=Vlad&EMail=vova@test.com&Password=2020&Phone=+712345&Age=55&Gender=1&Status=test
+
+
+###########
+POST http://localhost:58591/Home/GetUserDetails
+Content-Type: application/x-www-form-urlencoded
+
+token=Vladimirsomesalt2020
+
+###########
+POST http://localhost:58591/Home/GetBooks
+Content-Type: application/x-www-form-urlencoded
+
+token=Vladsomesalt2020
+
+###########
+POST http://localhost:58591/Home/GetSections
+Content-Type: application/x-www-form-urlencoded
+
+token=Vladsomesalt2020

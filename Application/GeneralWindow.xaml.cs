@@ -25,18 +25,11 @@ namespace OneNote.Application
     {
         GeneralWindowViewModel GeneralWindowModel = new GeneralWindowViewModel();
 
-        ICommunication _communication; //Client
-        IEnviroment _enviroment; //User
-        //TODO
-
         public GeneralWindow()
         {
             InitializeComponent();
 
-            _communication = ClassLoader.Instance.GetElement<ICommunication>();
-            _enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
-
-            DataContext = new List<object>() { GeneralWindowModel };
+            DataContext = GeneralWindowModel;
         }
 
         private void App_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

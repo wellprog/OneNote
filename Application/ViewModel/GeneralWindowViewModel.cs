@@ -1,4 +1,8 @@
-﻿using System;
+﻿using OneNote.Communication;
+using OneNote.Communication.Helpers;
+using OneNote.Helpers;
+using OneNote.SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +13,19 @@ namespace OneNote.Application.ViewModel
 {
     public class GeneralWindowViewModel
     {
-        //rename it later
-        public List<string> leftListBox { get; set; }
-        public List<string> rightListBox { get; set; }
-        public string Content { get; set; }
-        public ICommand leftAdd { get; set; }
-        public ICommand rightAdd { get; set; }
+        public BooksViewModel BooksPanel { get; }
+        public SectionViewModel SectionsPanel { get; }
+        public PagesViewModel PagesPanel { get; }
 
         public GeneralWindowViewModel()
         {
-            Content = "Here will be content";
+            BooksPanel = new BooksViewModel();
+
+            SectionsPanel = new SectionViewModel();
+            BooksPanel.OnBookSelected += SectionsPanel.FromBook;
+
+            PagesPanel = new PagesViewModel();
+            SectionsPanel.OnSectionSelected += PagesPanel.FromSection;
         }
     }
 }

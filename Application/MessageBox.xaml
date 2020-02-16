@@ -23,25 +23,147 @@
         BorderThickness="1"
         BorderBrush="Black">
 
-        <Grid>
+        <Grid x:Name="GridMain">
             <Label
                 Content="WellNote 0.1"
                 FontSize="20"
                 Margin="0,-15,0,0"/>
+            <StackPanel Orientation="Vertical" Margin="20,50,20,40">
+                <TextBox
+                    x:Name="oopsTextBox"
+                    BorderThickness="0"
+                    HorizontalAlignment="Center"
+                    IsReadOnly="True"
+                    FontSize="30"
+                    TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500"/>
+                <TextBox
+                    x:Name="mainTextBox" Margin="20,50,20,40"
+                    BorderThickness="0"
+                    HorizontalAlignment="Center"
+                    IsReadOnly="True"
+                    FontSize="20"
+                    TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Width="500"/>
+            </StackPanel>
 
-            <TextBox
-                x:Name="mainTextBox"
+            <Button
+                x:Name="YesButton"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Height="240"
-                IsReadOnly="True"
-                TextWrapping="Wrap" VerticalAlignment="Top" Width="500" Margin="10,45,0,0"/>
-
-            <Border
-                HorizontalAlignment="Center"
+                FontSize="15"
+                Height="30"
+                Width="100"
                 Background="Aqua"
-                PreviewMouseLeftButtonDown="Ok_PreviewMouseLeftButtonDown" Margin="150,300,150,10" Width="175">
-                <Label Content="Ok" HorizontalAlignment="Center"/>
-            </Border>
+                PreviewMouseLeftButtonDown="Ok_PreviewMouseLeftButtonDown" Margin="150,300,150,10"
+                Content="Yes">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                        </Trigger>
+                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.3"
+                                                        To="#82d77d"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="1,0"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="0:0:0.3"
+                                                        To="0.55,0"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                        Duration="0:0:0.5"
+                                                        To="Transparent"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.5,0.5"/>
+                                                        <PointAnimation
+                                                        Storyboard.TargetName="Temp"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        Duration="00:00:0.5"
+                                                        BeginTime="0:0:0.2"
+                                                        To="0.55,1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                    <Border
+                                    Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"
+                                    Background="#fff"
+                                    CornerRadius="10"
+                                    BorderThickness="2"
+                                    Padding="5,0,5,0"
+                                    Cursor="Hand"
+                                    x:Name="Temp">
+                                        <Label
+                                        Content="{TemplateBinding Content}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"/>
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#ebebeb"/>
+                                        </Border.Effect>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.55,1">
+                                                <GradientStop Color="Transparent" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="0.5"/>
+                                                <GradientStop Color="#e66f6f" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <StackPanel
                 Orientation="Horizontal" Margin="430,0,0,290">

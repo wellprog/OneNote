@@ -34,22 +34,28 @@ namespace OneNote.Application
             InitializeComponent();
 
             MainTextBox.Text = mainTextBoxString;
-            YesLabel.Content = yesLabelString;
-            NoLabel.Content = noLabelString;
+            YesButton.Content = yesLabelString;
+            NoButton.Content = noLabelString;
         }
 
+        //При нажатии YES
         private void Yes_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //Todo delete
             DialogWindow next = new DialogWindow(MainTextBox.Text.Substring(0, MainTextBox.Text.Length - 1) + ", что вы уверены?");
             next.Show();
+
             this.Close();
         }
 
+        //При нажатии NO
         private void No_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //*Do something* (TODO)
             this.Close();
         }
 
+        //Закрытие, открытие, перенос окна
         private void App_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();

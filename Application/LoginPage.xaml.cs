@@ -24,8 +24,7 @@ namespace OneNote.Application
     /// </summary>
     public partial class LoginPage : Window
     {
-        SignInViewModel SignInModel = new SignInViewModel();
-        SignUpViewModel SignUpModel = new SignUpViewModel();
+        LoginPageModel loginPageModel = new LoginPageModel();
 
         ICommunication communicator;
         IEnviroment enviroment;
@@ -34,13 +33,10 @@ namespace OneNote.Application
         {
             InitializeComponent();
 
-            SignInModel.Login = "Enter your Login";
-            SignInModel.Password = "Enter your Password";
-
             communicator = ClassLoader.Instance.GetElement<ICommunication>();
             enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
-            DataContext = new List<object>() { SignInModel, SignUpModel };
+            DataContext = loginPageModel;
         }
 
         bool IsLeftOpen = false;

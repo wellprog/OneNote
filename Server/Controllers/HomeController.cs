@@ -25,15 +25,15 @@ namespace Server.Controllers
         {
             _tokenStorage = tokenStorage;
             Connection c = new Connection();
-            //if (c.Database.EnsureCreated())
-            //{
+            if (c.Database.EnsureCreated())
+            {
                 _con = c;
                 _db = new Database(c);
-            //}
-            //else
-            //{
-            //    throw new Exception("A white little polar animal has come!");
-            //}
+            }
+            else
+            {
+                throw new Exception("A white little polar animal has come!");
+            }
         }
 
         public ActionResult Authorize([FromForm]string login, [FromForm]string password)

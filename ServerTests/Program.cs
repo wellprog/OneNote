@@ -13,21 +13,29 @@ namespace ServerTests
         static List<Page> pages = new List<Page>();
 
         static User user = new User();
+        static string URL = "http://localhost:58591/Home";
 
         static void Main(string[] args)
         {
             //1 - register user and get token;
 
-            var token = RegisterUser();
+            //var token = RegisterUser();
+
+            //if (string.IsNullOrWhiteSpace(token))
+            //{
+            //    Console.Write("Ups error register");
+            //    return;
+            //}
+
+            //2 - login user
+
+            var token = AuthorizeUser("User 1", "password");
 
             if (string.IsNullOrWhiteSpace(token))
             {
                 Console.Write("Ups error register");
                 return;
             }
-
-            //2 - login user
-
             //3 Get current user
 
 
@@ -44,13 +52,20 @@ namespace ServerTests
             user.Gender = true;
             user.IsDeleted = false;
             user.Password = "password";
-            user.Phone = "password";
+            user.Phone = "911";
             user.Status = "status";
             user.UpdateTime = DateTime.Now;
             user.UserName = "User 1";
+            var client = new Client(URL);
+            var str = client.Register(user);
+            return str;
+        }
 
-
-            return new Client("http://localhost/Home/Register").Register(user);
+        static string AuthorizeUser(string login,string password)
+        {
+            var client = new Client(URL);
+            var str = client.Authorize(login, password);
+            return str;
         }
     }
 }
