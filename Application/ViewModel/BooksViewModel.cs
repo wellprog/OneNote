@@ -93,9 +93,9 @@ namespace OneNote.Application.ViewModel
                 Book book = _database.GetBooks(currentUser.ID).Where(f => f.Name == result).FirstOrDefault();
                 if (book == null)
                 {
-                    _database.AddBook(new Book() { Name = result, Autor = currentUser.ID });
+                    book = new Book() { Name = result, Autor = currentUser.ID };
+                    _database.AddBook(book);
                     Books.Add(book);
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Books)));
                 }
             }
         }

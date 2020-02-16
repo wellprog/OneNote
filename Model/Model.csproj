@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>OneNote.Model</RootNamespace>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
 </Project>

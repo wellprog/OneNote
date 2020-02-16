@@ -39,7 +39,7 @@
                         VerticalAlignment="Top"
                         Width="200" Height="345"
                         SelectedIndex="{Binding BooksPanel.BookIndex, Mode=TwoWay}"
-                        ItemsSource="{Binding BooksPanel.Books, Mode=TwoWay}"
+                        ItemsSource="{Binding BooksPanel.Books}"
                         >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -174,8 +174,15 @@
                     <ListBox
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        ItemTemplate="{Binding rightListBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
-                        Width="200" Height="345" />
+                        SelectedIndex="{Binding SectionsPanel.SectionIndex, Mode=TwoWay}"
+                        ItemsSource="{Binding SectionsPanel.Sections}"
+                        Width="200" Height="345">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <Button Margin="0,5,0,0"
                         x:Name="AddSectionButton"
                         VerticalAlignment="Center"
@@ -183,7 +190,7 @@
                         FontSize="15"
                         Height="30"
                         Width="75"
-                        Command="{Binding sectionAdd}"
+                        Command="{Binding SectionsPanel.AddCommand}"
                         Content="Add">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -303,8 +310,15 @@
                     <ListBox
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        ItemTemplate="{Binding rightListBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Width="200" Height="345" />
+                        SelectedIndex="{Binding PagesPanel.PageIndex, Mode=TwoWay}"
+                        ItemsSource="{Binding PagesPanel.Pages}"
+                        Width="200" Height="345">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <Button Margin="0,5,0,0"
                         x:Name="AddSectionButton1"
                         VerticalAlignment="Center"
@@ -312,7 +326,7 @@
                         FontSize="15"
                         Height="30"
                         Width="75"
-                        Command="{Binding sectionAdd}"
+                        Command="{Binding PagesPanel.AddCommand}"
                         Content="Add">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
