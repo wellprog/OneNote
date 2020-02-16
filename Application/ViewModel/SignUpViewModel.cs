@@ -177,12 +177,13 @@ namespace OneNote.Application.ViewModel
 
         private void canClick()
         {
+            int result;
             if (
                 !string.IsNullOrWhiteSpace(UserName) && 
                 !string.IsNullOrWhiteSpace(EMail) &&
                 !string.IsNullOrWhiteSpace(Password) &&
                 !string.IsNullOrWhiteSpace(Phone) &&
-                !string.IsNullOrWhiteSpace(Age) &&
+                !string.IsNullOrWhiteSpace(Age) && Int32.TryParse(Age, out result) &&
                 //!string.IsNullOrWhiteSpace(Avatar) &&
                 !string.IsNullOrWhiteSpace(Status)
             )
