@@ -31,6 +31,7 @@ namespace OneNote.Application.ViewModel
 
             PagesPanel = new PagesViewModel();
             SectionsPanel.OnSectionSelected += PagesPanel.FromSection;
+            BooksPanel.OnBookSelected += PagesPanel.SectionChanged;
         }
     }
 }

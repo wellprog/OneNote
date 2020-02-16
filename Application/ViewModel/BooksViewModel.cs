@@ -82,7 +82,6 @@ namespace OneNote.Application.ViewModel
 
         protected void OnAddCommand(object param)
         {
-
             AddBox box = new AddBox();
             box.ShowDialog();
 
