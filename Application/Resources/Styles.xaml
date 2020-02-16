@@ -223,7 +223,7 @@
                             Margin="0,10,0,0"
                             MaxWidth="{TemplateBinding MaxWidth}"
                             BorderThickness="0"
-                            Text="{TemplateBinding Text}"
+                            Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=Text}"
                             FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
                             Background="Transparent"/>
@@ -233,7 +233,7 @@
                             BorderBrush="#ddd"
                             CornerRadius="0"
                             Margin="0,1,0,0"
-                            Width="230">    
+                            Width="230">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
                             </Border.Effect>
@@ -243,9 +243,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!-- <SolidColorBrush x:Name="DynamicBrush" x:Key="DynamicBrushKey" Color="Aqua"/> -->
-
+    
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="VerticalAlignment" Value="Center"/>

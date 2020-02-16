@@ -41,7 +41,7 @@
             FontSize="16"
             Foreground="Black"
             MaxWidth="230"
-            Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+            Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             GotFocus="PasswordTB_GotFocus"
             LostFocus="PasswordTB_LostFocus"/>
 
@@ -55,7 +55,7 @@
             FontSize="16"
             Foreground="Black"
             MaxWidth="230"
-            Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+            Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             GotFocus="PasswordTB_GotFocus"
             LostFocus="PasswordTB_LostFocus"/>
 
