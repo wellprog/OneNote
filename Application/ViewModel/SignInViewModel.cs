@@ -15,7 +15,7 @@ namespace OneNote.Application.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _login = "";
+        private string _login = "Enter your Login";
         public string Login {
             get
             {
@@ -28,7 +28,7 @@ namespace OneNote.Application.ViewModel
                 canClick();
             }
         }
-        private string _password = "";
+        private string _password = "Enter your Password";
         public string Password {
             get
             {

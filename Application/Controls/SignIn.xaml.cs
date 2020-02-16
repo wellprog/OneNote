@@ -20,38 +20,23 @@ namespace OneNote.Application.Controls
     /// </summary>
     public partial class SignIn : UserControl
     {
-        Brush textBrush;
-        SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
+        SolidColorBrush textBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+        SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(150, 150, 150));
 
         public SignIn()
         {
             InitializeComponent();
-
-            textBrush = LoginTB.Foreground;
-            LoginTB.Foreground = helpBrush;
             PasswordTB.Foreground = helpBrush;
-            LoginTB.Text = "Enter your Login";
-            PasswordTB.Text = "Enter yout Password";
-
-            /*
-            Open all windows to Debug
-            (new GeneralWindow()).Show();
-            (new AddBox()).Show();
-            (new MessageBox()).Show();
-            (new DialogWindow()).Show();
-            */
-        }
-
-        private void ShowError()
-        {
-            
+            LoginTB.Foreground = helpBrush;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(LoginTB.Text) || String.IsNullOrWhiteSpace(PasswordTB.Text))
+            if (String.IsNullOrWhiteSpace(LoginTB.Text) ||
+                String.IsNullOrWhiteSpace(PasswordTB.Text) ||
+                LoginTB.Text == "Enter your Login" ||
+                PasswordTB.Text == "Enter your Password")
             {
-                ShowError();
                 return;
             }
         }
@@ -67,7 +52,8 @@ namespace OneNote.Application.Controls
 
         private void LoginTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(LoginTB.Text))
+            if (String.IsNullOrWhiteSpace(LoginTB.Text) ||
+                LoginTB.Text == "Enter your Login")
             {
                 LoginTB.Foreground = helpBrush;
                 LoginTB.Text = "Enter your Login";
@@ -85,7 +71,8 @@ namespace OneNote.Application.Controls
 
         private void PasswordTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(PasswordTB.Text))
+            if (String.IsNullOrWhiteSpace(PasswordTB.Text) ||
+                PasswordTB.Text == "Enter your Password")
             {
                 PasswordTB.Foreground = helpBrush;
                 PasswordTB.Text = "Enter your Password";

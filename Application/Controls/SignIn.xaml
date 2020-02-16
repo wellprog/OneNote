@@ -42,8 +42,8 @@
             Foreground="Black"
             MaxWidth="230"
             Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            GotFocus="PasswordTB_GotFocus"
-            LostFocus="PasswordTB_LostFocus"/>
+            GotFocus="LoginTB_GotFocus"
+            LostFocus="LoginTB_LostFocus"/>
 
         <CustomEl:MyTextBox
             Grid.Row="1"
