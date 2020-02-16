@@ -34,7 +34,7 @@ namespace OneNote.Application.Controls
             PasswordTB.Text = "Enter yout Password";
 
             /*
-            //Open all windows to Debug
+            Open all windows to Debug
             (new GeneralWindow()).Show();
             (new AddBox()).Show();
             (new MessageBox()).Show();
@@ -66,7 +66,7 @@ namespace OneNote.Application.Controls
 
         private void LoginTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (LoginTB.Text == "")
+            if (String.IsNullOrWhiteSpace(LoginTB.Text))
             {
                 LoginTB.Foreground = helpBrush;
                 LoginTB.Text = "Enter your Login";
@@ -84,7 +84,7 @@ namespace OneNote.Application.Controls
 
         private void PasswordTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (PasswordTB.Text == "")
+            if (String.IsNullOrWhiteSpace(PasswordTB.Text))
             {
                 PasswordTB.Foreground = helpBrush;
                 PasswordTB.Text = "Enter your Password";
