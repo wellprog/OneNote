@@ -23,7 +23,7 @@ namespace OneNote.Application
         //Для подсказок
         Brush textBrush;
         SolidColorBrush helpBrush = new SolidColorBrush(Color.FromRgb(180, 180, 180));
-        string helpText = "(Type someone here)";
+        string helpText = "";
 
         AddBoxViewModel Model = new AddBoxViewModel();
 

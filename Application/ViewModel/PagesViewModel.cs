@@ -84,6 +84,12 @@ namespace OneNote.Application.ViewModel
 
             _database.GetPages(_currentSectionId)?.ToList().ForEach(f => Pages.Add(f));
         }
+        public void SectionChanged(string Section)
+        {
+            AddCommand.SetCanExecuted(false);
+
+            Pages.Clear();
+        }
 
         private void OnAddCommand(object param)
         {
