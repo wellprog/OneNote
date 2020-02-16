@@ -38,7 +38,8 @@ namespace OneNote.Application.Controls
             (new GeneralWindow()).Show();
             (new AddBox()).Show();
             (new MessageBox()).Show();
-            (new DialogWindow()).Show();*/
+            (new DialogWindow()).Show();
+            */
         }
 
         private void ShowError()

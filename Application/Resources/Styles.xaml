@@ -133,7 +133,6 @@
                         Background="#fff"
                         CornerRadius="10"
                         BorderThickness="2"
-                        Padding="10,5,10,5"
                         Cursor="Hand"
                         x:Name="Temp">
                         <Label
@@ -167,12 +166,6 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
-                                        Storyboard.TargetName="B"
-                                        Storyboard.TargetProperty="(Border.Width)"
-                                        From="230"
-                                        To="250"
-                                        Duration="0:0:0.25"/>
-                                    <DoubleAnimation
                                         Storyboard.TargetName="TB"
                                         Storyboard.TargetProperty="(Border.Width)"
                                         From="230"
@@ -182,7 +175,7 @@
                                         Storyboard.TargetName="TB"
                                         Storyboard.TargetProperty="FontSize"
                                         From="16"
-                                        To="18"
+                                        To="19"
                                         Duration="0:0:0.25"/>
                                 </Storyboard>
                             </BeginStoryboard>
@@ -190,12 +183,6 @@
                         <EventTrigger RoutedEvent="FocusManager.LostFocus">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="B"
-                                        Storyboard.TargetProperty="(Border.Width)"
-                                        From="250"
-                                        To="230"
-                                        Duration="0:0:0.25"/>
                                     <DoubleAnimation
                                         Storyboard.TargetName="TB"
                                         Storyboard.TargetProperty="(Border.Width)"
@@ -205,7 +192,7 @@
                                     <DoubleAnimation
                                         Storyboard.TargetName="TB"
                                         Storyboard.TargetProperty="FontSize"
-                                        From="18"
+                                        From="19"
                                         To="16"
                                         Duration="0:0:0.25"/>
                                 </Storyboard>
@@ -220,7 +207,7 @@
                         <TextBox
                             x:Name="TB"
                             TextAlignment="Center"
-                            Margin="0,10,0,0"
+                            Margin="0,10,0,1"
                             MaxWidth="{TemplateBinding MaxWidth}"
                             BorderThickness="0"
                             Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=Text}"
@@ -232,8 +219,7 @@
                             BorderThickness="1"
                             BorderBrush="#ddd"
                             CornerRadius="0"
-                            Margin="0,1,0,0"
-                            Width="230">
+                            Width="{TemplateBinding MaxWidth}">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
                             </Border.Effect>
