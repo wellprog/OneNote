@@ -82,7 +82,7 @@ namespace OneNote.Application.ViewModel
 
             Pages.Clear();
 
-            _database.GetPages(_currentSectionId).ToList().ForEach(f => Pages.Add(f));
+            _database.GetPages(_currentSectionId)?.ToList().ForEach(f => Pages.Add(f));
         }
 
         private void OnAddCommand(object param)
@@ -97,12 +97,14 @@ namespace OneNote.Application.ViewModel
                 Page page = _database.GetPages(_currentSectionId).Where(f => f.Name == result).FirstOrDefault();
                 if (page == null)
                 {
-                    _database.AddPage(new Page() {
+                    page = new Page()
+                    {
                         Name = result,
                         Description = "",
                         Text = "",
                         Section = _currentSectionId
-                    });
+                    };
+                    _database.AddPage(page);
                     Pages.Add(page);
 
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Pages)));

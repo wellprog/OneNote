@@ -5,6 +5,7 @@ using OneNote.Model;
 using OneNote.SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,8 @@ namespace OneNote.Application.ViewModel
         public delegate void SectionSelected(string sectionId);
         public event SectionSelected OnSectionSelected;
 
-        private List<Section> _sections = new List<Section>();
-        public List<Section> Sections
+        private ObservableCollection<Section> _sections = new ObservableCollection<Section>();
+        public ObservableCollection<Section> Sections
         {
             get
             {
@@ -85,11 +86,13 @@ namespace OneNote.Application.ViewModel
                 Section section = _database.GetSections(_currentBookId).Where(f => f.Name == result).FirstOrDefault();
                 if (section == null)
                 {
-                    _database.AddSection(new Section() {
+                    section = new Section()
+                    {
                         Name = result,
                         Description = "",
                         Book = _currentBookId
-                    });
+                    };
+                    _database.AddSection(section);
                     Sections.Add(section);
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Sections)));
                 }
@@ -102,7 +105,8 @@ namespace OneNote.Application.ViewModel
             AddCommand.SetCanExecuted(true);
 
             Sections.Clear();
-            Sections.AddRange(_database.GetSections(book));
+            _database.GetSections(book)
+                ?.ToList().ForEach(f => Sections.Add(f));
         }
 
     }
