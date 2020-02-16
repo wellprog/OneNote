@@ -444,9 +444,10 @@
                         BorderBrush="Black"
                         Height="375" Width="290">
                         <TextBox
+                            x:Name="TextTB"
                             HorizontalAlignment="Left" BorderThickness="0"
                             VerticalAlignment="Top"
-                            Text="{Binding Content}"
+                            Text="{Binding Path=PagesPanel.PresentPageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0,10,-1,0" Width="288" Height="355"/>
                     </Border>
 

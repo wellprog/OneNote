@@ -20,11 +20,25 @@ namespace OneNote.Application.ViewModel
         public delegate void PageSelected(string pageId);
         public event PageSelected OnPageSelected;
 
+        private string _presentPageText = "";
+        public string PresentPageText {
+            get
+            {
+                return _presentPageText;
+            }
+            set
+            {
+                _presentPageText = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PresentPageText)));
+            }
+        }
+
         private ObservableCollection<Page> _pages = new ObservableCollection<Page>();
         public ObservableCollection<Page> Pages
         {
             get
             {
+                //Здесь можно отслеживать смену секции
                 return _pages;
             }
             set
@@ -43,6 +57,15 @@ namespace OneNote.Application.ViewModel
             }
             set
             {
+                if (_pageIndex != -1)
+                {
+                    try //TODO (Костыль) (Ещё и кривой немного)
+                    {
+                        Pages[_pageIndex].Text = PresentPageText;
+                        _database.UpdatePage(Pages[_pageIndex]);
+                    }
+                    catch (Exception exp) { } //do nothing
+                }
                 _pageIndex = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PageIndex)));
                 if (_pageIndex != -1 && Pages.Count > _pageIndex)
@@ -90,6 +113,11 @@ namespace OneNote.Application.ViewModel
 
             Pages.Clear();
         }
+        public void PageChanged(string Section)
+        {
+            PresentPageText = Pages[PageIndex].Text;
+        }
+
 
         private void OnAddCommand(object param)
         {
