@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OneNote.Application.Controls"
+             xmlns:CustomEl="clr-namespace:OneNote.Application.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -29,177 +30,41 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
         </Border>
-        
-        <StackPanel
+
+        <CustomEl:MyTextBox
             Grid.Row="0"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-            <Label
-                Content="Login:"
-                FontSize="20"
-                HorizontalAlignment="Center"/>
-            <TextBox
-                x:Name="LoginTB"
-                TextAlignment="Center"
-                Foreground="Black"
-                Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
-                Margin="0,10,0,0"
-                MaxWidth="230"
-                FontSize="16"
-                BorderThickness="0"
-                GotFocus="LoginTB_GotFocus"
-                LostFocus="LoginTB_LostFocus"
-                Background="Transparent">
-                <TextBox.Triggers>
-                    <EventTrigger RoutedEvent="FocusManager.GotFocus">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="LIB"
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="230"
-                                    To="250"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="230"
-                                    To="250"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="FontSize"
-                                    From="16"
-                                    To="18"
-                                    Duration="0:0:0.25"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="FocusManager.LostFocus">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="LIB"
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="250"
-                                    To="230"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="250"
-                                    To="230"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="FontSize"
-                                    From="18"
-                                    To="16"
-                                    Duration="0:0:0.25"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBox.Triggers>
-            </TextBox>
-            <Border
-                x:Name="LIB"
-                BorderThickness="1"
-                BorderBrush="#ddd"
-                CornerRadius="0"
-                Margin="0,1,0,0"
-                Width="230">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
-                </Border.Effect>
-            </Border>
-        </StackPanel>
+            HorizontalAlignment="Center"
+            x:Name="LoginTB"
+            LabelFontSize="20"
+            LabelText="Login:"
+            FontSize="16"
+            Foreground="Black"
+            MaxWidth="230"
+            Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+            GotFocus="PasswordTB_GotFocus"
+            LostFocus="PasswordTB_LostFocus"/>
 
-        <StackPanel
+        <CustomEl:MyTextBox
             Grid.Row="1"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-            <Label
-                Content="Password:"
-                FontSize="20"
-                HorizontalAlignment="Center"/>
-            <TextBox
-                x:Name="PasswordTB"
-                Text="{Binding Password}"
-                />
-            <TextBox
-                x:Name="PasswordTB"
-                Foreground="Black"
-                TextAlignment="Center"
-                Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
-                Margin="0,10,0,0"
-                MaxWidth="230"
-                FontSize="16"
-                BorderThickness="0"
-                GotFocus="PasswordTB_GotFocus"
-                LostFocus="PasswordTB_LostFocus"
-                Background="Transparent">
-                <TextBox.Triggers>
-                    <EventTrigger RoutedEvent="FocusManager.GotFocus">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="PWB"
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="230"
-                                    To="250"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="230"
-                                    To="250"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="FontSize"
-                                    From="16"
-                                    To="18"
-                                    Duration="0:0:0.25"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="FocusManager.LostFocus">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="PWB"
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="250"
-                                    To="230"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="(Border.Width)"
-                                    From="250"
-                                    To="230"
-                                    Duration="0:0:0.25"/>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="FontSize"
-                                    From="18"
-                                    To="16"
-                                    Duration="0:0:0.25"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBox.Triggers>
-            </TextBox>
-            <Border
-                x:Name="PWB"
-                BorderThickness="1"
-                BorderBrush="#ddd"
-                CornerRadius="0"
-                Margin="0,1,0,0"
-                Width="230">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="-90" Color="#ccc"/>
-                </Border.Effect>
-            </Border>
-        </StackPanel>
+            HorizontalAlignment="Center"
+            x:Name="PasswordTB"
+            LabelFontSize="20"
+            LabelText="Password:"
+            FontSize="16"
+            Foreground="Black"
+            MaxWidth="230"
+            Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+            GotFocus="PasswordTB_GotFocus"
+            LostFocus="PasswordTB_LostFocus"/>
 
         <Button
             Grid.Row="2"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             FontSize="20"
-            Height="40"
+            Height="50"
             Width="110"
             Command="{Binding SignIn}"
             Content="Sign In">

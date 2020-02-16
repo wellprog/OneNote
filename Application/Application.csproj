@@ -220,6 +220,7 @@
     <Compile Include="MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\MyTextBox.cs" />
     <Compile Include="Services\SyncService.cs" />
     <Compile Include="ViewModel\AddBoxViewModel.cs" />
     <Compile Include="ViewModel\BooksViewModel.cs" />
