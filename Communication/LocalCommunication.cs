@@ -86,6 +86,7 @@ namespace OneNote.Communication
         public string Register(User user)
         {
             var data = testDB.AddUser(user);
+            _currentUser = user;
             if (data)
                 return "123";
             return "";
