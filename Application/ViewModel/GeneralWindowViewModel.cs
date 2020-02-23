@@ -27,14 +27,14 @@ namespace OneNote.Application.ViewModel
             BooksPanel = new BooksViewModel();
 
             SectionsPanel = new SectionViewModel();
-            BooksPanel.OnBookSelected += SectionsPanel.FromBook;
+            BooksPanel.OnBookSelected += SectionsPanel.FromBook; //Оповещаем секции о смене книги, чтобы они обновились
 
             PagesPanel = new PagesViewModel();
-            PagesPanel.OnPageSelected += PagesPanel.PageChanged;
+            PagesPanel.OnPageSelected += PagesPanel.PageChanged; //Оповещаем страницы о смене страницы (?), чтобы они сохранились и вывели новую
 
-            SectionsPanel.OnSectionSelected += PagesPanel.SectionChanged;
-            SectionsPanel.OnSectionSelected += PagesPanel.FromSection;
-            BooksPanel.OnBookSelected += PagesPanel.BookChanged;
+            SectionsPanel.OnSectionSelected += PagesPanel.SectionChanged; //Оповещаем страницы о смене секции, чтобы они сохранились
+            SectionsPanel.OnSectionSelected += PagesPanel.FromSection; //Оповещаем страницы о смене секции, чтобы они обновились
+            BooksPanel.OnBookSelected += PagesPanel.BookChanged; //Оповещаем страницы о смене книги, чтобы они сохранились
         }
     }
 }

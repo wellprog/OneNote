@@ -72,11 +72,12 @@ namespace OneNote.Application.ViewModel
             _enviroment.CurrentUser = currentUser;
 
             new GeneralWindow().Show();
+            //Application.Close(); //Отправить окну авторизации сигнал, что ему нужно закрыться //TODO
         }
 
         private void canClick()
         {
-            if (!string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password))
+            if (!string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && Login != "Enter your Login" && Password != "Enter your Password")
                 SignIn.SetCanExecuted(true);
             else
                 SignIn.SetCanExecuted(false);

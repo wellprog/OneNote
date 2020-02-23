@@ -30,17 +30,6 @@ namespace OneNote.Application.Controls
             LoginTB.Foreground = helpBrush;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(LoginTB.Text) ||
-                String.IsNullOrWhiteSpace(PasswordTB.Text) ||
-                LoginTB.Text == "Enter your Login" ||
-                PasswordTB.Text == "Enter your Password")
-            {
-                return;
-            }
-        }
-
         private void LoginTB_GotFocus(object sender, RoutedEventArgs e)
         {
             if(LoginTB.Foreground == helpBrush)

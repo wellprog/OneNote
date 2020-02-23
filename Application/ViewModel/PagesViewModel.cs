@@ -38,7 +38,6 @@ namespace OneNote.Application.ViewModel
         {
             get
             {
-                //Здесь можно отслеживать смену секции
                 return _pages;
             }
             set
