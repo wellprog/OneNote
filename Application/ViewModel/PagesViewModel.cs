@@ -48,6 +48,7 @@ namespace OneNote.Application.ViewModel
             }
         }
 
+        private int prevPageIndex;
         private int _pageIndex = -1;
         public int PageIndex
         {
@@ -57,15 +58,7 @@ namespace OneNote.Application.ViewModel
             }
             set
             {
-                if (_pageIndex != -1)
-                {
-                    try //TODO (Костыль) (Ещё и кривой немного)
-                    {
-                        Pages[_pageIndex].Text = PresentPageText;
-                        _database.UpdatePage(Pages[_pageIndex]);
-                    }
-                    catch (Exception exp) { } //do nothing
-                }
+                prevPageIndex = _pageIndex; //Для сохранения необходимо сохранять индекс страницы, с которой мы ушли
                 _pageIndex = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PageIndex)));
                 if (_pageIndex != -1 && Pages.Count > _pageIndex)
@@ -97,24 +90,44 @@ namespace OneNote.Application.ViewModel
             token = _enviroment.UserToken;
             currentUser = _communication.GetUserDetails(token);
         }
-
-        public void FromSection(string Section)
+        
+        public void FromSection(string Section) //Загрузка страниц секции
         {
             _currentSectionId = Section;
             AddCommand.SetCanExecuted(true);
 
-            Pages.Clear();
-
             _database.GetPages(_currentSectionId)?.ToList().ForEach(f => Pages.Add(f));
         }
-        public void SectionChanged(string Section)
+
+        public void BookChanged(string Book) //Если книга сменилась, сохраняем страницу и ничего не выводим
         {
-            AddCommand.SetCanExecuted(false);
+            if (PageIndex != -1 && Pages.Count > 0)
+            {
+                Pages[PageIndex].Text = PresentPageText;
+                _database.UpdatePage(Pages[PageIndex]);
+            }
+            PresentPageText = "";
 
             Pages.Clear();
         }
-        public void PageChanged(string Section)
+        public void SectionChanged(string Section) //Если секция сменилась, сохраняем страницу и ничего не выводим
         {
+            if (PageIndex != -1 && Pages.Count > 0)
+            {
+                Pages[PageIndex].Text = PresentPageText;
+                _database.UpdatePage(Pages[PageIndex]);
+            }
+            PresentPageText = "";
+
+            Pages.Clear();
+        }
+        public void PageChanged(string Section) //Если страница сменилась, сохраняем прошлую страницу и выводим ту, которую выбрал пользователь
+        {
+            if (prevPageIndex != -1 && Pages.Count > 0)
+            {
+                Pages[prevPageIndex].Text = PresentPageText;
+                _database.UpdatePage(Pages[prevPageIndex]);
+            }
             PresentPageText = Pages[PageIndex].Text;
         }
 
