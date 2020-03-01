@@ -22,9 +22,12 @@ namespace OneNote.Application.Controls
     /// </summary>
     public partial class SignUp : UserControl
     {
+        private SolidColorBrush aquaBrush = new SolidColorBrush(Color.FromRgb(0, 255, 255));
+        private SolidColorBrush pinkBrush = new SolidColorBrush(Color.FromRgb(255, 105, 180));
         public SignUp()
         {
             InitializeComponent();
+            swapGenderBorderColor(null, null);
         }
 
         string avatarPath;
@@ -40,6 +43,20 @@ namespace OneNote.Application.Controls
             {
                 avatarPath = fd.FileName;
                 IMGSource.ImageSource = new BitmapImage(new Uri(fd.FileName));
+            }
+        }
+
+        private void swapGenderBorderColor(object sender, RoutedEventArgs e)
+        {
+            if (GenderCheckBox.IsChecked == true)
+            {
+                GenderBorder.Background = aquaBrush;
+                GenderLabel.Content = "Male";
+            }
+            else
+            {
+                GenderBorder.Background = pinkBrush;
+                GenderLabel.Content = "Female";
             }
         }
     }
