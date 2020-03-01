@@ -214,6 +214,8 @@
                     <Rectangle
                         Height="35"
                         Width="35"
+                        RadiusX="10"
+                        RadiusY="10"
                         HorizontalAlignment="Left"
                         PreviewMouseLeftButtonDown="ChooseAvatar_PreviewMouseLeftButtonDown">
                         <Rectangle.Fill>
@@ -222,10 +224,14 @@
                     </Rectangle>
                 </Border>
             </StackPanel>
-            <StackPanel
-                Margin="75,0,0,0">
-                <Label Content="Gender"  Width="250"/>
-                <CheckBox/>
+            <StackPanel Margin="75,0,0,0">
+                <Label Content="Gender" Width="250"/>
+                <StackPanel Orientation="Horizontal">
+                    <Border x:Name="GenderBorder" HorizontalAlignment="Left" Background="White" CornerRadius="3" Margin="10,0,0,0" Width="17" Height="17">
+                        <CheckBox x:Name="GenderCheckBox" Click="swapGenderBorderColor" IsChecked="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Opacity="0"/>
+                    </Border>
+                    <Label x:Name="GenderLabel"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
