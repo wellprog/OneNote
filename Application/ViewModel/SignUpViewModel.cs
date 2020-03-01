@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -154,7 +155,7 @@ namespace OneNote.Application.ViewModel
                 Gender = Gender
             };
 
-            var token = _communication.Register(user);
+            var token = _communication.Register(user, new CancellationTokenSource().Token);
 
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -162,7 +163,7 @@ namespace OneNote.Application.ViewModel
                 return;
             }
 
-            var currentUser = _communication.GetUserDetails(token);
+            var currentUser = _communication.GetUserDetails(token, new CancellationTokenSource().Token);
             if (currentUser == null)
             {
                 new MessageBox(5, "Не получилось получить текущего пользователя").Show();

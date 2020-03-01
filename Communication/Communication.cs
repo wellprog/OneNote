@@ -7,6 +7,7 @@ using OneNote.Communication.Model;
 using OneNote.Communication.Helpers;
 using OneNote.Communication.Model.ResponseModel;
 using OneNote.SQLite.Model;
+using System.Threading;
 
 namespace OneNote.Communication
 {
@@ -29,14 +30,14 @@ namespace OneNote.Communication
         /// <param name="login"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public string Authorize(string login, string password)
+        public string Authorize(string login, string password, CancellationToken cToken)
         {
             if (String.IsNullOrWhiteSpace(login) && String.IsNullOrWhiteSpace(password))
             {
                 return "Please fill both fields!";
             }
 
-            var response = _client.Authorize(login, password);
+            var response = _client.Authorize(login, password, cToken);
             ResponseToken responseToken = JsonConvert.DeserializeObject<ResponseToken>(response);
             if (responseToken.ErrorID != 0)
                 return responseToken.ErrorDescription;
@@ -63,7 +64,7 @@ namespace OneNote.Communication
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public BookModel GetBooks(string token)
+        public BookModel GetBooks(string token, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
@@ -75,47 +76,47 @@ namespace OneNote.Communication
         /// <param name="table"></param>
         /// <param name="lastID"></param>
         /// <returns></returns>
-        public HistoryModel GetHistory(string token, string table, string lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public PageModel GetPages(string token)
+        public PageModel GetPages(string token, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public SectionModel GetSections(string token)
+        public SectionModel GetSections(string token, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public User GetUserDetails(string token)
+        public User GetUserDetails(string token, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public string Register(User user)
+        public string Register(User user, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public string SetBookHistory(string token, HistoryModel history)
+        public string SetBookHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public string SetHistory(string token, HistoryModel history)
+        public string SetHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public string SetPageHistory(string token, HistoryModel history)
+        public string SetPageHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }
 
-        public string SetSectionHistory(string token, HistoryModel history)
+        public string SetSectionHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             throw new NotImplementedException();
         }

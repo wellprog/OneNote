@@ -22,6 +22,7 @@ using OneNote.Model;
 using Newtonsoft.Json;
 using OneNote.Helpers;
 using OneNote.Communication.Helpers;
+using System.Threading;
 
 namespace Application
 {
@@ -238,14 +239,16 @@ namespace Application
             return;
             //TODO
 
+            CancellationTokenSource cancel = new CancellationTokenSource();
+
             if (autLoginTextBox.Text == "" || autLoginTextBox.Text == "Name" || autPasswordTextBox.Text == "" || autPasswordTextBox.Text == "Password")
                 return;
-            string unconfirmedToken = _communication.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text);
+            string unconfirmedToken = _communication.Authorize(autLoginTextBox.Text, autPasswordTextBox.Text, cancel.Token);
             if (unconfirmedToken != null)
             {
                 //Авторизовались и всё хорошо
                 _enviroment.UserToken = unconfirmedToken;
-                _enviroment.CurrentUser = _communication.GetUserDetails(unconfirmedToken);
+                _enviroment.CurrentUser = _communication.GetUserDetails(unconfirmedToken, cancel.Token);
 
                 /*Window1 MainWindow = new Window1();
                 MainWindow.Show();
@@ -262,6 +265,8 @@ namespace Application
         {
             //_enviroment = ClassLoader.Instance.GetElement<IEnviroment>();
 
+            CancellationTokenSource cancel = new CancellationTokenSource();
+
             //return; //Доработать эту зону без готового клиента пока невозможно (+Нужна система frontend оповещений)
             User registerProfile = new User();
             registerProfile.UserName = regNameTextBox.Text;
@@ -275,7 +280,7 @@ namespace Application
             registerProfile.Gender = IsMale;
             registerProfile.Status = regStatusTextBox.Text;
 
-            string unconfirmedToken = _communication.Register(registerProfile);
+            string unconfirmedToken = _communication.Register(registerProfile, cancel.Token);
             if (unconfirmedToken != null)
             {
                 //Сказать пользователю, что он зарегестрирован и войти в программу

@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OneNote.Application.ViewModel
@@ -71,7 +72,7 @@ namespace OneNote.Application.ViewModel
             AddCommand = new ClickCommand(OnAddCommand);
 
             token = _enviroment.UserToken;
-            currentUser = _communication.GetUserDetails(token);
+            currentUser = _communication.GetUserDetails(token, new CancellationTokenSource().Token);
         }
 
         private void OnAddCommand(object param)
