@@ -214,6 +214,8 @@
                     <Rectangle
                         Height="35"
                         Width="35"
+                        RadiusX="10"
+                        RadiusY="10"
                         HorizontalAlignment="Left"
                         PreviewMouseLeftButtonDown="ChooseAvatar_PreviewMouseLeftButtonDown">
                         <Rectangle.Fill>
