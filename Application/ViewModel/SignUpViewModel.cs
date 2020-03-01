@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace OneNote.Application.ViewModel
 {
@@ -178,13 +179,30 @@ namespace OneNote.Application.ViewModel
 
         private void canClick()
         {
-            int result;
+            bool isInt(string str)
+            {
+                int result;
+                return Int32.TryParse(Age, out result);
+            }
+            bool isCorrectRegex(string str, string regex)
+            {
+                if (!string.IsNullOrWhiteSpace(Phone))
+                {
+                    MatchCollection phoneRegexResult = Regex.Matches(Phone, regex, RegexOptions.IgnoreCase);
+                    if (phoneRegexResult.Count == 0)
+                        return false;
+                }
+                else
+                    return false;
+                return true;
+            }
+            
             if (
                 !string.IsNullOrWhiteSpace(UserName) && 
                 !string.IsNullOrWhiteSpace(EMail) &&
                 !string.IsNullOrWhiteSpace(Password) &&
-                !string.IsNullOrWhiteSpace(Phone) &&
-                !string.IsNullOrWhiteSpace(Age) && Int32.TryParse(Age, out result) &&
+                !string.IsNullOrWhiteSpace(Phone) && //isCorrectRegex(Phone, @"((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}") && //TODO
+                !string.IsNullOrWhiteSpace(Age) && isInt(Age) &&
                 //!string.IsNullOrWhiteSpace(Avatar) &&
                 !string.IsNullOrWhiteSpace(Status)
             )
