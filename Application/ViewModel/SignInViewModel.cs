@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -54,14 +55,14 @@ namespace OneNote.Application.ViewModel
 
         protected void OnExecuted(object param)
         {
-            string token = _communication.Authorize(Login, Password);
+            string token = _communication.Authorize(Login, Password, new CancellationTokenSource().Token);
             if (string.IsNullOrWhiteSpace(token))
             {
                 new MessageBox(5, "Логин или пароль не верен").Show();
                 return;
             }
 
-            var currentUser = _communication.GetUserDetails(token);
+            var currentUser = _communication.GetUserDetails(token, new CancellationTokenSource().Token);
             if (currentUser == null)
             {
                 new MessageBox(5, "Не получилось получить текущего пользователя").Show();

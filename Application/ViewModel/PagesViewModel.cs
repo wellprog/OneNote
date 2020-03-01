@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OneNote.Application.ViewModel
@@ -87,7 +88,7 @@ namespace OneNote.Application.ViewModel
             _database = ClassLoader.Instance.GetElement<IDatabase>();
 
             token = _enviroment.UserToken;
-            currentUser = _communication.GetUserDetails(token);
+            currentUser = _communication.GetUserDetails(token, new CancellationTokenSource().Token);
         }
         
         public void FromSection(string Section) //Загрузка страниц секции

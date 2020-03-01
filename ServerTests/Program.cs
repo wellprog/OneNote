@@ -7,7 +7,6 @@ namespace ServerTests
 {
     class Program
     {
-
         static List<Book> books = new List<Book>();
         static List<Section> sections = new List<Section>();
         static List<Page> pages = new List<Page>();

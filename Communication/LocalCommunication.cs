@@ -5,6 +5,7 @@ using OneNote.Communication.Model;
 using OneNote.Model;
 using OneNote.SQLite.Model;
 using System.Linq;
+using System.Threading;
 
 namespace OneNote.Communication
 {
@@ -18,7 +19,7 @@ namespace OneNote.Communication
             testDB = new SQLite.Database(new SQLite.Connection("test.db"));
         }
 
-        public string Authorize(string login, string password)
+        public string Authorize(string login, string password, CancellationToken cToken)
         {
             var user = testDB.GetUserByLoginPassword(login, password);
             if (user == null)
@@ -31,7 +32,7 @@ namespace OneNote.Communication
             return "123";
         }
 
-        public BookModel GetBooks(string token)
+        public BookModel GetBooks(string token, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -42,7 +43,7 @@ namespace OneNote.Communication
             };
         }
 
-        public HistoryModel GetHistory(string token, string table, string lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -54,7 +55,7 @@ namespace OneNote.Communication
             };
         }
 
-        public PageModel GetPages(string token)
+        public PageModel GetPages(string token, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -65,7 +66,7 @@ namespace OneNote.Communication
             };
         }
 
-        public SectionModel GetSections(string token)
+        public SectionModel GetSections(string token, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -76,14 +77,14 @@ namespace OneNote.Communication
             };
         }
 
-        public User GetUserDetails(string token)
+        public User GetUserDetails(string token, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
             return _currentUser;
         }
 
-        public string Register(User user)
+        public string Register(User user, CancellationToken cToken)
         {
             var data = testDB.AddUser(user);
             _currentUser = user;
@@ -92,7 +93,7 @@ namespace OneNote.Communication
             return "";
         }
 
-        public string SetBookHistory(string token, HistoryModel history)
+        public string SetBookHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -101,7 +102,7 @@ namespace OneNote.Communication
             return testDB.GetLastBookHistory();
         }
 
-        public string SetPageHistory(string token, HistoryModel history)
+        public string SetPageHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 
@@ -110,7 +111,7 @@ namespace OneNote.Communication
             return testDB.GetLastPageHistory();
         }
 
-        public string SetSectionHistory(string token, HistoryModel history)
+        public string SetSectionHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             if (!CheckAccess(token)) return null;
 

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using OneNote.Communication.Model;
@@ -46,76 +47,95 @@ namespace OneNote.Communication
             }
         }
         
-        public BookModel GetBooks(string token)
+        public BookModel GetBooks(string token, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
-            
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetBooks"), content).Result;
+
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/GetBooks"), content);
+            request.Wait(cToken);
+
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<BookModel>(returnedDataString);
         }
         
-        public HistoryModel GetHistory(string token, string table, string lastID)
+        public HistoryModel GetHistory(string token, string table, string lastID, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("table"), table);
             content.Add(new StringContent("lastID"), lastID);
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/GetHistory"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<HistoryModel>(returnedDataString);
         }
         
-        public PageModel GetPages(string token)
+        public PageModel GetPages(string token, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetPages"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/GetPages"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<PageModel>(returnedDataString);
         }
         
-        public SectionModel GetSections(string token)
+        public SectionModel GetSections(string token, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetSections"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/GetSections"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<SectionModel>(returnedDataString);
         }
         
-        public User GetUserDetails(string token)
+        public User GetUserDetails(string token, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/GetUserDetails"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/GetUserDetails"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<User>(returnedDataString);
         }
         
-        public string Authorize(string login, string password)
+        public string Authorize(string login, string password, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent(login), "login");
             content.Add(new StringContent(password), "password");
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/Authorize"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/Authorize"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
         }
         
-        public string Register(User user)
+        public string Register(User user, CancellationToken cToken)
         {
             //MultipartFormDataContent content = new MultipartFormDataContent();
            
@@ -131,7 +151,9 @@ namespace OneNote.Communication
             }
             var formContent = new FormUrlEncodedContent(encData);
             var uri = new Uri(baseUrl + "/Register");
-            HttpResponseMessage returnedData = httpClient.PostAsync(uri, formContent).Result;
+            var request = httpClient.PostAsync(uri, formContent);
+            request.Wait();
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
@@ -143,49 +165,61 @@ namespace OneNote.Communication
             //return token;
         }
         
-        public string SetHistory(string token, HistoryModel history)
+        public string SetHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetHistory"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/SetHistory"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
         }
 
-        public string SetBookHistory(string token, HistoryModel history)
+        public string SetBookHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetBookHistory"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/SetBookHistory"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
         }
 
-        public string SetSectionHistory(string token, HistoryModel history)
+        public string SetSectionHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetSectionHistory"), content).Result;
+            var request = httpClient.PostAsync(new Uri(baseUrl + "/SetSectionHistory"), content);
+            request.Wait(cToken);
+
+            HttpResponseMessage returnedData = request.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;
         }
 
-        public string SetPageHistory(string token, HistoryModel history)
+        public string SetPageHistory(string token, HistoryModel history, CancellationToken cToken)
         {
             MultipartFormDataContent content = new MultipartFormDataContent();
             content.Add(new StringContent("token"), token);
             content.Add(new StringContent("history"), JsonConvert.SerializeObject(history));
 
-            HttpResponseMessage returnedData = httpClient.PostAsync(new Uri(baseUrl + "/SetPageHistory"), content).Result;
+            var result = httpClient.PostAsync(new Uri(baseUrl + "/SetPageHistory"), content);
+            result.Wait(cToken);
+
+            HttpResponseMessage returnedData = result.Result;
             string returnedDataString = returnedData.Content.ReadAsStringAsync().Result;
 
             return returnedDataString;

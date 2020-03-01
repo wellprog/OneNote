@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace OneNote.Application.Services
 {
+
     class SyncService
     {
         private ICommunication _communication;
@@ -20,6 +21,8 @@ namespace OneNote.Application.Services
         private Thread _syncThread;
         private bool _isStopRequested = false;
 
+        CancellationTokenSource source = null;
+
         public SyncService ()
         {
             _communication = ClassLoader.Instance.GetElement<ICommunication>();
@@ -27,36 +30,36 @@ namespace OneNote.Application.Services
             _database = ClassLoader.Instance.GetElement<IDatabase>();
         }
 
-        public void Start()
+        public async void Start()
         {
-            _syncThread = new Thread(ThreadStart);
-            _syncThread.Start();
+            source = new CancellationTokenSource();
+            while (!source.Token.IsCancellationRequested)
+            {
+                await Task.Run(() => ThreadStart(), source.Token);
+                await Task.Run(() => Thread.Sleep(1000 * 60));
+            }
+            source = null;
         }
 
         public void Stop()
         {
-            _isStopRequested = true;
+            if (source != null)
+                source.Cancel();
         }
 
 
         void ThreadStart()
         {
-            SynkThreadStop();
-            SyncBooks();
-            SyncSections();
-            SyncPages();
-            SynkThreadStop();
-
-            Thread.Sleep(60000);
-        }
-
-        void SynkThreadStop()
-        {
-            if (_isStopRequested)
+            try
             {
-                _syncThread.Abort();
+                SyncBooks();
+                SyncSections();
+                SyncPages();
             }
+            catch (OperationCanceledException) { }
+            catch (Exception) { throw; }
         }
+
 
         private void SyncBooks()
         {
@@ -64,7 +67,7 @@ namespace OneNote.Application.Services
             //Если у нас ничего нет то нам нужно доставть все книги
             if (data.Count() == 0)
             {
-                var element = _communication.GetBooks(_enviroment.UserToken);
+                var element = _communication.GetBooks(_enviroment.UserToken, source.Token);
 
                 foreach (var book in element.Books)
                     _database.AddBook(book);
@@ -75,10 +78,10 @@ namespace OneNote.Application.Services
             {
                 //Отправить
                 var toSend = _database.GetBookHistory(_enviroment.LocalBookCursor);
-                _communication.SetBookHistory(_enviroment.UserToken, toSend);
+                _communication.SetBookHistory(_enviroment.UserToken, toSend, source.Token);
 
                 //Получаем
-                var element  = _communication.GetHistory(_enviroment.UserToken, "Book", _enviroment.RemoteBookCursor);
+                var element  = _communication.GetHistory(_enviroment.UserToken, "Book", _enviroment.RemoteBookCursor, source.Token);
 
                 if (element.Records.Count() > 0)
                 {
@@ -94,7 +97,7 @@ namespace OneNote.Application.Services
             //Если у нас ничего нет то нам нужно доставть все книги
             if (data.Count() == 0)
             {
-                var element = _communication.GetSections(_enviroment.UserToken);
+                var element = _communication.GetSections(_enviroment.UserToken, source.Token);
 
                 foreach (var section in element.Sections)
                     _database.AddSection(section);
@@ -105,10 +108,10 @@ namespace OneNote.Application.Services
             {
                 //Отправить
                 var toSend = _database.GetSectionHistory(_enviroment.LocalSectionCursor);
-                _communication.SetSectionHistory(_enviroment.UserToken, toSend);
+                _communication.SetSectionHistory(_enviroment.UserToken, toSend, source.Token);
 
                 //Получаем
-                var element = _communication.GetHistory(_enviroment.UserToken, "Section", _enviroment.RemoteSectionCursor);
+                var element = _communication.GetHistory(_enviroment.UserToken, "Section", _enviroment.RemoteSectionCursor, source.Token);
 
                 if (element.Records.Count() > 0)
                 {
@@ -124,7 +127,7 @@ namespace OneNote.Application.Services
             //Если у нас ничего нет то нам нужно доставть все книги
             if (data.Count() == 0)
             {
-                var element = _communication.GetPages(_enviroment.UserToken);
+                var element = _communication.GetPages(_enviroment.UserToken, source.Token);
 
                 foreach (var page in element.Pages)
                     _database.AddPage(page);
@@ -135,10 +138,10 @@ namespace OneNote.Application.Services
             {
                 //Отправить
                 var toSend = _database.GetPageHistory(_enviroment.LocalPageCursor);
-                _communication.SetPageHistory(_enviroment.UserToken, toSend);
+                _communication.SetPageHistory(_enviroment.UserToken, toSend, source.Token);
 
                 //Получаем
-                var element = _communication.GetHistory(_enviroment.UserToken, "Page", _enviroment.RemotePageCursor);
+                var element = _communication.GetHistory(_enviroment.UserToken, "Page", _enviroment.RemotePageCursor, source.Token);
 
                 if (element.Records.Count() > 0)
                 {
