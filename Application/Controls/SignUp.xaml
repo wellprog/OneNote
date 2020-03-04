@@ -157,6 +157,7 @@
                     FontSize="16"
                     BorderThickness="0"
                     Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    PreviewTextInput="PhoneTB_PreviewTextInput"
                     Background="Transparent">
                     </TextBox>
                     <Border
@@ -185,6 +186,7 @@
                     MaxWidth="230"
                     FontSize="16"
                     BorderThickness="0"
+                    PreviewTextInput="AgeTB_PreviewTextInput"
                     Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                     Background="Transparent">
                     </TextBox>

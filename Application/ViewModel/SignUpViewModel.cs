@@ -180,36 +180,27 @@ namespace OneNote.Application.ViewModel
 
         private void canClick()
         {
-            bool isInt(string str)
-            {
-                int result;
-                return Int32.TryParse(Age, out result);
-            }
             bool isCorrectRegex(string str, string regex)
             {
-                if (!string.IsNullOrWhiteSpace(Phone))
-                {
-                    MatchCollection phoneRegexResult = Regex.Matches(Phone, regex, RegexOptions.IgnoreCase);
-                    if (phoneRegexResult.Count == 0)
-                        return false;
-                }
-                else
+                if (string.IsNullOrWhiteSpace(str))
                     return false;
+
+                MatchCollection phoneRegexResult = Regex.Matches(str, regex, RegexOptions.IgnoreCase);
+                if (phoneRegexResult.Count != 1)
+                    return false;
+                    
                 return true;
             }
             
-            if (
-                !string.IsNullOrWhiteSpace(UserName) && 
-                !string.IsNullOrWhiteSpace(EMail) &&
-                !string.IsNullOrWhiteSpace(Password) &&
-                !string.IsNullOrWhiteSpace(Phone) && //isCorrectRegex(Phone, @"((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}") && //TODO
-                !string.IsNullOrWhiteSpace(Age) && isInt(Age) &&
-                //!string.IsNullOrWhiteSpace(Avatar) &&
-                !string.IsNullOrWhiteSpace(Status)
-            )
-                SignUp.SetCanExecuted(true);
-            else
+            if (string.IsNullOrWhiteSpace(UserName)
+            || string.IsNullOrWhiteSpace(EMail) || !isCorrectRegex(EMail, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$")
+            || string.IsNullOrWhiteSpace(Password)
+            || string.IsNullOrWhiteSpace(Phone) || !isCorrectRegex(Phone, @"^((8|\+7)[\d]{10})$")
+            || string.IsNullOrWhiteSpace(Age)
+            || string.IsNullOrWhiteSpace(Status) || Status.Length >= 64)
                 SignUp.SetCanExecuted(false);
+            else
+                SignUp.SetCanExecuted(true);
         }
     }
 }

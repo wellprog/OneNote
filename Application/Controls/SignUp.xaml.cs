@@ -59,5 +59,29 @@ namespace OneNote.Application.Controls
                 GenderLabel.Content = "Female";
             }
         }
+
+        private bool isInt(string str)
+        {
+            int result;
+            if (string.IsNullOrWhiteSpace(str))
+                return false;
+            return Int32.TryParse(str, out result);
+        }
+        
+        private void AgeTB_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (AgeTB.Text.Length >= 3 || !isInt(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void PhoneTB_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (PhoneTB.Text.Length >= 12)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
